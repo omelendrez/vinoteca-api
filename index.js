@@ -22,15 +22,14 @@ app.use(function (req, res, next) {
   next()
 })
 
-app.use('/', (req, res) => {
-  res.send(process.env.TEST)
+const port = process.env.PORT || 3000
+
+app.listen(port, () => {
+  console.log('API listeing on port ' + port)
 })
 
-const port = process.env.PORT || '3000'
-
-app.listen(port)
-
-console.log(Date())
-console.log('Serer listening on port ' + port)
+app.get('/', async (req, res) => {
+  res.json({ status: process.env.TEST })
+})
 
 module.exports = app
