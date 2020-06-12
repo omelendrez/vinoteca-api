@@ -29,7 +29,7 @@ app.listen(port, () => {
 })
 
 app.get('/', async (req, res) => {
-  res.json({ status: process.env.TEST })
+  res.json({ status: 'Ok' })
 })
 
 module.exports = app
