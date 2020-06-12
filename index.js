@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
 const port = process.env.PORT || 3000
 
 app.listen(port, () => {
-  console.log('API listeing on port ' + port)
+  console.log('API listening on port ' + port)
 })
 
 app.get('/', async (req, res) => {
