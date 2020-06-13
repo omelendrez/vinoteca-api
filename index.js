@@ -27,12 +27,9 @@ app.use((req, res, next) => {
 if (environment !== 'production') {
   app.use(logger('dev'))
 }
-const routes = require('./routes/index.js')
+
+const routes = require('./routes')
 app.use('/api/v1', routes(router))
-// app.use('/api/v1', (req, res, next) => {
-//   res.send('Hello');
-//   next();
-// });
 
 const port = process.env.PORT
 app.listen(`${port}`, () => {
