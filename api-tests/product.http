@@ -1,0 +1,48 @@
+GET http://localhost:3000/api/v1/products
+
+### Agregar company
+POST http://localhost:3000/api/v1/products
+content-type: application/json
+
+{
+  "code": "P-0001",
+  "barcode": "333",
+  "name": "Matias",
+  "description": "asdas",
+  "quantity": "4",
+  "minimum" : "2",
+  "category_id": "1",
+  "company_id": "1",
+  "last_purchase_date": "2017-06-15",
+  "last_purchase_price": "126",
+  "last_sale_date": "2019-05-01",
+  "last_sale_price": "216",
+  "price": "134",
+  "status_id": "1"
+}
+
+### Actualizar company 
+PUT http://localhost:3000/api/v1/products/1
+content-type: application/json
+
+{
+  "id": "1",
+  "code": "P-0001",
+  "barcode": "333",
+  "name": "Matias",
+  "description": "asdas",
+  "quantity": "4",
+  "minimum" : "2",
+  "category_id": "1",
+  "company_id": "1",
+  "last_purchase_date": "2017-06-15",
+  "last_purchase_price": "126",
+  "last_sale_date": "2019-05-01",
+  "last_sale_price": "216",
+  "price": "134",
+  "status_id": "1"
+}
+
+### Obtener empresa pasando el id 
+GET http://localhost:3000/api/v1/products/1
+content-type: application/json
