@@ -34,6 +34,7 @@ module.exports = {
       res.status(401).send(result)
     }
   },
+
   generateToken(user) {
     const payload = { id: user.id, name: user.name, profileId: user.profile_id }
     const options = { expiresIn: '2d', issuer: process.env.ISSUER }
@@ -45,19 +46,30 @@ module.exports = {
       user
     }
   },
+
   async encryptPassword(user) {
     const hash = await bcrypt.hash(user.password, 10)
     return hash
   },
-  async generateFieldsFromModel(model) {
-    const fields = []
-    const values = []
+
+  async insertFieldsFromModel(model) {
+    const fields = ['created', 'updated']
+    const values = ['NOW()', 'NOW()']
     await Object.keys(model).forEach(field => {
       fields.push(field.toUnderscore())
       values.push(`'${model[field]}'`)
     })
     return [fields, values]
   },
+
+  async updateFieldsFromModel(model) {
+    const fields = ['updated=NOW()']
+    await Object.keys(model).forEach(field => {
+      fields.push(`${field.toUnderscore()}='${model[field]}'`)
+    })
+    return [fields.join(',')]
+  },
+
   convertToCamel(data) {
     const results = []
     data.map(record => {
