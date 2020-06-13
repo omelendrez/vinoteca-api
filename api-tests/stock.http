@@ -1,0 +1,26 @@
+### Lista de empresas
+GET http://localhost:3000/api/v1/stock
+
+### Agregar empresa
+POST http://localhost:3000/api/v1/stock
+content-type: application/json
+
+{
+  "store_id": 1,
+  "product_id": 1,
+  "quantity": 10
+}
+
+### Actualizar empresa || Se pasa el id del registro a modificar en la url
+PUT http://localhost:3000/api/v1/stock/1
+content-type: application/json
+
+{
+  "store_id": 1,
+  "product_id": 1,
+  "quantity": 25
+}
+
+### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
+GET http://localhost:3000/api/v1/stock/1
+content-type: application/json
