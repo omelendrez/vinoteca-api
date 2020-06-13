@@ -1,0 +1,26 @@
+### Lista usuarios
+GET http://localhost:3000/api/v1/categories
+
+### Agregar category
+POST http://localhost:3000/api/v1/categories
+content-type: application/json
+
+{
+  "name": "Vinoteca",
+  "code": "123456",
+  "company_id": "1"
+}
+
+### Actualizar category || Se pasa el id del registro a modificar en la url
+PUT http://localhost:3000/api/v1/categories/1
+content-type: application/json
+
+{
+  "name": "Vinoteca y Fiambrería Gourmet",
+"code": "789852",
+  "company_id": "2"
+}
+
+### Obtener categoria pasando el id || Se pasa el id del registro a modificar en la url
+GET http://localhost:3000/api/v1/categories/1
+content-type: application/json
