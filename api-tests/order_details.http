@@ -1,0 +1,31 @@
+### Lista usuarios
+GET http://localhost:3000/api/v1/order_details
+
+
+### Agregar detalles de orden
+POST http://localhost:3000/api/v1/order_details
+content-type: application/json
+
+{
+  "order_id": "1",
+  "store_id": "2",
+  "product_id": "3",
+  "qty_requested": 8,
+  "qty_received": 3
+}
+
+### Actualizar company || Se pasa el id del registro a modificar en la url
+PUT http://localhost:3000/api/v1/order_details/1
+content-type: application/json
+
+{
+   "order_id": "1",
+  "store_id": "2",
+  "product_id": "3",
+  "qty_requested": 10,
+  "qty_received": 10
+}
+
+### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
+GET http://localhost:3000/api/v1/order_details/2
+content-type: application/json
