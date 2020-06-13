@@ -1,13 +1,10 @@
 {
   "name": "vinoteca-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "api para la aplicación de administración de stock de vinotecas",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "editor.codeActionsOnSave": {
     "source.fixAll": true
@@ -16,8 +13,12 @@
     "type": "git",
     "url": "git+https://github.com/omelendrez/vinoteca-api.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "api",
+    "vinotecas",
+    "heroku"
+  ],
+  "author": "omelendrez",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/omelendrez/vinoteca-api/issues"
@@ -33,5 +34,8 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.4"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
