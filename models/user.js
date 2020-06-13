@@ -2,7 +2,8 @@ const pool = require('./pool')
 const encryptPassword = require('../utils').encryptPassword // Sólo para user
 const insertFieldsFromModel = require('../utils').insertFieldsFromModel
 const updateFieldsFromModel = require('../utils').updateFieldsFromModel
-const convertToCamel = require('../utils').convertToCamel
+const convertListToCamelCase = require('../utils').convertListToCamelCase
+const convertObjectToCamelCase = require('../utils').convertObjectToCamelCase
 
 module.exports = {
   save: async user => {
@@ -12,7 +13,7 @@ module.exports = {
       const sql = `INSERT INTO user (${fields}) VALUES (${values})`
       pool.executeQuery(sql, null, (err, results, fields) => {
         if (err) return reject(err)
-        resolve(convertToCamel(results))
+        resolve(convertObjectToCamelCase(results))
       })
     })
   },
@@ -26,7 +27,7 @@ module.exports = {
         const sql = `SELECT * FROM user WHERE id=?`
         pool.executeQuery(sql, [id], (err, results, fields) => {
           if (err) return reject(err)
-          resolve(convertToCamel(results)[0])
+          resolve(convertListToCamelCase(results)[0])
         })
       })
     })
@@ -37,7 +38,7 @@ module.exports = {
       const sql = 'SELECT * FROM user;'
       pool.executeQuery(sql, null, async (err, results, fields) => {
         if (err) return reject({ error: err })
-        resolve(convertToCamel(results))
+        resolve(convertListToCamelCase(results))
       })
     })
   },
@@ -47,7 +48,7 @@ module.exports = {
       const sql = 'SELECT * FROM user WHERE id=?;'
       pool.executeQuery(sql, [id], (err, results, fields) => {
         if (err) return reject({ error: err })
-        resolve(convertToCamel(results)[0]) // Es un solo record
+        resolve(convertListToCamelCase(results)[0]) // Es un solo record
       })
     })
   },
@@ -57,7 +58,7 @@ module.exports = {
       const sql = 'SELECT * FROM user WHERE name=?;'
       pool.executeQuery(sql, [name], (err, results, fields) => {
         if (err) return reject({ error: err })
-        resolve(convertToCamel(results, false)[0]) // Es un solo record
+        resolve(convertListToCamelCase(results, false)[0]) // Es un solo record
       })
     })
   }
