@@ -50,37 +50,6 @@ module.exports = {
   async encryptPassword(user) {
     const hash = await bcrypt.hash(user.password, 10)
     return hash
-  },
-
-  async insertFieldsFromModel(model) {
-    const fields = ['created', 'updated']
-    const values = ['NOW()', 'NOW()']
-    await Object.keys(model).forEach(field => {
-      fields.push(field.toUnderscore())
-      values.push(`'${model[field]}'`)
-    })
-    return [fields, values]
-  },
-
-  async updateFieldsFromModel(model) {
-    const fields = ['updated=NOW()']
-    await Object.keys(model).forEach(field => {
-      fields.push(`${field.toUnderscore()}='${model[field]}'`)
-    })
-    return [fields.join(',')]
-  },
-
-  convertToCamel(data, excludePassword = true) {
-    const results = []
-    data.map(record => {
-      const row = {}
-      Object.keys(record).forEach(field => {
-        if (field !== 'password' || !excludePassword) {
-          row[field.toCamel()] = record[field]
-        }
-      })
-      results.push(row)
-    })
-    return results
   }
+
 }
