@@ -4,11 +4,14 @@ const logger = require('morgan')
 require('dotenv').config()
 
 const app = express()
-app.use(logger('dev'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(function (req, res, next) {
+const router = express.Router()
+const environment = process.env.NODE_ENV || 'development'
+const stage = require('./config')[environment]
+
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*")
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -22,14 +25,19 @@ app.use(function (req, res, next) {
   next()
 })
 
-const port = process.env.PORT || 3000
+if (environment !== 'production') {
+  app.use(logger('dev'))
+}
+const routes = require('./routes/index.js')
+app.use('/api/v1', routes(router))
+// app.use('/api/v1', (req, res, next) => {
+//   res.send('Hello');
+//   next();
+// });
 
-app.listen(port, () => {
-  console.log('API listening on port ' + port)
-})
-
-app.get('/', async (req, res) => {
-  res.json({ status: 'Ok' })
+const port = stage.port || process.env.PORT
+app.listen(`${port}`, () => {
+  console.log(`Server now listening at localhost:${port}`)
 })
 
 module.exports = app
