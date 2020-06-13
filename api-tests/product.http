@@ -5,11 +5,20 @@ POST http://localhost:3000/api/v1/products
 content-type: application/json
 
 {
-  "name": "Vinoteca",
-  "contact": "Emiliano",
-  "address": "Juan Molina y Avellaneda",
-  "phone": "2912222222",
-  "email": "emiliano@gmail.com"
+  "code": "P-0001",
+  "barcode": "333",
+  "name": "Matias",
+  "description": "asdas",
+  "quantity": "4",
+  "minimum" : "2",
+  "category_id": "1",
+  "company_id": "1",
+  "last_purchase_date": "2017-06-15",
+  "last_purchase_price": "126",
+  "last_sale_date": "2019-05-01",
+  "last_sale_price": "216",
+  "price": "134",
+  "status_id": "1"
 }
 
 ### Actualizar company 
@@ -17,11 +26,21 @@ PUT http://localhost:3000/api/v1/products/1
 content-type: application/json
 
 {
-  "name": "Vinoteca y Fiambrería Gourmet",
-  "contact": "Emiliano Mancinelli",
-  "address": "Juan Molina y Avellaneda",
-  "phone": "2915432109",
-  "email": "emiliano@gmail.com"
+  "id": "1",
+  "code": "P-0001",
+  "barcode": "333",
+  "name": "Matias",
+  "description": "asdas",
+  "quantity": "4",
+  "minimum" : "2",
+  "category_id": "1",
+  "company_id": "1",
+  "last_purchase_date": "2017-06-15",
+  "last_purchase_price": "126",
+  "last_sale_date": "2019-05-01",
+  "last_sale_price": "216",
+  "price": "134",
+  "status_id": "1"
 }
 
 ### Obtener empresa pasando el id 
