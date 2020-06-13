@@ -70,12 +70,12 @@ module.exports = {
     return [fields.join(',')]
   },
 
-  convertToCamel(data) {
+  convertToCamel(data, excludePassword = true) {
     const results = []
     data.map(record => {
       const row = {}
       Object.keys(record).forEach(field => {
-        if (field !== 'password') {
+        if (field !== 'password' || !excludePassword) {
           row[field.toCamel()] = record[field]
         }
       })
