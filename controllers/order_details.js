@@ -1,10 +1,9 @@
-const Order_details = require('../models/order_details')
-const order_details = require('../models/order_details')
+const OrderDetails = require('../models/order_details')
 
 module.exports = {
   add: (req, res) => {
-    Order_details.save(req.body)
-      .then(order_details => res.json(order_details))
+    OrderDetails.save(req.body)
+      .then(orderDetails => res.json(orderDetails))
       .catch(err => res.status(500).json(err))
   },
   update: (req, res) => {
@@ -13,13 +12,13 @@ module.exports = {
       .catch(err => res.status(500).json(err))
   },
   getAll: (req, res) => {
-    Order_details.getAll()
-      .then(order_details => res.json(order_details))
+    OrderDetails.getAll()
+      .then(orderDetails => res.json(orderDetails))
       .catch(err => res.status(500).json(err))
   },
   getById: (req, res) => {
-    Order_details.getById(req.params.id)
-      .then(order_details => res.json(order_details))
+    OrderDetails.getById(req.params.id)
+      .then(orderDetails => res.json(orderDetails))
       .catch(err => res.status(500).json(err))
   }
 }

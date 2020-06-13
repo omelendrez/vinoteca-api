@@ -22,7 +22,7 @@ module.exports = {
   },
 
   // El contolador quiere cambiar datos en una empresa
-  update: async (order_details, id) => { // El controlador nos pasa los datos que envió el cliente (datos de la empresa y su id)
+  update: async (orderDetails, id) => { // El controlador nos pasa los datos que envió el cliente (datos de la empresa y su id)
     const [fields] = await updateFieldsFromModel(order_details) // Otra función helper que genera SQL para ejectuar un UPDATE
     return new Promise(async (resolve, reject) => { // Creamos una nueva Promise
       const sql = `UPDATE order_details SET ${fields} WHERE id=?` // Preparamos el SQL
