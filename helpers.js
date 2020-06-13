@@ -43,7 +43,7 @@ module.exports = {
     const row = {} // Creamos un objeto vacío
     Object.keys(object).forEach(field => { // Con Object.keys obtenemos la lista de sus campos y los recorremos con forEach
       if (field !== 'password' || !excludePassword) { // field contiene el nombre del campo. Si el campo se llama password nunca lo procesamos porque no se lo tenemos que enviar al cliente jamás
-        row[field.toCamel()] = record[field] // Ahora agregamos a row el nombre del campo formatado y el valor que contiene
+        row[field.toCamel()] = object[field] // Ahora agregamos a row el nombre del campo formatado y el valor que contiene
         // Esto hace algo como row['userId'] = '15'
       }
     })
