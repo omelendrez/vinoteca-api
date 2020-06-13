@@ -1,0 +1,32 @@
+### Lista stores
+GET http://localhost:3000/api/v1/stores
+
+### Agregar store
+POST http://localhost:3000/api/v1/stores
+content-type: application/json
+
+{
+  "name": "Almacen Pepito",
+  "contact": "El perro de Pepito 11221",
+  "address": "Juan Molina y Avellaneda",
+  "phone": "2912222222",
+  "email": "ap@gmail.com",
+  "company_id": "1"
+}
+
+### Actualizar store || Se pasa el id del registro a modificar en la url
+PUT http://localhost:3000/api/v1/stores/1
+content-type: application/json
+
+{
+  "name": "El garage de la esquina",
+  "contact": "El gato de Pepito 11221",
+  "address": "Juan Molina 12",
+  "phone": "2912211222",
+  "email": "aaa@gmail.com",
+  "company_id": "2"
+}
+
+### Obtener store pasando el id || Se pasa el id del registro a modificar en la url
+GET http://localhost:3000/api/v1/stores/3
+content-type: application/json
