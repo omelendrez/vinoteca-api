@@ -25,42 +25,4 @@ module.exports = {
       .then(users => res.json(users))
       .catch(err => res.status(500).json(err))
   }
-
-  /*
-  mongoose.connect(connUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-    let result = {}
-    let status = 200
-    if (!err) {
-      const payload = req.decoded
-      if (payload && payload.user === 'admin') {
-        User.find({}, (err, users) => {
-          if (!err) {
-            result.status = status
-            result.error = err
-            result.result = users
-          } else {
-            status = 500
-            result.status = status
-            result.error = err
-          }
-          res.status(status).send(result)
-        }).then(() => mongoose.connection.close())
-      } else {
-        status = 401
-        result.status = status
-        result.error = `Authentication error`
-        res.status(status).send(result)
-
-        mongoose.connection.close()
-      }
-    } else {
-      status = 500
-      result.status = status
-      result.error = err
-      res.status(status).send(result)
-
-      mongoose.connection.close()
-    }
-  })
-  */
 }
