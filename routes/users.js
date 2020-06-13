@@ -8,7 +8,9 @@ module.exports = (router) => {
     .get(controller.getAll)
 
   router.route('/users/:id')
+    .put(controller.update)
     .get(controller.getById)
+
 
   router.route('/login')
     .post(controller.login)

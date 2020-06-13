@@ -10,6 +10,12 @@ module.exports = {
       .catch(err => res.status(500).json(err))
   },
 
+  update: (req, res) => {
+    User.update(req.body, req.params.id)
+      .then(user => res.json(user))
+      .catch(err => res.status(500).json(err))
+  },
+
   login: async (req, res) => {
     const { name, password } = req.body
 

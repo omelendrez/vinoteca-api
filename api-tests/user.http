@@ -7,8 +7,19 @@ POST http://localhost:3000/api/v1/users
 content-type: application/json
 
 {
-  "name": "pepedds",
-  "password": "Master1*",
+  "name": "Omar",
+  "password": "Master1",
+  "email": "omar.melendrez@gmail.com",
+  "profileId": 1,
+  "companyId": 1
+}
+
+### Actualizar usuario
+PUT http://localhost:3000/api/v1/users/1
+content-type: application/json
+
+{
+  "name": "Omar",
   "email": "omar.melendrez@gmail.com",
   "profileId": 1,
   "companyId": 1
