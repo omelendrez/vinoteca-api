@@ -1,9 +1,7 @@
 const pool = require('./pool')
 const encryptPassword = require('../utils').encryptPassword // Sólo para user
-const insertFieldsFromModel = require('../utils').insertFieldsFromModel
-const updateFieldsFromModel = require('../utils').updateFieldsFromModel
-const convertListToCamelCase = require('../utils').convertListToCamelCase
-const convertObjectToCamelCase = require('../utils').convertObjectToCamelCase
+const { insertFieldsFromModel, updateFieldsFromModel, convertListToCamelCase, convertObjectToCamelCase } = require('../helpers')
+
 
 module.exports = {
   save: async user => {
