@@ -6,6 +6,12 @@
   "scripts": {
     "start": "node index.js"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/omelendrez/vinoteca-api.git"

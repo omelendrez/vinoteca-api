@@ -1,0 +1,30 @@
+### Lista usuarios
+GET http://localhost:3000/api/v1/companies
+
+### Agregar company
+POST http://localhost:3000/api/v1/companies
+content-type: application/json
+
+{
+  "name": "Vinoteca",
+  "contact": "Emiliano",
+  "address": "Juan Molina y Avellaneda",
+  "phone": "2912222222",
+  "email": "emiliano@gmail.com"
+}
+
+### Actualizar company || Se pasa el id del registro a modificar en la url
+PUT http://localhost:3000/api/v1/companies/1
+content-type: application/json
+
+{
+  "name": "Vinoteca y Fiambrería Gourmet",
+  "contact": "Emiliano Mancinelli",
+  "address": "Juan Molina y Avellaneda",
+  "phone": "2915432109",
+  "email": "emiliano@gmail.com"
+}
+
+### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
+GET http://localhost:3000/api/v1/companies/1
+content-type: application/json
