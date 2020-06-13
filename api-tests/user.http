@@ -1,0 +1,24 @@
+### Lista usuarios
+GET http://localhost:3000/api/v1/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6InBlcGVkZHMiLCJwcm9maWxlSWQiOjEsImlhdCI6MTU5MjAyMDU4NCwiZXhwIjoxNTkyMTkzMzg0LCJpc3MiOiJodHRwOi8vdmlub3RlY2EtYXBpLmhlcm9rdWFwcC5jb20vIn0.HZ0dEleSPxLJREuCp74lHTbRbqMrNsQTlE_ys7u_Tt8
+
+### Agregar usuario
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+  "name": "pepedds",
+  "password": "Master1*",
+  "profileId": 1,
+  "email": "omar.melendrez@gmail.com",
+  "companyId": 1
+}
+
+### Login
+POST http://localhost:3000/api/v1/login
+content-type: application/json
+
+{
+  "name": "pepedds",
+  "password": "Master1*"
+}
