@@ -9,7 +9,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const router = express.Router()
 const environment = process.env.NODE_ENV || 'development'
-const stage = require('./config')[environment]
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*")
@@ -35,7 +34,7 @@ app.use('/api/v1', routes(router))
 //   next();
 // });
 
-const port = stage.port || process.env.PORT
+const port = process.env.PORT
 app.listen(`${port}`, () => {
   console.log(`Server now listening at localhost:${port}`)
 })
