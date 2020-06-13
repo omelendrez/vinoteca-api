@@ -1,7 +1,7 @@
-### Lista usuarios
+### Lista de empresas
 GET http://localhost:3000/api/v1/companies
 
-### Agregar company
+### Agregar empresa
 POST http://localhost:3000/api/v1/companies
 content-type: application/json
 
@@ -13,8 +13,8 @@ content-type: application/json
   "email": "emiliano@gmail.com"
 }
 
-### Actualizar company || Se pasa el id del registro a modificar en la url
-PUT http://localhost:3000/api/v1/companies/1
+### Actualizar empresa || Se pasa el id del registro a modificar en la url
+PUT http://localhost:3000/api/v1/companies/10
 content-type: application/json
 
 {
@@ -26,5 +26,5 @@ content-type: application/json
 }
 
 ### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
-GET http://localhost:3000/api/v1/companies/1
+GET http://localhost:3000/api/v1/companies/10
 content-type: application/json
