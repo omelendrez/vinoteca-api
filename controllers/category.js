@@ -25,7 +25,7 @@ module.exports = {
   // En la ruta el cliente ha hecho un GET por lo que quiere una lista de todas las empresas
   getAll: (req, res) => {
     Category.getAll() // El controlador le dice al model que ejecute la función getAll
-      .then(companies => res.json(companies))
+      .then(categories => res.json(categories))
       .catch(err => res.status(500).json(err))
   },
 
