@@ -17,7 +17,7 @@ module.exports = {
 
   getAll: (req, res) => {
     Product.getAll()
-      .then(companies => res.json(companies))
+      .then(products => res.json(products))
       .catch(err => res.status(500).json(err))
   },
 
