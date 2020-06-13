@@ -12,7 +12,7 @@ module.exports = {
       const sql = `INSERT INTO user (${fields}) VALUES (${values})`
       pool.executeQuery(sql, null, (err, results, fields) => {
         if (err) return reject(err)
-        resolve(results)
+        resolve(convertToCamel(results))
       })
     })
   },
@@ -26,7 +26,7 @@ module.exports = {
         const sql = `SELECT * FROM user WHERE id=?`
         pool.executeQuery(sql, [id], (err, results, fields) => {
           if (err) return reject(err)
-          resolve(convertToCamel(results))
+          resolve(convertToCamel(results)[0])
         })
       })
     })
@@ -47,7 +47,7 @@ module.exports = {
       const sql = 'SELECT * FROM user WHERE id=?;'
       pool.executeQuery(sql, [id], (err, results, fields) => {
         if (err) return reject({ error: err })
-        resolve(results[0])
+        resolve(convertToCamel(results)[0]) // Es un solo record
       })
     })
   },
@@ -57,7 +57,7 @@ module.exports = {
       const sql = 'SELECT * FROM user WHERE name=?;'
       pool.executeQuery(sql, [name], (err, results, fields) => {
         if (err) return reject({ error: err })
-        resolve(results[0])
+        resolve(convertToCamel(results, false)[0]) // Es un solo record
       })
     })
   }

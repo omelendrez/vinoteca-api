@@ -20,6 +20,7 @@ module.exports = {
     const { name, password } = req.body
 
     const user = await User.getByName(name)
+
     if (!user) return res.status(401).json({ message: 'Usuario o password incorrectos' })
 
     const ok = await bcrypt.compare(password, user.password)
