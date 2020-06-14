@@ -6,28 +6,28 @@ POST http://localhost:3000/api/v1/suppliers
 content-type: application/json
 
 {
-  "name": "matias", 
-  "contact": "Oscar", 
-  "address": "Necochea 636", 
+  "name": "matias",
+  "contact": "Oscar",
+  "address": "Necochea 636",
   "phone": "154737118",
   "email": "matias@gmail.com",
   "company_id": "1"
 }
 
 ### Actualizar company || Se pasa el id del registro a modificar en la url
-PUT http://localhost:3000/api/v1/suppliers/2
+PUT http://localhost:3000/api/v1/suppliers/1
 content-type: application/json
 
 {
-  "name": "matias mancinelli", 
-  "contact": "Oscar", 
-  "address": "Necochea 637", 
+  "name": "matias mancinelli",
+  "contact": "Oscar",
+  "address": "Necochea 637",
   "phone": "154737118",
   "email": "matias@gmail.com",
-  "company_id": "1", 
+  "company_id": "1",
   "status_id": "1"
 }
 
 ### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
-GET http://localhost:3000/api/v1/suppliers/2
+GET http://localhost:3000/api/v1/suppliers/1
 content-type: application/json

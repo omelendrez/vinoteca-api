@@ -21,18 +21,18 @@ content-type: application/json
   "status_id": "1"
 }
 
-### Actualizar company 
+### Actualizar company
 PUT http://localhost:3000/api/v1/products/1
 content-type: application/json
 
 {
   "id": "1",
-  "code": "P-0001",
-  "barcode": "333",
-  "name": "Matias",
-  "description": "asdas",
-  "quantity": "4",
-  "minimum" : "2",
+  "code": "P-0023",
+  "barcode": "546465466466",
+  "name": "Vino",
+  "description": "Vino Tomba",
+  "quantity": "60",
+  "minimum" : "10",
   "category_id": "1",
   "company_id": "1",
   "last_purchase_date": "2017-06-15",
@@ -43,6 +43,6 @@ content-type: application/json
   "status_id": "1"
 }
 
-### Obtener empresa pasando el id 
+### Obtener empresa pasando el id
 GET http://localhost:3000/api/v1/products/1
 content-type: application/json

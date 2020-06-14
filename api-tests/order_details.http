@@ -19,7 +19,7 @@ PUT http://localhost:3000/api/v1/order_details/1
 content-type: application/json
 
 {
-   "order_id": "1",
+  "order_id": "1",
   "store_id": "2",
   "product_id": "3",
   "qty_requested": 10,
@@ -27,5 +27,5 @@ content-type: application/json
 }
 
 ### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
-GET http://localhost:3000/api/v1/order_details/2
+GET http://localhost:3000/api/v1/order_details/1
 content-type: application/json

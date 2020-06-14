@@ -14,7 +14,7 @@ content-type: application/json
 }
 
 ### Actualizar empresa || Se pasa el id del registro a modificar en la url
-PUT http://localhost:3000/api/v1/companies/10
+PUT http://localhost:3000/api/v1/companies/1
 content-type: application/json
 
 {
@@ -26,5 +26,5 @@ content-type: application/json
 }
 
 ### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
-GET http://localhost:3000/api/v1/companies/10
+GET http://localhost:3000/api/v1/companies/1
 content-type: application/json
