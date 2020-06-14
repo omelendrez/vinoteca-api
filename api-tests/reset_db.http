@@ -1,4 +1,14 @@
-// TODO: CUIDADO ESTE REQUEST RESETEA LA BASE DE DATOS
-### Resetear la base de datos
+// TODO: CUIDADO ESTE REQUEST RESETEA LA BASE DE DATOS LOCAL
+### Resetear la base de datos LOCAL
 POST http://localhost:3000/api/v1/reset-db
+content-type: application/json
+
+// TODO: CUIDADO ESTE REQUEST RESETEA LA BASE DE DATOS EN QA
+### Resetear la base de datos
+POST https://vinoteca-api-qa.herokuapp.com/api/v1/reset-db
+content-type: application/json
+
+// FIXME: CUIDADO ESTE REQUEST RESETEA LA BASE DE DATOS EN PRODUCCION
+### Resetear la base de datos
+POST https://vinoteca-api.herokuapp.com/api/v1/reset-db
 content-type: application/json
