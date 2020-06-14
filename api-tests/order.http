@@ -14,7 +14,7 @@ content-type: application/json
 }
 
 ### Actualizar order || Se pasa el id del registro a modificar en la url
-PUT http://localhost:3000/api/v1/orders/7
+PUT http://localhost:3000/api/v1/orders/1
 content-type: application/json
 
 {
@@ -26,5 +26,5 @@ content-type: application/json
 }
 
 ### Obtener order pasando el id || Se pasa el id del registro a modificar en la url
-GET http://localhost:3000/api/v1/orders/11
+GET http://localhost:3000/api/v1/orders/1
 content-type: application/json

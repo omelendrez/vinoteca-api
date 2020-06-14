@@ -10,8 +10,8 @@ const { insertFieldsFromModel, updateFieldsFromModel, convertListToCamelCase } =
 
 module.exports = {
   // El contolador quiere agregar una nueva empresa
-  save: async order_details => { // El controlador ha ejecutado esta función pasado el objeto que le envió el cliente a la respectiva ruta
-    const [fields, values] = await insertFieldsFromModel(order_details) // Función helper que genera el código SQL para ejecutar un INSERT
+  save: async orderDetails => { // El controlador ha ejecutado esta función pasado el objeto que le envió el cliente a la respectiva ruta
+    const [fields, values] = await insertFieldsFromModel(orderDetails) // Función helper que genera el código SQL para ejecutar un INSERT
     return new Promise(async (resolve, reject) => { // Creamos una Promise, que nos permite actuar de manera diferente si hubo errores o no
       const sql = `INSERT INTO order_details (${fields}) VALUES (${values})` // La lista de fields y values es generada automáticamente
       pool.executeQuery(sql, null, (err, results, fields) => { // Mandamo el query a la base de datos
@@ -23,7 +23,7 @@ module.exports = {
 
   // El contolador quiere cambiar datos en una empresa
   update: async (orderDetails, id) => { // El controlador nos pasa los datos que envió el cliente (datos de la empresa y su id)
-    const [fields] = await updateFieldsFromModel(order_details) // Otra función helper que genera SQL para ejectuar un UPDATE
+    const [fields] = await updateFieldsFromModel(orderDetails) // Otra función helper que genera SQL para ejectuar un UPDATE
     return new Promise(async (resolve, reject) => { // Creamos una nueva Promise
       const sql = `UPDATE order_details SET ${fields} WHERE id=?` // Preparamos el SQL
       pool.executeQuery(sql, [id], (err, results, fields) => { // Enviamos el SQL y el id (estamos modificando un solo registro) a mysql
