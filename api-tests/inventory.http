@@ -1,8 +1,8 @@
 ### Lista de empresas
-GET http://localhost:3000/api/v1/stock
+GET http://localhost:3000/api/v1/inventory
 
 ### Agregar empresa
-POST http://localhost:3000/api/v1/stock
+POST http://localhost:3000/api/v1/inventory
 content-type: application/json
 
 {
@@ -12,7 +12,7 @@ content-type: application/json
 }
 
 ### Actualizar empresa || Se pasa el id del registro a modificar en la url
-PUT http://localhost:3000/api/v1/stock/1
+PUT http://localhost:3000/api/v1/inventory/1
 content-type: application/json
 
 {
@@ -22,5 +22,5 @@ content-type: application/json
 }
 
 ### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
-GET http://localhost:3000/api/v1/stock/1
+GET http://localhost:3000/api/v1/inventory/1
 content-type: application/json

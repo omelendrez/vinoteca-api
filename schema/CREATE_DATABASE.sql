@@ -31,9 +31,9 @@ CREATE TABLE company (
   PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS inventory;
+DROP TABLE IF EXISTS store;
 
-CREATE TABLE inventory (
+CREATE TABLE store (
   id INTEGER NOT NULL AUTO_INCREMENT,
   name VARCHAR(30) NOT NULL,
   contact VARCHAR(30) NOT NULL,
@@ -115,9 +115,9 @@ CREATE TABLE product (
   INDEX(company_id)
 );
 
-DROP TABLE IF EXISTS stock;
+DROP TABLE IF EXISTS inventory;
 
-CREATE TABLE stock (
+CREATE TABLE inventory (
   id INTEGER NOT NULL AUTO_INCREMENT,
   store_id INTEGER NOT NULL,
   product_id INTEGER NOT NULL,
