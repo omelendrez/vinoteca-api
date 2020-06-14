@@ -1,9 +1,12 @@
-DROP TABLE IF EXISTS inventory;
-CREATE TABLE inventory (
+DROP TABLE IF EXISTS stock_variation;
+CREATE TABLE stock_variation (
   id INTEGER NOT NULL AUTO_INCREMENT,
   store_id INTEGER NOT NULL,
   product_id INTEGER NOT NULL,
   quantity INTEGER DEFAULT 0,
+  variation_type TINYINT NOT NULL,
+  variation_reason SMALLINT NOT NULL,
+  comments VARCHAR(100) DEFAULT '',
   company_id INTEGER NOT NULL,
   created DATETIME DEFAULT NULL,
   created_by INTEGER DEFAULT 0,
