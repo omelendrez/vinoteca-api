@@ -6,6 +6,7 @@ POST http://localhost:3000/api/v1/inventory
 content-type: application/json
 
 {
+  "company_id": 1,
   "store_id": 1,
   "product_id": 1,
   "quantity": 10
@@ -16,6 +17,7 @@ PUT http://localhost:3000/api/v1/inventory/1
 content-type: application/json
 
 {
+  "company_id": 1,
   "store_id": 1,
   "product_id": 1,
   "quantity": 25

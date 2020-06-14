@@ -7,8 +7,8 @@ module.exports = {
       .catch(err => res.status(500).json(err))
   },
   update: (req, res) => {
-    Order_details.update(req.body, req.params.id)
-      .then(order_details => res.json(order_details))
+    OrderDetails.update(req.body, req.params.id)
+      .then(orderDetails => res.json(orderDetails))
       .catch(err => res.status(500).json(err))
   },
   getAll: (req, res) => {
