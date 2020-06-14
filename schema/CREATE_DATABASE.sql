@@ -1,11 +1,3 @@
-
-
-DROP DATABASE IF EXISTS vinoteca_db;
-
-CREATE DATABASE vinoteca_db;
-
-USE vinoteca_db;
-
 DROP TABLE IF EXISTS category;
 
 CREATE TABLE category (
