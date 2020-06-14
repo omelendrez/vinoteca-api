@@ -1,10 +1,8 @@
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order` (
+DROP TABLE IF EXISTS stock_variation_reason;
+CREATE TABLE stock_variation_reason (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  number CHAR(6) NOT NULL,
-  date DATE NOT NULL,
-  supplier_id INTEGER NOT NULL,
-  amount DECIMAL(10, 2) DEFAULT 0,
+  code CHAR(3) NOT NULL,
+  name VARCHAR(30) NOT NULL,
   company_id INTEGER NOT NULL,
   status_id TINYINT DEFAULT 1,
   created DATETIME DEFAULT NULL,
@@ -12,5 +10,5 @@ CREATE TABLE `order` (
   updated DATETIME DEFAULT NULL,
   updated_by INTEGER DEFAULT 0,
   PRIMARY KEY (id),
-  INDEX(company_id, number)
+  INDEX(company_id, code)
 );
