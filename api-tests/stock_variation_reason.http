@@ -1,0 +1,27 @@
+### Lista usuarios
+GET http://localhost:3000/api/v1/stock_variation_reason
+
+
+### Agregar detalles de orden
+POST http://localhost:3000/api/v1/stock_variation_reason
+content-type: application/json
+
+{
+ "code" : "123",
+ "name" : "Nombre",
+ "company_id" : "1"
+}
+
+### Actualizar company || Se pasa el id del registro a modificar en la url
+PUT http://localhost:3000/api/v1/stock_variation_reason/1
+content-type: application/json
+
+{
+  "code" : "123",
+  "name" : "Nombre",
+  "company_id" : "2"
+}
+
+### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
+GET http://localhost:3000/api/v1/stock_variation_reason/1
+content-type: application/json
