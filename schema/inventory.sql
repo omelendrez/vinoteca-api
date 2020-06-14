@@ -1,4 +1,4 @@
-CREATE TABLE stock (
+CREATE TABLE inventory (
   id INTEGER NOT NULL AUTO_INCREMENT,
   store_id INTEGER NOT NULL,
   product_id INTEGER NOT NULL,

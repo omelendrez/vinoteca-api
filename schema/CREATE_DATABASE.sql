@@ -37,6 +37,25 @@ CREATE TABLE company (
   PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS inventory;
+
+CREATE TABLE inventory (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  name VARCHAR(30) NOT NULL,
+  contact VARCHAR(30) NOT NULL,
+  address VARCHAR(30) NOT NULL,
+  phone VARCHAR(15) NOT NULL,
+  email VARCHAR(60) NOT NULL,
+  company_id INTEGER NOT NULL,
+  status_id TINYINT DEFAULT 1,
+  created DATETIME  DEFAULT NULL  ,
+  created_by INTEGER DEFAULT 0,
+  updated DATETIME  DEFAULT NULL  ,
+  updated_by INTEGER DEFAULT 0,
+  PRIMARY KEY (id),
+  INDEX(company_id)
+);
+
 DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order` (
@@ -116,25 +135,6 @@ CREATE TABLE stock (
   updated_by INTEGER DEFAULT 0,
   PRIMARY KEY (id),
   INDEX(company_id, store_id)
-);
-
-DROP TABLE IF EXISTS store;
-
-CREATE TABLE store (
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  name VARCHAR(30) NOT NULL,
-  contact VARCHAR(30) NOT NULL,
-  address VARCHAR(30) NOT NULL,
-  phone VARCHAR(15) NOT NULL,
-  email VARCHAR(60) NOT NULL,
-  company_id INTEGER NOT NULL,
-  status_id TINYINT DEFAULT 1,
-  created DATETIME  DEFAULT NULL  ,
-  created_by INTEGER DEFAULT 0,
-  updated DATETIME  DEFAULT NULL  ,
-  updated_by INTEGER DEFAULT 0,
-  PRIMARY KEY (id),
-  INDEX(company_id)
 );
 
 DROP TABLE IF EXISTS supplier;
