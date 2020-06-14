@@ -16,7 +16,8 @@ CREATE TABLE category (
   created_by INTEGER DEFAULT 0,
   updated DATETIME  DEFAULT NULL  ,
   updated_by INTEGER DEFAULT 0,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  INDEX(company_id, code)
 );
 
 DROP TABLE IF EXISTS company;
@@ -40,7 +41,7 @@ DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order` (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  number INTEGER NOT NULL,
+  number CHAR(6) NOT NULL,
   date DATE NOT NULL,
   supplier_id INTEGER NOT NULL,
   amount DECIMAL(10, 2) DEFAULT 0,
@@ -50,7 +51,8 @@ CREATE TABLE `order` (
   created_by INTEGER DEFAULT 0,
   updated DATETIME  DEFAULT NULL  ,
   updated_by INTEGER DEFAULT 0,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  INDEX(company_id, number)
 );
 
 DROP TABLE IF EXISTS order_details;
@@ -68,7 +70,8 @@ CREATE TABLE order_details (
   created_by INTEGER DEFAULT 0,
   updated DATETIME  DEFAULT NULL  ,
   updated_by INTEGER DEFAULT 0,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  INDEX(order_id)
 );
 
 DROP TABLE IF EXISTS product;
@@ -93,7 +96,10 @@ CREATE TABLE product (
   created_by INTEGER DEFAULT 0,
   updated DATETIME  DEFAULT NULL  ,
   updated_by INTEGER DEFAULT 0,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  INDEX(company_id, code),
+  INDEX(barcode),
+  INDEX(company_id)
 );
 
 DROP TABLE IF EXISTS stock;
@@ -103,11 +109,13 @@ CREATE TABLE stock (
   store_id INTEGER NOT NULL,
   product_id INTEGER NOT NULL,
   quantity INTEGER DEFAULT 0,
+  company_id INTEGER NOT NULL,
   created DATETIME  DEFAULT NULL  ,
   created_by INTEGER DEFAULT 0,
   updated DATETIME  DEFAULT NULL  ,
   updated_by INTEGER DEFAULT 0,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  INDEX(company_id, store_id)
 );
 
 DROP TABLE IF EXISTS store;
@@ -125,7 +133,8 @@ CREATE TABLE store (
   created_by INTEGER DEFAULT 0,
   updated DATETIME  DEFAULT NULL  ,
   updated_by INTEGER DEFAULT 0,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  INDEX(company_id)
 );
 
 DROP TABLE IF EXISTS supplier;
@@ -143,14 +152,15 @@ CREATE TABLE supplier (
   created_by INTEGER DEFAULT 0,
   updated DATETIME  DEFAULT NULL  ,
   updated_by INTEGER DEFAULT 0,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  INDEX(company_id)
 );
 
 DROP TABLE IF EXISTS user;
 
 CREATE TABLE user (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  name VARCHAR(30) NOT NULL,
+  name CHAR(10) NOT NULL,
   email VARCHAR(60) NOT NULL,
   password VARCHAR(60) NOT NULL,
   profile_id INTEGER NOT NULL,
@@ -160,5 +170,7 @@ CREATE TABLE user (
   created_by INTEGER DEFAULT 0,
   updated DATETIME  DEFAULT NULL  ,
   updated_by INTEGER DEFAULT 0,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  INDEX (name),
+  INDEX(company_id)
 );
