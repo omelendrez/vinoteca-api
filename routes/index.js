@@ -8,6 +8,7 @@ const resetDb = require('./reset_db')
 const store = require('./store')
 const supplier = require('./supplier')
 const user = require('./user')
+const stock_variation = require('./stock_variation')
 
 module.exports = (router) => {
   category(router)
@@ -20,5 +21,6 @@ module.exports = (router) => {
   store(router)
   supplier(router) // Cada vez que agregamos una nueva ruta con su respectivo modelo y controlador, debemos importarla arriba y agregarla acá
   user(router)
+  stock_variation(router)
   return router
 }
