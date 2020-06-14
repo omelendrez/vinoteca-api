@@ -1,0 +1,4 @@
+// TODO: CUIDADO ESTE REQUEST RESETEA LA BASE DE DATOS
+### Resetear la base de datos
+POST http://localhost:3000/api/v1/reset-db
+content-type: application/json

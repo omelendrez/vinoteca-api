@@ -26,16 +26,16 @@
  */
 
 
-const controller = require('../controllers/stock') // Este es el controlador que va a correr la acciones que se ejecuten en esta ruta (/companies)
+const controller = require('../controllers/inventory') // Este es el controlador que va a correr la acciones que se ejecuten en esta ruta (/companies)
 const validateToken = require('../utils').validateToken
 
 module.exports = (router) => {
-  router.route('/stock') // Si el usuario le pega a /companies (ej.: http://api/v1/companies)
+  router.route('/inventory') // Si el usuario le pega a /companies (ej.: http://api/v1/companies)
     .post(controller.add) // Un POST agrega una nueva empresa
     //.get(validateToken, controller.getAll) // Ruta protegida con token por ahora desactivada
     .get(controller.getAll) // Un GET obtiene la lista de todas las empresas existentes en la base de datos
 
-  router.route('/stock/:id') // Notar el :id || Sólo se va a actuar en una empresa en particular
+  router.route('/inventory/:id') // Notar el :id || Sólo se va a actuar en una empresa en particular
     .put(controller.update) // Un PUT modifica los datos de una exmpresa
     .get(controller.getById) // Un GET obtiene los datos de una empresa
 
