@@ -3,5 +3,5 @@ const validateToken = require('../utils').validateToken
 
 module.exports = (router) => {
   router.route('/reset-db')
-    .post(controller.add)
+    .post(controller.reset)
 }
