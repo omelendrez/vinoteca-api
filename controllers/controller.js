@@ -1,9 +1,12 @@
 const bcrypt = require('bcrypt')
 const generateToken = require('../utils').generateToken
 /**
+ * Controlador: Agnóstico de rutas o base de datos
+ * Interface entre la ruta y el modelo
  * El controlador tiene la función de interactuar con el modelo
  * para realizar acciones con la base de datos de acuerdo a lo
- * que el cliente hace en cada ruta
+ * que el cliente hace en las rutas
+ * Puede recibir data o errores del modelo y se los envía al cliente
  */
 const getModelFromRoute = require('../helpers').getModelFromRoute
 // Importamos el modelo con el que este controlador va a interactuar
@@ -19,9 +22,9 @@ module.exports = {
         .then(result => res.json(result)) // Aquí todo salió bien, devolvemos  al cliente lo que nos devolvió el modelo
         .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
     } else {
-      Model.saveUser(req.body, modelName) // Le decimos al modelo que ejecute la función "save" y le pasamos lo que el cliente posteó en la ruta
-        .then(result => res.json(result)) // Aquí todo salió bien, devolvemos  al cliente lo que nos devolvió el modelo
-        .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
+      Model.saveUser(req.body, modelName)
+        .then(result => res.json(result))
+        .catch(err => res.status(500).json(err))
     }
   },
 
