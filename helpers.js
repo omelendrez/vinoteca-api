@@ -6,20 +6,7 @@ String.prototype.toCamel = function () {
   return this.replace(/(\_[a-z])/g, function ($1) { return $1.toUpperCase().replace('_', '') })
 }
 
-const routeMaps = [
-  { route: 'categories', model: 'category' },
-  { route: 'companies', model: 'company' },
-  { route: 'inventory', model: 'inventory' },
-  { route: 'orders', model: 'order' },
-  { route: 'order_details', model: 'order_details' },
-  { route: 'products', model: 'product' },
-  { route: 'stock_variations', model: 'stock_variation' },
-  { route: 'stock_variation_reasons', model: 'stock_variation_reason' },
-  { route: 'stores', model: 'store' },
-  { route: 'suppliers', model: 'supplier' },
-  { route: 'users', model: 'user' },
-  { route: 'login', model: 'user' }
-]
+const routeMaps = require('./routes/routes.json')
 
 module.exports = {
   async updateFieldsFromModel(model) {
