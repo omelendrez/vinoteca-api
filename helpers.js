@@ -1,3 +1,11 @@
+String.prototype.toUnderscore = function () {
+  return this.replace(/([A-Z])/g, function ($1) { return "_" + $1.toLowerCase() })
+}
+
+String.prototype.toCamel = function () {
+  return this.replace(/(\_[a-z])/g, function ($1) { return $1.toUpperCase().replace('_', '') })
+}
+
 const routeMaps = [
   { route: 'categories', model: 'category' },
   { route: 'companies', model: 'company' },
@@ -14,27 +22,6 @@ const routeMaps = [
 ]
 
 module.exports = {
-  async insertFieldsFromModel(model) {
-    // Crea lista de campos y valores separados por coma para ser usado con SQL INSERT INTO...
-    /**
-     * Por ejemplo, si el usuario posteó {email: 'omar.melendrez@gmail.com', name:'Omar', companyId: '1'}
-     * esta función generará los fields así:
-     * fields= "created,updated,email,name,company_id"
-     * values= "NOW(),NOW(),'omar.melendrez@gmail.com','Omar','1'"
-     * que es el formato que se usa para hacer un INSERT en SQL
-     *
-     * INSERT INTO user (created,updated,email,name,company_id) VALUES (NOW(),NOW(),'omar.melendrez@gmail.com','Omar','1')
-     *
-     */
-    const fields = ['created', 'updated']
-    const values = ['NOW()', 'NOW()']
-    await Object.keys(model).forEach(field => {
-      fields.push(field.toUnderscore())
-      values.push(`'${model[field]}'`)
-    })
-    return [fields, values]
-  },
-
   async updateFieldsFromModel(model) {
     // Crea lista de campos y valores separados por coma para ser usados con SQL UPDATE table...
     /**
@@ -80,9 +67,19 @@ module.exports = {
     })
     return results
   },
+
+  convertObjectToUnderscoreCase(object) {
+    const row = {}
+    Object.keys(object).forEach(field => {
+      row[field.toUnderscore()] = object[field]
+    })
+    return row
+  },
+
   getRouteMaps() {
     return routeMaps
   },
+
   getModelFromRoute(req) {
     const originalUrl = req.originalUrl.split('/')
     const routeName = originalUrl[3]

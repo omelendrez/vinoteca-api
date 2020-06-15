@@ -1,14 +1,6 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-String.prototype.toUnderscore = function () {
-  return this.replace(/([A-Z])/g, function ($1) { return "_" + $1.toLowerCase() })
-}
-
-String.prototype.toCamel = function () {
-  return this.replace(/(\_[a-z])/g, function ($1) { return $1.toUpperCase().replace('_', '') })
-}
-
 module.exports = {
   validateToken: (req, res, next) => {
     const authorizationHeader = req.headers.authorization

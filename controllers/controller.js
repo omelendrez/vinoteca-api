@@ -1,5 +1,3 @@
-const bcrypt = require('bcrypt')
-const generateToken = require('../utils').generateToken
 /**
  * Controlador: Agnóstico de rutas o base de datos
  * Interface entre la ruta y el modelo
@@ -8,6 +6,8 @@ const generateToken = require('../utils').generateToken
  * que el cliente hace en las rutas
  * Puede recibir data o errores del modelo y se los envía al cliente
  */
+const bcrypt = require('bcrypt')
+const { generateToken } = require('../security')
 const getModelFromRoute = require('../helpers').getModelFromRoute
 // Importamos el modelo con el que este controlador va a interactuar
 
