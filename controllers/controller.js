@@ -67,5 +67,12 @@ module.exports = {
     Model.reset()
       .then(results => res.json(results))
       .catch(err => res.status(500).json(err))
+  },
+
+  delete: (req, res) => {
+    const modelName = getModelFromRoute(req)
+    Model.delete(req.params.id, modelName)
+      .then(results => res.json(results))
+      .catch(err => res.status(500).json(err))
   }
 }

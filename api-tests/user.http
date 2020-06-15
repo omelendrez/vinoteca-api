@@ -37,3 +37,8 @@ content-type: application/json
 ### Obtener usuario pasando el id  || Se pasa el id del registro a modificar en la url
 GET http://localhost:3000/api/v1/users/1
 content-type: application/json
+
+### Eliminar usuario pasando el id || Se pasa el id del registro a eliminar en la url
+DELETE http://localhost:3000/api/v1/users/1
+content-type: application/json
+

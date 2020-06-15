@@ -1,7 +1,7 @@
-### Lista de empresas
+### Lista de stock variations
 GET http://localhost:3000/api/v1/stock_variations
 
-### Agregar empresa
+### Agregar stock variations
 POST http://localhost:3000/api/v1/stock_variations
 content-type: application/json
 
@@ -16,7 +16,7 @@ content-type: application/json
 
 }
 
-### Actualizar empresa || Se pasa el id del registro a modificar en la url
+### Actualizar stock variations || Se pasa el id del registro a modificar en la url
 PUT http://localhost:3000/api/v1/stock_variations/1
 content-type: application/json
 
@@ -31,6 +31,10 @@ content-type: application/json
 
 }
 
-### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
+### Obtener stock variations pasando el id || Se pasa el id del registro a modificar en la url
 GET http://localhost:3000/api/v1/stock_variations/1
+content-type: application/json
+
+### Eliminar stock variations pasando el id || Se pasa el id del registro a eliminar en la url
+DELETE http://localhost:3000/api/v1/stock_variations/1
 content-type: application/json
