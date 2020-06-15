@@ -1,3 +1,18 @@
+const routeMaps = [
+  { route: 'categories', model: 'category' },
+  { route: 'companies', model: 'company' },
+  { route: 'inventory', model: 'inventory' },
+  { route: 'orders', model: 'order' },
+  { route: 'order_details', model: 'order_details' },
+  { route: 'products', model: 'product' },
+  { route: 'stock_variations', model: 'stock_variation' },
+  { route: 'stock_variation_reasons', model: 'stock_variation_reason' },
+  { route: 'stores', model: 'store' },
+  { route: 'suppliers', model: 'supplier' },
+  { route: 'users', model: 'user' },
+  { route: 'login', model: 'user' }
+]
+
 module.exports = {
   async insertFieldsFromModel(model) {
     // Crea lista de campos y valores separados por coma para ser usado con SQL INSERT INTO...
@@ -64,5 +79,18 @@ module.exports = {
       results.push(row)
     })
     return results
+  },
+  getRouteMaps() {
+    return routeMaps
+  },
+  getModelFromRoute(req) {
+    const originalUrl = req.originalUrl.split('/')
+    const routeName = originalUrl[3]
+    const result = routeMaps.find(item => item.route === routeName)
+    if (result) {
+      return result.model
+    } else {
+      return ''
+    }
   }
 }

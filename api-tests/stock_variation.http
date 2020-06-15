@@ -1,0 +1,36 @@
+### Lista de empresas
+GET http://localhost:3000/api/v1/stock_variations
+
+### Agregar empresa
+POST http://localhost:3000/api/v1/stock_variations
+content-type: application/json
+
+{
+  "company_id": "1",
+  "store_id": "1",
+  "product_id": "1",
+  "quantity": "4",
+  "variation_type": "0",
+  "variation_reason": "1",
+  "comments": "asdas"
+
+}
+
+### Actualizar empresa || Se pasa el id del registro a modificar en la url
+PUT http://localhost:3000/api/v1/stock_variations/1
+content-type: application/json
+
+{
+  "company_id": "1",
+  "store_id": "1",
+  "product_id": "1",
+  "quantity": "4",
+  "variation_type": "0",
+  "variation_reason": "1",
+  "comments": "asdadasdas"
+
+}
+
+### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
+GET http://localhost:3000/api/v1/stock_variations/1
+content-type: application/json
