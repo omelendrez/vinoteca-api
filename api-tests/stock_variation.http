@@ -13,7 +13,7 @@ content-type: application/json
   "variation_type": "0",
   "variation_reason": "1",
   "comments": "asdas"
-  
+
 }
 
 ### Actualizar empresa || Se pasa el id del registro a modificar en la url
@@ -21,7 +21,6 @@ PUT http://localhost:3000/api/v1/stock_variations/1
 content-type: application/json
 
 {
-  "id": "1",
   "company_id": "1",
   "store_id": "1",
   "product_id": "1",
@@ -29,7 +28,7 @@ content-type: application/json
   "variation_type": "0",
   "variation_reason": "1",
   "comments": "asdadasdas"
-  
+
 }
 
 ### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
