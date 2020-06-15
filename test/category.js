@@ -19,6 +19,7 @@ describe('category end point', () => {
       chai.request(url)
         .get('/categories')
         .end((err, res) => {
+          //test
           res.should.have.status(200)
           res.body.should.be.a('array')
           res.body.length.should.be.eql(0)
