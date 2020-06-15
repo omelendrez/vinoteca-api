@@ -1,3 +1,11 @@
+/**
+ * Modelo: Agnóstico de rutas y seguridad
+ * Interface entre el controlador y la base de datos (mysql)
+ * Reponsable solo de guardar y extraer datos de la base de datos
+ * Recibe del controlador lo que hay que guardar y le envía el resultado si fue satisfactorio o el error que se produjo
+ * Envía al controlador los datos que el controlador le pidió cuando, por ejemplo la ruta recibió un GET
+ */
+
 const fs = require('fs') // Función de node que permite acceder al sistema de achivos (file system)
 const path = require('path') // Función de node que genera urls
 const pool = require('./pool')

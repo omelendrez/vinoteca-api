@@ -1,6 +1,10 @@
-// Las rutas son las que permiten al usuario interactuar con la api
 /**
- * Los métodos son siempre usar una url específica (endpoint)
+ * Ruta: Agnóstica de seguridad y base datos
+ * Interface entre el cliente y el controlador
+ * Envia los requests del cliente al controlador
+ *
+ *
+ * Las rutas son las que permiten al usuario interactuar con la api
  * Y utilizar desde el cliente un métod específico en cada ejecución
  * Los métodos válidos son:
  * POST:  Se usa para crear un registro nuevo, debe ir acompañado del "body"
