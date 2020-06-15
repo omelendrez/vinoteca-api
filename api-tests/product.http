@@ -1,6 +1,7 @@
+### Lista products
 GET http://localhost:3000/api/v1/products
 
-### Agregar company
+### Agregar products
 POST http://localhost:3000/api/v1/products
 content-type: application/json
 
@@ -21,7 +22,7 @@ content-type: application/json
   "status_id": "1"
 }
 
-### Actualizar company
+### Actualizar products
 PUT http://localhost:3000/api/v1/products/1
 content-type: application/json
 
@@ -43,6 +44,11 @@ content-type: application/json
   "status_id": "1"
 }
 
-### Obtener empresa pasando el id
+### Obtener products pasando el id
 GET http://localhost:3000/api/v1/products/1
 content-type: application/json
+
+### Eliminar product pasando el id || Se pasa el id del registro a eliminar en la url
+DELETE http://localhost:3000/api/v1/products/1
+content-type: application/json
+
