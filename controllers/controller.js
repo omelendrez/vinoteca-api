@@ -8,7 +8,7 @@
  */
 const bcrypt = require('bcrypt')
 const { generateToken } = require('../security')
-const getModelFromRoute = require('../helpers').getModelFromRoute
+const { getModelFromRoute } = require('../helpers')
 // Importamos el modelo con el que este controlador va a interactuar
 
 const Model = require('../models/model')
