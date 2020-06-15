@@ -9,29 +9,29 @@
 const fs = require('fs') // Función de node que permite acceder al sistema de achivos (file system)
 const path = require('path') // Función de node que genera urls
 const pool = require('./pool')
-const encryptPassword = require('../utils').encryptPassword // Sólo para user
-const { insertFieldsFromModel, updateFieldsFromModel, convertListToCamelCase, convertObjectToCamelCase } = require('../helpers')
+const encryptPassword = require('../security').encryptPassword // Sólo para user
+const { updateFieldsFromModel, convertListToCamelCase, convertObjectToCamelCase, convertObjectToUnderscoreCase } = require('../helpers')
 
 module.exports = {
   save: async (data, model) => { // El controlador ha ejecutado esta función pasado el objeto que le envió el cliente a la respectiva ruta
-    const [fields, values] = await insertFieldsFromModel(data) // Función helper que genera el código SQL para ejecutar un INSERT
+    const payload = convertObjectToUnderscoreCase(data)
     return new Promise(async (resolve, reject) => { // Creamos una Promise, que nos permite actuar de manera diferente si hubo errores o no
-      const sql = `INSERT INTO \`${model}\` (${fields}) VALUES (${values})` // La lista de fields y values es generada automáticamente
-      pool.executeQuery(sql, null, (err, results, fields) => { // Mandamo el query a la base de datos
+      const sql = `INSERT INTO \`${model}\` SET ?` // La lista de fields y values es generada automáticamente
+      pool.executeQuery(sql, [payload], (err, results, fields) => { // Mandamo el query a la base de datos
         if (err) return reject(err) // Si hubo errores devolvemos el error y terminamos acá
-        resolve(convertListToCamelCase(results)) // Si llegamos acá no hubo errores, formateamos la data y la devolvemos al controlador
+        resolve({ id: results.insertId }) // Si llegamos acá no hubo errores, formateamos la data y la devolvemos al controlador
       })
     })
   },
 
   saveUser: async (data, model) => {
     data.password = await encryptPassword(data) // Sólo para user
-    const [fields, values] = await insertFieldsFromModel(data)
+    const payload = convertObjectToUnderscoreCase(data)
     return new Promise(async (resolve, reject) => {
-      const sql = `INSERT INTO \`${model}\` (${fields}) VALUES (${values})`
-      pool.executeQuery(sql, null, (err, results, fields) => {
+      const sql = `INSERT INTO \`${model}\` SET ?`
+      pool.executeQuery(sql, [payload], (err, results, fields) => {
         if (err) return reject(err)
-        resolve(convertObjectToCamelCase(results))
+        resolve({ id: results.insertId })
       })
     })
   },
@@ -95,34 +95,35 @@ module.exports = {
        * fs.readFileSync: devuelve el contenido del archivo
        *
        * path.join(directory, fileName): 'c://webserver/spa/vinoteca-api/schema/category.sql'
-       * fs.readFileSync('c://webserver/spa/vinoteca-api/schema/category.sql') : DROP TABLE IF EXISTS category;
-                                                                                  CREATE TABLE category (
-                                                                                    id INTEGER NOT NULL AUTO_INCREMENT,
-                                                                                    code CHAR(6) NOT NULL,
-                                                                                    name VARCHAR(30) NOT NULL,
-                                                                                    company_id INTEGER NOT NULL,
-                                                                                    status_id TINYINT DEFAULT 1,
-                                                                                    created DATETIME DEFAULT NULL,
-                                                                                    created_by INTEGER DEFAULT 0,
-                                                                                    updated DATETIME DEFAULT NULL,
-                                                                                    updated_by INTEGER DEFAULT 0,
-                                                                                    PRIMARY KEY (id),
-                                                                                    INDEX(company_id, code)
-                                                                                  );DROP TABLE IF EXISTS company;
-                                                                                  CREATE TABLE company (
-                                                                                    id INTEGER NOT NULL AUTO_INCREMENT,
-                                                                                    name VARCHAR(30) NOT NULL,
-                                                                                    contact VARCHAR(60) NOT NULL,
-                                                                                    address VARCHAR(30) NOT NULL,
-                                                                                    phone VARCHAR(15) NOT NULL,
-                                                                                    email VARCHAR(60) NOT NULL,
-                                                                                    status_id TINYINT DEFAULT 1,
-                                                                                    created DATETIME DEFAULT NULL,
-                                                                                    created_by INTEGER DEFAULT 0,
-                                                                                    updated DATETIME DEFAULT NULL,
-                                                                                    updated_by INTEGER DEFAULT 0,
-                                                                                    PRIMARY KEY (id)
-                                                                                  );
+       * fs.readFileSync('c://webserver/spa/vinoteca-api/schema/category.sql'):
+       *  DROP TABLE IF EXISTS category;
+          CREATE TABLE category (
+            id INTEGER NOT NULL AUTO_INCREMENT,
+            code CHAR(6) NOT NULL,
+            name VARCHAR(30) NOT NULL,
+            company_id INTEGER NOT NULL,
+            status_id TINYINT DEFAULT 1,
+            created DATETIME DEFAULT NULL,
+            created_by INTEGER DEFAULT 0,
+            updated DATETIME DEFAULT NULL,
+            updated_by INTEGER DEFAULT 0,
+            PRIMARY KEY (id),
+            INDEX(company_id, code)
+          );DROP TABLE IF EXISTS company;
+          CREATE TABLE company (
+            id INTEGER NOT NULL AUTO_INCREMENT,
+            name VARCHAR(30) NOT NULL,
+            contact VARCHAR(60) NOT NULL,
+            address VARCHAR(30) NOT NULL,
+            phone VARCHAR(15) NOT NULL,
+            email VARCHAR(60) NOT NULL,
+            status_id TINYINT DEFAULT 1,
+            created DATETIME DEFAULT NULL,
+            created_by INTEGER DEFAULT 0,
+            updated DATETIME DEFAULT NULL,
+            updated_by INTEGER DEFAULT 0,
+            PRIMARY KEY (id)
+          );
        */
       const directory = path.join(__dirname, '..', 'schema')
       fs.readdir(directory, ((err, fileNames) => {
@@ -141,5 +142,4 @@ module.exports = {
       }))
     })
   }
-
 }

@@ -30,9 +30,11 @@
  */
 
 const controller = require('../controllers/controller') // Este es el controlador que va a correr la acciones que se ejecuten en esta ruta (/categories)
-const validateToken = require('../utils').validateToken
+const { validateToken } = require('../security')
+
 
 module.exports = (router) => {
+
   router.route('/categories') // Si el usuario le pega a /categories (ej.: http://api/v1/categories)
     .post(controller.add) // Un POST agrega una nueva categoria
     //.get(validateToken, controller.getAll) // Ruta protegida con token por ahora desactivada
