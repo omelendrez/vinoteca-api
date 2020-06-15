@@ -1,7 +1,7 @@
-### Lista usuarios
+### Lista suppliers
 GET http://localhost:3000/api/v1/suppliers
 
-### Agregar company
+### Agregar suppliers
 POST http://localhost:3000/api/v1/suppliers
 content-type: application/json
 
@@ -14,7 +14,7 @@ content-type: application/json
   "company_id": "1"
 }
 
-### Actualizar company || Se pasa el id del registro a modificar en la url
+### Actualizar suppliers || Se pasa el id del registro a modificar en la url
 PUT http://localhost:3000/api/v1/suppliers/1
 content-type: application/json
 
@@ -28,6 +28,11 @@ content-type: application/json
   "status_id": "1"
 }
 
-### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
+### Obtener suppliers pasando el id || Se pasa el id del registro a modificar en la url
 GET http://localhost:3000/api/v1/suppliers/1
 content-type: application/json
+
+### Eliminar suppliers pasando el id || Se pasa el id del registro a eliminar en la url
+DELETE http://localhost:3000/api/v1/suppliers/1
+content-type: application/json
+

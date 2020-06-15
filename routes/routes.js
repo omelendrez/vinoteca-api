@@ -43,6 +43,7 @@ module.exports = (router) => {
   router.route('/categories/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
 
   router.route('/companies')
     .post(controller.add)
@@ -51,6 +52,8 @@ module.exports = (router) => {
   router.route('/companies/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
+
   router.route('/inventory')
     .post(controller.add)
     .get(controller.getAll)
@@ -58,6 +61,7 @@ module.exports = (router) => {
   router.route('/inventory/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
 
   router.route('/orders')
     .post(controller.add)
@@ -66,6 +70,7 @@ module.exports = (router) => {
   router.route('/orders/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
 
   router.route('/order_details')
     .post(controller.add)
@@ -74,6 +79,7 @@ module.exports = (router) => {
   router.route('/order_details/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
 
   router.route('/products')
     .post(controller.add)
@@ -82,6 +88,7 @@ module.exports = (router) => {
   router.route('/products/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
 
   router.route('/reset-db')
     .post(controller.reset)
@@ -93,6 +100,7 @@ module.exports = (router) => {
   router.route('/stock_variations/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
 
   router.route('/stock_variation_reasons')
     .post(controller.add)
@@ -101,6 +109,7 @@ module.exports = (router) => {
   router.route('/stock_variation_reasons/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
 
   router.route('/stores')
     .post(controller.add)
@@ -109,6 +118,7 @@ module.exports = (router) => {
   router.route('/stores/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
 
   router.route('/suppliers')
     .post(controller.add)
@@ -117,6 +127,7 @@ module.exports = (router) => {
   router.route('/suppliers/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
 
   router.route('/users')
     .post(controller.add)
@@ -125,6 +136,7 @@ module.exports = (router) => {
   router.route('/users/:id')
     .put(controller.update)
     .get(controller.getById)
+    .delete(controller.delete)
 
   router.route('/login')
     .post(controller.login)

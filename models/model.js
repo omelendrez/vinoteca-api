@@ -74,6 +74,16 @@ module.exports = {
     })
   },
 
+  delete: (id, model) => { // Por eso nos pasa el id
+    return new Promise((resolve, reject) => { // Creamos una nueva Promise
+      const sql = `DELETE FROM  \`${model}\` WHERE id=?;` // Preparamos el query
+      pool.executeQuery(sql, [id], (err, results, fields) => { // Se lo enviamos a mysql junto con el id
+        if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
+        resolve(convertListToCamelCase(results)[0]) // Si no hubo errores formateamos el registro y se lo devolvemos al controlador
+      })
+    })
+  },
+
   getByName: (name, model) => { // Sólo para user
     return new Promise((resolve, reject) => {
       const sql = `SELECT * FROM \`${model}\` WHERE name=?;`

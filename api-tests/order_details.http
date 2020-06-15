@@ -1,4 +1,4 @@
-### Lista usuarios
+### Lista detalles de orden
 GET http://localhost:3000/api/v1/order_details
 
 
@@ -14,7 +14,7 @@ content-type: application/json
   "qty_received": 3
 }
 
-### Actualizar company || Se pasa el id del registro a modificar en la url
+### Actualizar detalles de orden || Se pasa el id del registro a modificar en la url
 PUT http://localhost:3000/api/v1/order_details/1
 content-type: application/json
 
@@ -26,6 +26,10 @@ content-type: application/json
   "qty_received": 10
 }
 
-### Obtener empresa pasando el id || Se pasa el id del registro a modificar en la url
+### Obtener detalles de orden pasando el id || Se pasa el id del registro a modificar en la url
 GET http://localhost:3000/api/v1/order_details/1
+content-type: application/json
+
+### Eliminar detalles de orden pasando el id || Se pasa el id del registro a eliminar en la url
+DELETE http://localhost:3000/api/v1/order_details/1
 content-type: application/json
