@@ -12,14 +12,14 @@ content-type: application/json
   "description": "asdas",
   "quantity": "4",
   "minimum" : "2",
-  "category_id": "1",
-  "company_id": "1",
-  "last_purchase_date": "2017-06-15",
-  "last_purchase_price": "126",
-  "last_sale_date": "2019-05-01",
-  "last_sale_price": "216",
+  "categoryId": "1",
+  "companyId": "1",
+  "lastPurchaseDate": "2017-06-15",
+  "lastPurchasePrice": "126",
+  "lastSaleDate": "2019-05-01",
+  "lastSalePrice": "216",
   "price": "134",
-  "status_id": "1"
+  "statusId": "1"
 }
 
 ### Actualizar products
@@ -34,14 +34,14 @@ content-type: application/json
   "description": "Vino Tomba",
   "quantity": "60",
   "minimum" : "10",
-  "category_id": "1",
-  "company_id": "1",
-  "last_purchase_date": "2017-06-15",
-  "last_purchase_price": "126",
-  "last_sale_date": "2019-05-01",
-  "last_sale_price": "216",
+  "categoryId": "1",
+  "companyId": "1",
+  "lastPurchaseDate": "2017-06-15",
+  "lastPurchasePrice": "126",
+  "lastSaleDate": "2019-05-01",
+  "lastSalePrice": "216",
   "price": "134",
-  "status_id": "1"
+  "statusId": "1"
 }
 
 ### Obtener products pasando el id
@@ -51,4 +51,3 @@ content-type: application/json
 ### Eliminar product pasando el id || Se pasa el id del registro a eliminar en la url
 DELETE http://localhost:3000/api/v1/products/1
 content-type: application/json
-

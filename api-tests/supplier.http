@@ -11,7 +11,7 @@ content-type: application/json
   "address": "Necochea 636",
   "phone": "154737118",
   "email": "matias@gmail.com",
-  "company_id": "1"
+  "companyId": "1"
 }
 
 ### Actualizar suppliers || Se pasa el id del registro a modificar en la url
@@ -24,8 +24,8 @@ content-type: application/json
   "address": "Necochea 637",
   "phone": "154737118",
   "email": "matias@gmail.com",
-  "company_id": "1",
-  "status_id": "1"
+  "companyId": "1",
+  "statusId": "1"
 }
 
 ### Obtener suppliers pasando el id || Se pasa el id del registro a modificar en la url
@@ -35,4 +35,3 @@ content-type: application/json
 ### Eliminar suppliers pasando el id || Se pasa el id del registro a eliminar en la url
 DELETE http://localhost:3000/api/v1/suppliers/1
 content-type: application/json
-

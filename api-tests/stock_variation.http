@@ -6,12 +6,12 @@ POST http://localhost:3000/api/v1/stock_variations
 content-type: application/json
 
 {
-  "company_id": "1",
-  "store_id": "1",
-  "product_id": "1",
+  "companyId": "1",
+  "storeId": "1",
+  "productId": "1",
   "quantity": "4",
-  "variation_type": "0",
-  "variation_reason": "1",
+  "variationType": "0",
+  "variationReason": "1",
   "comments": "asdas"
 
 }
@@ -21,12 +21,12 @@ PUT http://localhost:3000/api/v1/stock_variations/1
 content-type: application/json
 
 {
-  "company_id": "1",
-  "store_id": "1",
-  "product_id": "1",
+  "companyId": "1",
+  "storeId": "1",
+  "productId": "1",
   "quantity": "4",
-  "variation_type": "0",
-  "variation_reason": "1",
+  "variationType": "0",
+  "variationReason": "1",
   "comments": "asdadasdas"
 
 }
