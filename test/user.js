@@ -27,7 +27,7 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
 
   it('Debería devolver todos los usuarios', (done) => {
     chai.request(server)
@@ -45,7 +45,7 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
 
   it('Debería crear un nuevo usuario', (done) => {
     const user = {
@@ -79,7 +79,7 @@ describe('USUARIOS', () => {
 
         done()
       })
-  })
+  }).timeout(5000)
 
   it('Debería devolver un usuario', (done) => {
     chai.request(server)
@@ -103,7 +103,7 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
 
   it('Debería devolver todos los usuarios (el registro insertado)', (done) => {
     chai.request(server)
@@ -121,7 +121,7 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
 
   it('Debería modificar un usuario', (done) => {
     const user = {
@@ -155,7 +155,7 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
 
   it('Debería loguearse', (done) => {
     const user = {
@@ -184,7 +184,7 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
 
   it('Debería eliminar un usuario', (done) => {
     chai.request(server)
@@ -202,5 +202,5 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
 })
