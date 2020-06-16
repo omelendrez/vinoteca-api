@@ -9,10 +9,11 @@ const server = require('../index')
 chai.should()
 chai.use(chaiHttp)
 
-describe('DB-RESET', () => {
-  it('', (done) => {
+
+describe('USUARIOS', () => {
+  it('Recrear tabla user', (done) => {
     chai.request(server)
-      .post('/api/v1/reset-db')
+      .post('/api/v1/reset-db/user')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -21,15 +22,12 @@ describe('DB-RESET', () => {
 
         res.body.should.have.property('queries')
 
-        res.body.queries.length.should.be.eql(11)
+        res.body.queries.length.should.be.eql(1)
 
         done()
 
       })
   })
-})
-
-describe('USUARIOS', () => {
 
   it('Debería devolver todos los usuarios', (done) => {
     chai.request(server)
@@ -99,6 +97,22 @@ describe('USUARIOS', () => {
         res.body.email.should.be.eql('omar@gmail.com')
         res.body.profileId.should.be.eql(1)
         res.body.companyId.should.be.eql(1)
+
+        done()
+
+      })
+  })
+
+  it('Debería devolver todos los usuarios (el registro insertado)', (done) => {
+    chai.request(server)
+      .get('/api/v1/users')
+      .end((err, res) => {
+
+        res.should.have.status(200)
+
+        res.body.should.be.a('array')
+
+        res.body.length.should.be.eql(1)
 
         done()
 

@@ -9,10 +9,12 @@ const server = require('../index')
 chai.should()
 chai.use(chaiHttp)
 
-describe('DB-RESET', () => {
-  it('', (done) => {
+
+describe('CATEGORIAS', () => {
+
+  it('Recrear tabla category', (done) => {
     chai.request(server)
-      .post('/api/v1/reset-db')
+      .post('/api/v1/reset-db/category')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -21,15 +23,12 @@ describe('DB-RESET', () => {
 
         res.body.should.have.property('queries')
 
-        res.body.queries.length.should.be.eql(11)
+        res.body.queries.length.should.be.eql(1)
 
         done()
 
       })
   })
-})
-
-describe('CATEGORIAS', () => {
 
   it('Debería devolver todas las categorías', (done) => {
     chai.request(server)
@@ -89,6 +88,22 @@ describe('CATEGORIAS', () => {
         res.body.name.should.be.eql('Vinoteca')
 
         res.body.companyId.should.be.eql(1)
+
+        done()
+
+      })
+  })
+
+  it('Debería devolver todas las categorías (el registro insertado)', (done) => {
+    chai.request(server)
+      .get('/api/v1/categories')
+      .end((err, res) => {
+
+        res.should.have.status(200)
+
+        res.body.should.be.a('array')
+
+        res.body.length.should.be.eql(1)
 
         done()
 
