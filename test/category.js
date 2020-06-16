@@ -14,7 +14,7 @@ describe('CATEGORIAS', () => {
 
   it('Recrear tabla category', (done) => {
     chai.request(server)
-      .post('/api/v1/reset-db')
+      .post('/api/v1/reset-db/category')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -23,7 +23,7 @@ describe('CATEGORIAS', () => {
 
         res.body.should.have.property('queries')
 
-        res.body.queries.length.should.be.eql(11)
+        res.body.queries.length.should.be.eql(1)
 
         done()
 
@@ -52,9 +52,9 @@ describe('CATEGORIAS', () => {
 
   it('Debería crear una nueva categoría', (done) => {
     const category = {
-      name: "Vinoteca",
-      code: "123456",
-      companyId: 1
+      "name": "Vinos",
+      "code": "123456",
+      "companyId": "1"
     }
     chai.request(server)
       .post('/api/v1/categories')
@@ -89,7 +89,7 @@ describe('CATEGORIAS', () => {
         res.body.should.have.property('companyId')
 
         res.body.code.should.be.eql('123456')
-        res.body.name.should.be.eql('Vinoteca')
+        res.body.name.should.be.eql('Vinos')
 
         res.body.companyId.should.be.eql(1)
 
@@ -116,7 +116,7 @@ describe('CATEGORIAS', () => {
       })
   })
 
-  it('Debería crear modificar una categoría', (done) => {
+  it('Debería modificar una categoría', (done) => {
     const category = {
       name: "Vinoteca & Fiambreria Gourment",
       code: "123456",

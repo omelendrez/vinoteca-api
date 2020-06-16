@@ -13,7 +13,7 @@ chai.use(chaiHttp)
 describe('USUARIOS', () => {
   it('Recrear tabla user', (done) => {
     chai.request(server)
-      .post('/api/v1/reset-db')
+      .post('/api/v1/reset-db/user')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -22,7 +22,7 @@ describe('USUARIOS', () => {
 
         res.body.should.have.property('queries')
 
-        res.body.queries.length.should.be.eql(11)
+        res.body.queries.length.should.be.eql(1)
 
         done()
 
