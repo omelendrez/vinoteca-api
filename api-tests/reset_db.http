@@ -1,6 +1,6 @@
 // TODO: CUIDADO ESTE REQUEST RESETEA LA BASE DE DATOS LOCAL
 ### Resetear la base de datos
-POST http://localhost:3000/api/v1/reset-db
+POST http://localhost:3000/api/v1/reset-db/category
 content-type: application/json
 
 
