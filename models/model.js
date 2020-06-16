@@ -106,7 +106,7 @@ module.exports = {
     })
   },
 
-  reset: () => {
+  reset: (model) => {
     return new Promise((resolve, reject) => {
       /**
        * __dirname: variable de node que contiene la url donde se está ejecutando la api
@@ -153,8 +153,11 @@ module.exports = {
         let queries = []
         fileNames.map(fileName => {
           if (fileName.includes('.sql')) {
-            sql += fs.readFileSync(path.join(directory, fileName)).toString()
-            queries = [...queries, fileName]
+            if (!model || (model + '.sql' === fileName)) {
+              sql += fs.readFileSync(path.join(directory, fileName)).toString()
+              queries = [...queries, fileName]
+            }
+
           }
         })
         pool.executeQuery(sql, null, (error, results) => {
