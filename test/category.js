@@ -14,7 +14,7 @@ describe('CATEGORIAS', () => {
 
   it('Recrear tabla category', (done) => {
     chai.request(server)
-      .post('/api/v1/reset-db/category')
+      .post('/api/v1/reset-db')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -23,7 +23,7 @@ describe('CATEGORIAS', () => {
 
         res.body.should.have.property('queries')
 
-        res.body.queries.length.should.be.eql(1)
+        res.body.queries.length.should.be.eql(11)
 
         done()
 
@@ -37,9 +37,13 @@ describe('CATEGORIAS', () => {
 
         res.should.have.status(200)
 
-        res.body.should.be.a('array')
+        res.body.should.be.a('object')
 
-        res.body.length.should.be.eql(0)
+        res.body.should.have.property('count')
+
+        res.body.should.have.property('rows')
+
+        res.body.count.should.be.eql(0)
 
         done()
 
@@ -101,9 +105,11 @@ describe('CATEGORIAS', () => {
 
         res.should.have.status(200)
 
-        res.body.should.be.a('array')
+        res.body.should.have.property('count')
 
-        res.body.length.should.be.eql(1)
+        res.body.should.have.property('rows')
+
+        res.body.count.should.be.eql(1)
 
         done()
 

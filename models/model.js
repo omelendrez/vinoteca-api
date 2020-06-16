@@ -59,10 +59,18 @@ module.exports = {
   // El controlador quiere una lista de todas las empresas
   getAll: (model) => {
     return new Promise((resolve, reject) => { // Creamos una nueva Promise
-      const sql = `SELECT * FROM  \`${model}\`;` // Preparamos el query
+      const sql = `SELECT COUNT(*) as count FROM  \`${model}\`;` // Preparamos el query
       pool.executeQuery(sql, null, async (err, results, fields) => { // Enviamos el query a mysql
         if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
-        resolve(convertListToCamelCase(results)) // Si no hubo errores formateamos la lista completa y se la devolvemos al controlador
+        let response = {
+          count: results[0].count
+        }
+        const sql = `SELECT * FROM  \`${model}\`;` // Preparamos el query
+        pool.executeQuery(sql, null, async (err, results, fields) => { // Enviamos el query a mysql
+          if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
+          response.rows = convertListToCamelCase(results)
+          resolve(response) // Si no hubo errores formateamos la lista completa y se la devolvemos al controlador
+        })
       })
     })
   },
