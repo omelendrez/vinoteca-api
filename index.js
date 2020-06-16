@@ -1,9 +1,12 @@
 const express = require('express') // Middleware que simplifica la implemenetación de web servers
 const bodyParser = require('body-parser') // Transorma la data enviada en un POST, PUT o PATCH en un objeto javascript llamado "body"
 const logger = require('morgan') // Permite mostrar en gitbash qué acciones se están ejecutando cada vez que le pegamos a un endpoint
+const cors = require('cors')
+
 require('dotenv').config() // Permite leer las variables guardadas en archivo .env y las deja disponibles para toda la aplicación
 
 const app = express()
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false })) // extended permite recibir objetos anidados, pero no necesitamos eso.
 

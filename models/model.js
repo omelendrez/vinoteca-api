@@ -14,6 +14,8 @@ const { updateFieldsFromModel, convertListToCamelCase, convertObjectToCamelCase,
 
 module.exports = {
   save: async (data, model) => { // El controlador ha ejecutado esta función pasado el objeto que le envió el cliente a la respectiva ruta
+    data.created = new Date()
+    data.updated = new Date()
     const payload = convertObjectToUnderscoreCase(data)
     return new Promise(async (resolve, reject) => { // Creamos una Promise, que nos permite actuar de manera diferente si hubo errores o no
       const sql = `INSERT INTO \`${model}\` SET ?` // La lista de fields y values es generada automáticamente
@@ -26,6 +28,8 @@ module.exports = {
 
   saveUser: async (data, model) => {
     data.password = await encryptPassword(data) // Sólo para user
+    data.created = new Date()
+    data.updated = new Date()
     const payload = convertObjectToUnderscoreCase(data)
     return new Promise(async (resolve, reject) => {
       const sql = `INSERT INTO \`${model}\` SET ?`
@@ -79,7 +83,7 @@ module.exports = {
       const sql = `DELETE FROM  \`${model}\` WHERE id=?;` // Preparamos el query
       pool.executeQuery(sql, [id], (err, results, fields) => { // Se lo enviamos a mysql junto con el id
         if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
-        resolve(convertListToCamelCase(results)[0]) // Si no hubo errores formateamos el registro y se lo devolvemos al controlador
+        resolve(results)
       })
     })
   },
