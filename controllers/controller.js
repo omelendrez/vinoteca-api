@@ -19,12 +19,20 @@ module.exports = {
     const modelName = getModelFromRoute(req)
     if (modelName !== 'user') {
       Model.save(req.body, modelName) // Le decimos al modelo que ejecute la función "save" y le pasamos lo que el cliente posteó en la ruta
-        .then(result => res.json(result)) // Aquí todo salió bien, devolvemos  al cliente lo que nos devolvió el modelo
+        .then(result => {
+          Model.getById(result.id, modelName)
+            .then(result => res.status(201).json({ errors: {}, data: result }))
+            .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
+        }) // Aquí todo salió bien, devolvemos  al cliente lo que nos devolvió el modelo
         .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
     } else {
       Model.saveUser(req.body, modelName)
-        .then(result => res.json(result))
-        .catch(err => res.status(500).json(err))
+        .then(result => {
+          Model.getById(result.id, modelName)
+            .then(result => res.status(201).json({ errors: {}, data: result }))
+            .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
+        }) // Aquí todo salió bien, devolvemos  al cliente lo que nos devolvió el modelo
+        .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
     }
   },
 
@@ -32,7 +40,7 @@ module.exports = {
   update: (req, res) => {
     const modelName = getModelFromRoute(req)
     Model.update(req.body, req.params.id, modelName) // El controlador le está enviando los datos nuevos y el id de la empresa a modificar
-      .then(result => res.json(result))
+      .then(result => res.status(200).json({ errors: {}, data: result }))
       .catch(err => res.status(500).json(err))
   },
 
@@ -72,7 +80,9 @@ module.exports = {
   delete: (req, res) => {
     const modelName = getModelFromRoute(req)
     Model.delete(req.params.id, modelName)
-      .then(results => res.json(results))
+      .then(results => {
+        return res.status(200).json(results)
+      })
       .catch(err => res.status(500).json(err))
   }
 }
