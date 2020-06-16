@@ -9,8 +9,8 @@ const server = require('../index')
 chai.should()
 chai.use(chaiHttp)
 
-describe('Reset base de datos', () => {
-  it('Debería vacias la base de datos', (done) => {
+describe('DB-RESET', () => {
+  it('', (done) => {
     chai.request(server)
       .post('/api/v1/reset-db')
       .end((err, res) => {
@@ -29,121 +29,119 @@ describe('Reset base de datos', () => {
   })
 })
 
-describe('category end point', () => {
-  describe('CATEGORIAS', () => {
+describe('CATEGORIAS', () => {
 
-    it('Debería devolver todas las categorías', (done) => {
-      chai.request(server)
-        .get('/api/v1/categories')
-        .end((err, res) => {
+  it('Debería devolver todas las categorías', (done) => {
+    chai.request(server)
+      .get('/api/v1/categories')
+      .end((err, res) => {
 
-          res.should.have.status(200)
+        res.should.have.status(200)
 
-          res.body.should.be.a('array')
+        res.body.should.be.a('array')
 
-          res.body.length.should.be.eql(0)
+        res.body.length.should.be.eql(0)
 
-          done()
+        done()
 
-        })
-    })
+      })
+  })
 
-    it('Debería crear una nueva categoría', (done) => {
-      const category = {
-        name: "Vinoteca",
-        code: "123456",
-        companyId: 1
-      }
-      chai.request(server)
-        .post('/api/v1/categories')
-        .send(category)
-        .end((err, res) => {
+  it('Debería crear una nueva categoría', (done) => {
+    const category = {
+      name: "Vinoteca",
+      code: "123456",
+      companyId: 1
+    }
+    chai.request(server)
+      .post('/api/v1/categories')
+      .send(category)
+      .end((err, res) => {
 
-          res.should.have.status(201)
+        res.should.have.status(201)
 
-          res.body.should.be.a('object')
+        res.body.should.be.a('object')
 
-          res.body.should.have.property('errors')
-          res.body.should.have.property('data')
+        res.body.should.have.property('errors')
+        res.body.should.have.property('data')
 
-          res.body.data.should.have.property('name')
+        res.body.data.should.have.property('name')
 
-          done()
+        done()
 
-        })
-    })
+      })
+  })
 
-    it('Debería devolver una categoría', (done) => {
-      chai.request(server)
-        .get('/api/v1/categories/1')
-        .end((err, res) => {
+  it('Debería devolver una categoría', (done) => {
+    chai.request(server)
+      .get('/api/v1/categories/1')
+      .end((err, res) => {
 
-          res.should.have.status(200)
+        res.should.have.status(200)
 
-          res.body.should.be.a('object')
+        res.body.should.be.a('object')
 
-          res.body.should.have.property('code')
-          res.body.should.have.property('name')
-          res.body.should.have.property('companyId')
+        res.body.should.have.property('code')
+        res.body.should.have.property('name')
+        res.body.should.have.property('companyId')
 
-          res.body.code.should.be.eql('123456')
-          res.body.name.should.be.eql('Vinoteca')
+        res.body.code.should.be.eql('123456')
+        res.body.name.should.be.eql('Vinoteca')
 
-          res.body.companyId.should.be.eql(1)
+        res.body.companyId.should.be.eql(1)
 
-          done()
+        done()
 
-        })
-    })
+      })
+  })
 
-    it('Debería crear modificar una categoría', (done) => {
-      const category = {
-        name: "Vinoteca & Fiambreria Gourment",
-        code: "123456",
-        companyId: 2
-      }
-      chai.request(server)
-        .put('/api/v1/categories/1')
-        .send(category)
-        .end((err, res) => {
+  it('Debería crear modificar una categoría', (done) => {
+    const category = {
+      name: "Vinoteca & Fiambreria Gourment",
+      code: "123456",
+      companyId: 2
+    }
+    chai.request(server)
+      .put('/api/v1/categories/1')
+      .send(category)
+      .end((err, res) => {
 
-          res.should.have.status(200)
+        res.should.have.status(200)
 
-          res.body.should.be.a('object')
+        res.body.should.be.a('object')
 
-          res.body.should.have.property('errors')
-          res.body.should.have.property('data')
+        res.body.should.have.property('errors')
+        res.body.should.have.property('data')
 
-          res.body.data.should.have.property('code')
-          res.body.data.should.have.property('name')
-          res.body.data.should.have.property('companyId')
+        res.body.data.should.have.property('code')
+        res.body.data.should.have.property('name')
+        res.body.data.should.have.property('companyId')
 
-          res.body.data.code.should.be.eql('123456')
-          res.body.data.name.should.be.eql('Vinoteca & Fiambreria Gourment')
+        res.body.data.code.should.be.eql('123456')
+        res.body.data.name.should.be.eql('Vinoteca & Fiambreria Gourment')
 
-          res.body.data.companyId.should.be.eql(2)
+        res.body.data.companyId.should.be.eql(2)
 
-          done()
+        done()
 
-        })
-    })
+      })
+  })
 
-    it('Debería eliminar una categoría', (done) => {
-      chai.request(server)
-        .delete('/api/v1/categories/1')
-        .end((err, res) => {
+  it('Debería eliminar una categoría', (done) => {
+    chai.request(server)
+      .delete('/api/v1/categories/1')
+      .end((err, res) => {
 
-          res.should.have.status(200)
+        res.should.have.status(200)
 
-          res.body.should.be.a('object')
+        res.body.should.be.a('object')
 
-          res.body.should.have.property('affectedRows')
+        res.body.should.have.property('affectedRows')
 
-          res.body.affectedRows.should.be.eql(1)
+        res.body.affectedRows.should.be.eql(1)
 
-          done()
+        done()
 
-        })
-    })
+      })
   })
 })

@@ -9,8 +9,8 @@ const server = require('../index')
 chai.should()
 chai.use(chaiHttp)
 
-describe('Reset base de datos', () => {
-  it('Debería vacias la base de datos', (done) => {
+describe('DB-RESET', () => {
+  it('', (done) => {
     chai.request(server)
       .post('/api/v1/reset-db')
       .end((err, res) => {
@@ -29,166 +29,160 @@ describe('Reset base de datos', () => {
   })
 })
 
-describe('user end point', () => {
-  /**
-   * Testear GET
-   */
-  describe('USUARIOS', () => {
+describe('USUARIOS', () => {
 
-    it('Debería devolver todos los usuarios', (done) => {
-      chai.request(server)
-        .get('/api/v1/users')
-        .end((err, res) => {
+  it('Debería devolver todos los usuarios', (done) => {
+    chai.request(server)
+      .get('/api/v1/users')
+      .end((err, res) => {
 
-          res.should.have.status(200)
+        res.should.have.status(200)
 
-          res.body.should.be.a('array')
+        res.body.should.be.a('array')
 
-          res.body.length.should.be.eql(0)
+        res.body.length.should.be.eql(0)
 
-          done()
+        done()
 
-        })
-    })
-
-    it('Debería crear un nuevo usuario', (done) => {
-      const user = {
-        "name": "Omar",
-        "password": "Master1",
-        "email": "omar@gmail.com",
-        "profileId": 1,
-        "companyId": 1
-      }
-      chai.request(server)
-        .post('/api/v1/users')
-        .send(user)
-        .end((err, res) => {
-
-          res.should.have.status(201)
-
-          res.body.should.be.a('object')
-
-          res.body.should.have.property('errors')
-          res.body.should.have.property('data')
-
-          res.body.data.should.have.property('name')
-          res.body.data.should.have.property('email')
-          res.body.data.should.have.property('profileId')
-          res.body.data.should.have.property('companyId')
-
-          res.body.data.name.should.be.eql('Omar')
-          res.body.data.email.should.be.eql('omar@gmail.com')
-          res.body.data.profileId.should.be.eql(1)
-          res.body.data.companyId.should.be.eql(1)
-
-          done()
-        })
-    })
-
-    it('Debería devolver un usuario', (done) => {
-      chai.request(server)
-        .get('/api/v1/users/1')
-        .end((err, res) => {
-
-          res.should.have.status(200)
-
-          res.body.should.be.a('object')
-
-          res.body.should.have.property('name')
-          res.body.should.have.property('email')
-          res.body.should.have.property('profileId')
-          res.body.should.have.property('companyId')
-
-          res.body.name.should.be.eql('Omar')
-          res.body.email.should.be.eql('omar@gmail.com')
-          res.body.profileId.should.be.eql(1)
-          res.body.companyId.should.be.eql(1)
-
-          done()
-
-        })
-    })
-
-    it('Debería modificar un usuario', (done) => {
-      const user = {
-        "name": "OmarMel",
-        "email": "omar.melendrez@gmail.com",
-        "profileId": 1,
-        "companyId": 1
-      }
-      chai.request(server)
-        .put('/api/v1/users/1')
-        .send(user)
-        .end((err, res) => {
-
-          res.should.have.status(200)
-
-          res.body.should.be.a('object')
-
-          res.body.should.have.property('errors')
-          res.body.should.have.property('data')
-
-          res.body.data.should.have.property('name')
-          res.body.data.should.have.property('email')
-          res.body.data.should.have.property('profileId')
-          res.body.data.should.have.property('companyId')
-
-          res.body.data.name.should.be.eql('OmarMel')
-          res.body.data.email.should.be.eql('omar.melendrez@gmail.com')
-          res.body.data.profileId.should.be.eql(1)
-          res.body.data.companyId.should.be.eql(1)
-
-          done()
-
-        })
-    })
-
-    it('Debería loguearse', (done) => {
-      const user = {
-        "name": "OmarMel",
-        "password": "Master1"
-      }
-
-      chai.request(server)
-        .post('/api/v1/login')
-        .send(user)
-        .end((err, res) => {
-
-          res.should.have.status(200)
-
-          res.body.should.be.a('object')
-
-          res.body.should.have.property('token')
-          res.body.should.have.property('user')
-
-          res.body.user.should.have.property('id')
-          res.body.user.should.have.property('name')
-
-          res.body.user.id.should.be.eql(1)
-          res.body.user.name.should.be.eql('OmarMel')
-
-          done()
-
-        })
-    })
-
-    it('Debería eliminar un usuario', (done) => {
-      chai.request(server)
-        .delete('/api/v1/users/1')
-        .end((err, res) => {
-
-          res.should.have.status(200)
-
-          res.body.should.be.a('object')
-
-          res.body.should.have.property('affectedRows')
-
-          res.body.affectedRows.should.be.eql(1)
-
-          done()
-
-        })
-    })
+      })
   })
 
+  it('Debería crear un nuevo usuario', (done) => {
+    const user = {
+      "name": "Omar",
+      "password": "Master1",
+      "email": "omar@gmail.com",
+      "profileId": 1,
+      "companyId": 1
+    }
+    chai.request(server)
+      .post('/api/v1/users')
+      .send(user)
+      .end((err, res) => {
+
+        res.should.have.status(201)
+
+        res.body.should.be.a('object')
+
+        res.body.should.have.property('errors')
+        res.body.should.have.property('data')
+
+        res.body.data.should.have.property('name')
+        res.body.data.should.have.property('email')
+        res.body.data.should.have.property('profileId')
+        res.body.data.should.have.property('companyId')
+
+        res.body.data.name.should.be.eql('Omar')
+        res.body.data.email.should.be.eql('omar@gmail.com')
+        res.body.data.profileId.should.be.eql(1)
+        res.body.data.companyId.should.be.eql(1)
+
+        done()
+      })
+  })
+
+  it('Debería devolver un usuario', (done) => {
+    chai.request(server)
+      .get('/api/v1/users/1')
+      .end((err, res) => {
+
+        res.should.have.status(200)
+
+        res.body.should.be.a('object')
+
+        res.body.should.have.property('name')
+        res.body.should.have.property('email')
+        res.body.should.have.property('profileId')
+        res.body.should.have.property('companyId')
+
+        res.body.name.should.be.eql('Omar')
+        res.body.email.should.be.eql('omar@gmail.com')
+        res.body.profileId.should.be.eql(1)
+        res.body.companyId.should.be.eql(1)
+
+        done()
+
+      })
+  })
+
+  it('Debería modificar un usuario', (done) => {
+    const user = {
+      "name": "OmarMel",
+      "email": "omar.melendrez@gmail.com",
+      "profileId": 1,
+      "companyId": 1
+    }
+    chai.request(server)
+      .put('/api/v1/users/1')
+      .send(user)
+      .end((err, res) => {
+
+        res.should.have.status(200)
+
+        res.body.should.be.a('object')
+
+        res.body.should.have.property('errors')
+        res.body.should.have.property('data')
+
+        res.body.data.should.have.property('name')
+        res.body.data.should.have.property('email')
+        res.body.data.should.have.property('profileId')
+        res.body.data.should.have.property('companyId')
+
+        res.body.data.name.should.be.eql('OmarMel')
+        res.body.data.email.should.be.eql('omar.melendrez@gmail.com')
+        res.body.data.profileId.should.be.eql(1)
+        res.body.data.companyId.should.be.eql(1)
+
+        done()
+
+      })
+  })
+
+  it('Debería loguearse', (done) => {
+    const user = {
+      "name": "OmarMel",
+      "password": "Master1"
+    }
+
+    chai.request(server)
+      .post('/api/v1/login')
+      .send(user)
+      .end((err, res) => {
+
+        res.should.have.status(200)
+
+        res.body.should.be.a('object')
+
+        res.body.should.have.property('token')
+        res.body.should.have.property('user')
+
+        res.body.user.should.have.property('id')
+        res.body.user.should.have.property('name')
+
+        res.body.user.id.should.be.eql(1)
+        res.body.user.name.should.be.eql('OmarMel')
+
+        done()
+
+      })
+  })
+
+  it('Debería eliminar un usuario', (done) => {
+    chai.request(server)
+      .delete('/api/v1/users/1')
+      .end((err, res) => {
+
+        res.should.have.status(200)
+
+        res.body.should.be.a('object')
+
+        res.body.should.have.property('affectedRows')
+
+        res.body.affectedRows.should.be.eql(1)
+
+        done()
+
+      })
+  })
 })
