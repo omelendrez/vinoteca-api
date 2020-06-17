@@ -8,9 +8,9 @@ content-type: application/json
 {
   "number": "123231",
   "date": "2019-06-13",
-  "supplier_id": "1",
+  "supplierId": "1",
   "amount": "342.12",
-  "company_id": "1"
+  "companyId": "1"
 }
 
 ### Actualizar order || Se pasa el id del registro a modificar en la url
@@ -20,9 +20,9 @@ content-type: application/json
 {
   "number": "8888",
   "date": "2015-06-13",
-  "supplier_id": "111111",
+  "supplierId": "111111",
   "amount": "0.12",
-  "company_id": "4345"
+  "companyId": "4345"
 }
 
 ### Obtener order pasando el id || Se pasa el id del registro a modificar en la url
