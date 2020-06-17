@@ -32,11 +32,15 @@
 const controller = require('../controllers/controller') // Este es el controlador que va a correr la acciones que se ejecuten en esta ruta (/categories)
 const { validateToken } = require('../security')
 const routes = require('./routes.json')
-
+//.get(validateToken, controller.getAll) // Ruta protegida con token
+//.get(controller.getAll)
 const generateRoutes = (router, routes) => {
   routes.map(route => {
     const path = router.route(route.url)
     route.methods.map(method => {
+      if (method.secure) {
+        return path[method.method](validateToken, controller[method.function])
+      }
       return path[method.method](controller[method.function])
     })
   })
