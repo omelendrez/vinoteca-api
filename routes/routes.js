@@ -31,117 +31,17 @@
 
 const controller = require('../controllers/controller') // Este es el controlador que va a correr la acciones que se ejecuten en esta ruta (/categories)
 const { validateToken } = require('../security')
+const routes = require('./routes.json')
 
+const generateRoutes = (router, routes) => {
+  routes.map(route => {
+    const path = router.route(route.url)
+    route.methods.map(method => {
+      return path[method.method](controller[method.function])
+    })
+  })
+}
 
 module.exports = (router) => {
-
-  router.route('/categories') // Si el usuario le pega a /categories (ej.: http://api/v1/categories)
-    .post(controller.add) // Un POST agrega una nueva categoria
-    //.get(validateToken, controller.getAll) // Ruta protegida con token por ahora desactivada
-    .get(controller.getAll) // Un GET obtiene la lista de todas las categorias existentes en la base de datos
-
-  router.route('/categories/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/companies')
-    .post(controller.add)
-    .get(controller.getAll)
-
-  router.route('/companies/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/inventory')
-    .post(controller.add)
-    .get(controller.getAll)
-
-  router.route('/inventory/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/orders')
-    .post(controller.add)
-    .get(controller.getAll)
-
-  router.route('/orders/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/order_details')
-    .post(controller.add)
-    .get(controller.getAll)
-
-  router.route('/order_details/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/products')
-    .post(controller.add)
-    .get(controller.getAll)
-
-  router.route('/products/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/reset-db')
-    .post(controller.reset)
-
-  router.route('/reset-db/:table')
-    .post(controller.reset)
-
-  router.route('/stock_variations')
-    .post(controller.add)
-    .get(controller.getAll)
-
-  router.route('/stock_variations/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/stock_variation_reasons')
-    .post(controller.add)
-    .get(controller.getAll)
-
-  router.route('/stock_variation_reasons/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/stores')
-    .post(controller.add)
-    .get(controller.getAll)
-
-  router.route('/stores/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/suppliers')
-    .post(controller.add)
-    .get(controller.getAll)
-
-  router.route('/suppliers/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/users')
-    .post(controller.add)
-    .get(controller.getAll)
-
-  router.route('/users/:id')
-    .put(controller.update)
-    .get(controller.getById)
-    .delete(controller.delete)
-
-  router.route('/login')
-    .post(controller.login)
-
+  generateRoutes(router, routes)
 }
