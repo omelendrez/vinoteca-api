@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS stock_variation;
-CREATE TABLE stock_variation (
+DROP TABLE IF EXISTS inventory_variation;
+CREATE TABLE inventory_variation (
   id INTEGER NOT NULL AUTO_INCREMENT,
   store_id INTEGER NOT NULL,
   product_id INTEGER NOT NULL,

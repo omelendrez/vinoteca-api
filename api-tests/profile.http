@@ -1,0 +1,30 @@
+### Lista categories
+GET http://localhost:3000/api/v1/profiles
+
+### Agregar category
+POST http://localhost:3000/api/v1/profiles
+content-type: application/json
+
+{
+  "name": "Vinos",
+  "code": "123456",
+  "companyId": "1"
+}
+
+### Actualizar category || Se pasa el id del registro a modificar en la url
+PUT http://localhost:3000/api/v1/profiles/1
+content-type: application/json
+
+{
+  "name": "Bebidas gaseosas",
+  "code": "789852",
+  "companyId": "2"
+}
+
+### Obtener categoria pasando el id || Se pasa el id del registro a modificar en la url
+GET http://localhost:3000/api/v1/profiles/1
+content-type: application/json
+
+### Eliminar categoria pasando el id || Se pasa el id del registro a eliminar en la url
+DELETE http://localhost:3000/api/v1/profiles/1
+content-type: application/json
