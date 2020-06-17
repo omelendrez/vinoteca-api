@@ -10,11 +10,11 @@ chai.should()
 chai.use(chaiHttp)
 
 
-describe('VARIACION DE STOCK', () => {
+describe('VARIACION DE INVENTARIO', () => {
 
-  it('Recrear tabla stock_variation', (done) => {
+  it('Recrear tabla inventory_variation', (done) => {
     chai.request(server)
-      .post('/api/v1/reset-db/stock_variation')
+      .post('/api/v1/reset-db/inventory_variation')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -30,9 +30,9 @@ describe('VARIACION DE STOCK', () => {
       })
   })
 
-  it('Debería devolver todas los stock_variation', (done) => {
+  it('Debería devolver todas los inventory_variation', (done) => {
     chai.request(server)
-      .get('/api/v1/stock_variations')
+      .get('/api/v1/inventory_variations')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -50,8 +50,8 @@ describe('VARIACION DE STOCK', () => {
       })
   })
 
-  it('Debería crear una nuevo stock_Variation', (done) => {
-    const stock_Variation = {
+  it('Debería crear una nuevo inventory_Variation', (done) => {
+    const inventory_Variation = {
       "companyId": "1",
       "storeId": "1",
       "productId": "1",
@@ -61,8 +61,8 @@ describe('VARIACION DE STOCK', () => {
       "comments": "asdas"
     }
     chai.request(server)
-      .post('/api/v1/stock_variations')
-      .send(stock_Variation)
+      .post('/api/v1/inventory_variations')
+      .send(inventory_Variation)
       .end((err, res) => {
 
         res.should.have.status(201)
@@ -79,9 +79,9 @@ describe('VARIACION DE STOCK', () => {
       })
   })
 
-  it('Debería devolver un stock_variation', (done) => {
+  it('Debería devolver un inventory_variation', (done) => {
     chai.request(server)
-      .get('/api/v1/stock_variations/1')
+      .get('/api/v1/inventory_variations/1')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -102,9 +102,9 @@ describe('VARIACION DE STOCK', () => {
       })
   })
 
-  it('Debería devolver todas las variaciones de stock', (done) => {
+  it('Debería devolver todas las variaciones de inventario', (done) => {
     chai.request(server)
-      .get('/api/v1/stock_variations')
+      .get('/api/v1/inventory_variations')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -120,8 +120,8 @@ describe('VARIACION DE STOCK', () => {
       })
   })
 
-  it('Debería modificar una categoría', (done) => {
-    const stock_Variation = {
+  it('Debería modificar una variación de inventario', (done) => {
+    const inventory_Variation = {
       "companyId": "1",
       "storeId": "1",
       "productId": "1",
@@ -131,8 +131,8 @@ describe('VARIACION DE STOCK', () => {
       "comments": "asdas"
     }
     chai.request(server)
-      .put('/api/v1/stock_variations/1')
-      .send(stock_Variation)
+      .put('/api/v1/inventory_variations/1')
+      .send(inventory_Variation)
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -156,9 +156,9 @@ describe('VARIACION DE STOCK', () => {
       })
   })
 
-  it('Debería eliminar una variacion de stock', (done) => {
+  it('Debería eliminar una variacion de inventario', (done) => {
     chai.request(server)
-      .delete('/api/v1/stock_variations/1')
+      .delete('/api/v1/inventory_variations/1')
       .end((err, res) => {
 
         res.should.have.status(200)

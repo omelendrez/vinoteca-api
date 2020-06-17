@@ -234,9 +234,9 @@
     ]
   },
   {
-    "route": "stock_variations",
-    "model": "stock_variation",
-    "url": "/stock_variations",
+    "route": "inventory_variations",
+    "model": "inventory_variation",
+    "url": "/inventory_variations",
     "methods": [
       {
         "method": "get",
@@ -251,9 +251,9 @@
     ]
   },
   {
-    "route": "stock_variations",
-    "model": "stock_variation",
-    "url": "/stock_variations/:id",
+    "route": "inventory_variations",
+    "model": "inventory_variation",
+    "url": "/inventory_variations/:id",
     "methods": [
       {
         "method": "get",
@@ -273,9 +273,9 @@
     ]
   },
   {
-    "route": "stock_variation_reasons",
-    "model": "stock_variation_reason",
-    "url": "/stock_variation_reasons",
+    "route": "inventory_variation_reasons",
+    "model": "inventory_variation_reason",
+    "url": "/inventory_variation_reasons",
     "methods": [
       {
         "method": "get",
@@ -290,9 +290,9 @@
     ]
   },
   {
-    "route": "stock_variation_reasons",
-    "model": "stock_variation_reason",
-    "url": "/stock_variation_reasons/:id",
+    "route": "inventory_variation_reasons",
+    "model": "inventory_variation_reason",
+    "url": "/inventory_variation_reasons/:id",
     "methods": [
       {
         "method": "get",
@@ -312,9 +312,9 @@
     ]
   },
   {
-    "route": "stock_variations",
-    "model": "stock_variation",
-    "url": "/stock_variations",
+    "route": "inventory_variations",
+    "model": "inventory_variation",
+    "url": "/inventory_variations",
     "methods": [
       {
         "method": "get",
@@ -329,9 +329,9 @@
     ]
   },
   {
-    "route": "stock_variations",
-    "model": "stock_variation",
-    "url": "/stock_variations/:id",
+    "route": "inventory_variations",
+    "model": "inventory_variation",
+    "url": "/inventory_variations/:id",
     "methods": [
       {
         "method": "get",

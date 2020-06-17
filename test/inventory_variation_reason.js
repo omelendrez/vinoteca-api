@@ -10,11 +10,11 @@ chai.should()
 chai.use(chaiHttp)
 
 
-describe('Razones de variación de stock', () => {
+describe('Razones de variación de inventario', () => {
 
-  it('Recrear tabla stock_variation_reason', (done) => {
+  it('Recrear tabla inventory_variation_reason', (done) => {
     chai.request(server)
-      .post('/api/v1/reset-db/stock_variation_reason')
+      .post('/api/v1/reset-db/inventory_variation_reason')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -30,9 +30,9 @@ describe('Razones de variación de stock', () => {
       })
   }).timeout(5000)
 
-  it('Debería devolver todas las razones devariación de stock', (done) => {
+  it('Debería devolver todas las razones de variación de inventario', (done) => {
     chai.request(server)
-      .get('/api/v1/stock_variation_reasons')
+      .get('/api/v1/inventory_variation_reasons')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -50,15 +50,15 @@ describe('Razones de variación de stock', () => {
       })
   }).timeout(5000)
 
-  it('Debería crear una nueva razón de variación de stock', (done) => {
-    const stock_variation_reason = {
+  it('Debería crear una nueva razón de variación de inventario', (done) => {
+    const inventory_variation_reason = {
       "code": "123",
       "name": "Nombre",
       "companyId": "1"
     }
     chai.request(server)
-      .post('/api/v1/stock_variation_reasons')
-      .send(stock_variation_reason)
+      .post('/api/v1/inventory_variation_reasons')
+      .send(inventory_variation_reason)
       .end((err, res) => {
 
         res.should.have.status(201)
@@ -75,9 +75,9 @@ describe('Razones de variación de stock', () => {
       })
   }).timeout(5000)
 
-  it('Debería devolver una razón de variación de stock', (done) => {
+  it('Debería devolver una razón de variación de inventario', (done) => {
     chai.request(server)
-      .get('/api/v1/stock_variation_reasons/1')
+      .get('/api/v1/inventory_variation_reasons/1')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -98,9 +98,9 @@ describe('Razones de variación de stock', () => {
       })
   }).timeout(5000)
 
-  it('Debería devolver todas las razones de variación de stock (el registro insertado)', (done) => {
+  it('Debería devolver todas las razones de variación de inventario (el registro insertado)', (done) => {
     chai.request(server)
-      .get('/api/v1/stock_variation_reasons')
+      .get('/api/v1/inventory_variation_reasons')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -116,15 +116,15 @@ describe('Razones de variación de stock', () => {
       })
   }).timeout(5000)
 
-  it('Debería modificar una razón de variación de stock', (done) => {
-    const stock_variation_reason = {
+  it('Debería modificar una razón de variación de inventario', (done) => {
+    const inventory_variation_reason = {
       "code": "123",
       "name": "Nombre nuevo",
       "companyId": "2"
     }
     chai.request(server)
-      .put('/api/v1/stock_variation_reasons/1')
-      .send(stock_variation_reason)
+      .put('/api/v1/inventory_variation_reasons/1')
+      .send(inventory_variation_reason)
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -148,9 +148,9 @@ describe('Razones de variación de stock', () => {
       })
   }).timeout(5000)
 
-  it('Debería eliminar una razón de variación de stock', (done) => {
+  it('Debería eliminar una razón de variación de inventario', (done) => {
     chai.request(server)
-      .delete('/api/v1/stock_variation_reasons/1')
+      .delete('/api/v1/inventory_variation_reasons/1')
       .end((err, res) => {
 
         res.should.have.status(200)
