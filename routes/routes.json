@@ -502,5 +502,44 @@
         "secure": false
       }
     ]
+  },
+  {
+    "route": "profiles",
+    "model": "profile",
+    "url": "/profiles",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "profiles",
+    "model": "profile",
+    "url": "/profiles/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   }
 ]
