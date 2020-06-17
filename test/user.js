@@ -9,10 +9,11 @@ const server = require('../index')
 chai.should()
 chai.use(chaiHttp)
 
-describe('DB-RESET', () => {
-  it('', (done) => {
+
+describe('USUARIOS', () => {
+  it('Recrear tabla user', (done) => {
     chai.request(server)
-      .post('/api/v1/reset-db')
+      .post('/api/v1/reset-db/user')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -21,15 +22,12 @@ describe('DB-RESET', () => {
 
         res.body.should.have.property('queries')
 
-        res.body.queries.length.should.be.eql(11)
+        res.body.queries.length.should.be.eql(1)
 
         done()
 
       })
-  })
-})
-
-describe('USUARIOS', () => {
+  }).timeout(5000)
 
   it('Debería devolver todos los usuarios', (done) => {
     chai.request(server)
@@ -38,14 +36,16 @@ describe('USUARIOS', () => {
 
         res.should.have.status(200)
 
-        res.body.should.be.a('array')
+        res.body.should.have.property('count')
 
-        res.body.length.should.be.eql(0)
+        res.body.should.have.property('rows')
+
+        res.body.count.should.be.eql(0)
 
         done()
 
       })
-  })
+  }).timeout(5000)
 
   it('Debería crear un nuevo usuario', (done) => {
     const user = {
@@ -79,7 +79,7 @@ describe('USUARIOS', () => {
 
         done()
       })
-  })
+  }).timeout(5000)
 
   it('Debería devolver un usuario', (done) => {
     chai.request(server)
@@ -103,7 +103,25 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
+
+  it('Debería devolver todos los usuarios (el registro insertado)', (done) => {
+    chai.request(server)
+      .get('/api/v1/users')
+      .end((err, res) => {
+
+        res.should.have.status(200)
+
+        res.body.should.have.property('count')
+
+        res.body.should.have.property('rows')
+
+        res.body.count.should.be.eql(1)
+
+        done()
+
+      })
+  }).timeout(5000)
 
   it('Debería modificar un usuario', (done) => {
     const user = {
@@ -137,7 +155,7 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
 
   it('Debería loguearse', (done) => {
     const user = {
@@ -166,7 +184,7 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
 
   it('Debería eliminar un usuario', (done) => {
     chai.request(server)
@@ -184,5 +202,5 @@ describe('USUARIOS', () => {
         done()
 
       })
-  })
+  }).timeout(5000)
 })

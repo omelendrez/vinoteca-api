@@ -72,7 +72,8 @@ module.exports = {
   },
 
   reset: (req, res) => {
-    Model.reset()
+    const model = req.params.table || ''
+    Model.reset(model)
       .then(results => res.json(results))
       .catch(err => res.status(500).json(err))
   },

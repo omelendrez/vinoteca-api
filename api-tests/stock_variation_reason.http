@@ -9,7 +9,7 @@ content-type: application/json
 {
  "code" : "123",
  "name" : "Nombre",
- "company_id" : "1"
+ "companyId" : "1"
 }
 
 ### Actualizar stock variation reasons || Se pasa el id del registro a modificar en la url
@@ -19,7 +19,7 @@ content-type: application/json
 {
   "code" : "123",
   "name" : "Nombre nuevo",
-  "company_id" : "2"
+  "companyId" : "2"
 }
 
 ### Obtener stock variation reasons pasando el id || Se pasa el id del registro a modificar en la url

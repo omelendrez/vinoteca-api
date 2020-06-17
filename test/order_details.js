@@ -10,11 +10,11 @@ chai.should()
 chai.use(chaiHttp)
 
 
-describe('CATEGORIAS', () => {
+describe('DETALLE DE ORDEN', () => {
 
-  it('Recrear tabla category', (done) => {
+  it('Recrear tabla order_details', (done) => {
     chai.request(server)
-      .post('/api/v1/reset-db/category')
+      .post('/api/v1/reset-db/order_details')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -28,11 +28,11 @@ describe('CATEGORIAS', () => {
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería devolver todas las categorías', (done) => {
+  it('Debería devolver todas los detalles de orden', (done) => {
     chai.request(server)
-      .get('/api/v1/categories')
+      .get('/api/v1/order_details')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -48,17 +48,19 @@ describe('CATEGORIAS', () => {
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería crear una nueva categoría', (done) => {
-    const category = {
-      "name": "Vinos",
-      "code": "123456",
-      "companyId": "1"
+  it('Debería crear un nuevo detalle de orden', (done) => {
+    const order_details = {
+      "orderId": "1",
+      "storeId": "2",
+      "productId": "3",
+      "qtyRequested": 8,
+      "qtyReceived": 3
     }
     chai.request(server)
-      .post('/api/v1/categories')
-      .send(category)
+      .post('/api/v1/order_details')
+      .send(order_details)
       .end((err, res) => {
 
         res.should.have.status(201)
@@ -68,39 +70,39 @@ describe('CATEGORIAS', () => {
         res.body.should.have.property('errors')
         res.body.should.have.property('data')
 
-        res.body.data.should.have.property('name')
+        res.body.data.should.have.property('orderId')
 
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería devolver una categoría', (done) => {
+  it('Debería devolver un detalle de orden', (done) => {
     chai.request(server)
-      .get('/api/v1/categories/1')
+      .get('/api/v1/order_details/1')
       .end((err, res) => {
 
         res.should.have.status(200)
 
         res.body.should.be.a('object')
 
-        res.body.should.have.property('code')
-        res.body.should.have.property('name')
-        res.body.should.have.property('companyId')
+        res.body.should.have.property('orderId')
+        res.body.should.have.property('storeId')
+        res.body.should.have.property('productId')
 
-        res.body.code.should.be.eql('123456')
-        res.body.name.should.be.eql('Vinos')
+        res.body.qtyRequested.should.be.eql(8)
+        res.body.qtyReceived.should.be.eql(3)
 
-        res.body.companyId.should.be.eql(1)
+        res.body.productId.should.be.eql(3)
 
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería devolver todas las categorías (el registro insertado)', (done) => {
+  it('Debería devolver todas los detalles de orden (el registro insertado)', (done) => {
     chai.request(server)
-      .get('/api/v1/categories')
+      .get('/api/v1/order_details')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -114,17 +116,19 @@ describe('CATEGORIAS', () => {
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería modificar una categoría', (done) => {
-    const category = {
-      name: "Vinoteca & Fiambreria Gourment",
-      code: "123456",
-      companyId: 2
+  it('Debería modificar una orden de detalle', (done) => {
+    const order_details = {
+      orderId: "1",
+      storeId: "2",
+      productId: "3",
+      qtyRequested: 8,
+      qtyReceived: 3
     }
     chai.request(server)
-      .put('/api/v1/categories/1')
-      .send(category)
+      .put('/api/v1/order_details/1')
+      .send(order_details)
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -134,23 +138,23 @@ describe('CATEGORIAS', () => {
         res.body.should.have.property('errors')
         res.body.should.have.property('data')
 
-        res.body.data.should.have.property('code')
-        res.body.data.should.have.property('name')
-        res.body.data.should.have.property('companyId')
+        res.body.data.should.have.property('orderId')
+        res.body.data.should.have.property('storeId')
+        res.body.data.should.have.property('productId')
 
-        res.body.data.code.should.be.eql('123456')
-        res.body.data.name.should.be.eql('Vinoteca & Fiambreria Gourment')
+        res.body.data.qtyRequested.should.be.eql(8)
+        res.body.data.qtyReceived.should.be.eql(3)
 
-        res.body.data.companyId.should.be.eql(2)
+        res.body.data.productId.should.be.eql(3)
 
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería eliminar una categoría', (done) => {
+  it('Debería eliminar un detalle de orden', (done) => {
     chai.request(server)
-      .delete('/api/v1/categories/1')
+      .delete('/api/v1/order_details/1')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -164,5 +168,5 @@ describe('CATEGORIAS', () => {
         done()
 
       })
-  }).timeout(5000)
+  })
 })

@@ -10,11 +10,11 @@ chai.should()
 chai.use(chaiHttp)
 
 
-describe('CATEGORIAS', () => {
+describe('TEST DE COMPAÑÍAS', () => {
 
-  it('Recrear tabla category', (done) => {
+  it('Recrear tabla company', (done) => {
     chai.request(server)
-      .post('/api/v1/reset-db/category')
+      .post('/api/v1/reset-db/company')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -28,11 +28,11 @@ describe('CATEGORIAS', () => {
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería devolver todas las categorías', (done) => {
+  it('Devolver todas las compañías', (done) => {
     chai.request(server)
-      .get('/api/v1/categories')
+      .get('/api/v1/companies')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -48,17 +48,19 @@ describe('CATEGORIAS', () => {
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería crear una nueva categoría', (done) => {
-    const category = {
-      "name": "Vinos",
-      "code": "123456",
-      "companyId": "1"
+  it('Crear una nueva compañía', (done) => {
+    const company = {
+      "name": "Vinos Copados Co",
+      "contact": "Emiliano el loco",
+      "address": "Juan Molina y Avellaneda",
+      "phone": "2912222222",
+      "email": "emiliano@gmail.com"
     }
     chai.request(server)
-      .post('/api/v1/categories')
-      .send(category)
+      .post('/api/v1/companies')
+      .send(company)
       .end((err, res) => {
 
         res.should.have.status(201)
@@ -73,34 +75,35 @@ describe('CATEGORIAS', () => {
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería devolver una categoría', (done) => {
+  it('Debería devolver una compañía', (done) => {
     chai.request(server)
-      .get('/api/v1/categories/1')
+      .get('/api/v1/companies/1')
       .end((err, res) => {
 
         res.should.have.status(200)
 
         res.body.should.be.a('object')
 
-        res.body.should.have.property('code')
         res.body.should.have.property('name')
-        res.body.should.have.property('companyId')
+        res.body.should.have.property('contact')
+        res.body.should.have.property('address')
+        res.body.should.have.property('phone')
+        res.body.should.have.property('email')
 
-        res.body.code.should.be.eql('123456')
-        res.body.name.should.be.eql('Vinos')
-
-        res.body.companyId.should.be.eql(1)
+        res.body.name.should.be.eql('Vinos Copados Co')
+        res.body.contact.should.be.eql('Emiliano el loco')
+        res.body.address.should.be.eql('Juan Molina y Avellaneda')
 
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería devolver todas las categorías (el registro insertado)', (done) => {
+  it('Debería devolver todas las compañías (el registro insertado)', (done) => {
     chai.request(server)
-      .get('/api/v1/categories')
+      .get('/api/v1/companies')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -114,17 +117,19 @@ describe('CATEGORIAS', () => {
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería modificar una categoría', (done) => {
-    const category = {
-      name: "Vinoteca & Fiambreria Gourment",
-      code: "123456",
-      companyId: 2
+  it('Debería modificar una compañía', (done) => {
+    const company = {
+      "name": "Vinos Aburridos Co",
+      "contact": "Carla la loco",
+      "address": "Avellaneda",
+      "phone": "2912222222",
+      "email": "emiliano@gmail.com"
     }
     chai.request(server)
-      .put('/api/v1/categories/1')
-      .send(category)
+      .put('/api/v1/companies/1')
+      .send(company)
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -134,23 +139,24 @@ describe('CATEGORIAS', () => {
         res.body.should.have.property('errors')
         res.body.should.have.property('data')
 
-        res.body.data.should.have.property('code')
         res.body.data.should.have.property('name')
-        res.body.data.should.have.property('companyId')
+        res.body.data.should.have.property('contact')
+        res.body.data.should.have.property('address')
+        res.body.data.should.have.property('phone')
+        res.body.data.should.have.property('email')
 
-        res.body.data.code.should.be.eql('123456')
-        res.body.data.name.should.be.eql('Vinoteca & Fiambreria Gourment')
-
-        res.body.data.companyId.should.be.eql(2)
+        res.body.data.name.should.be.eql('Vinos Aburridos Co')
+        res.body.data.contact.should.be.eql('Carla la loco')
+        res.body.data.address.should.be.eql('Avellaneda')
 
         done()
 
       })
-  }).timeout(5000)
+  })
 
-  it('Debería eliminar una categoría', (done) => {
+  it('Debería eliminar una compañía', (done) => {
     chai.request(server)
-      .delete('/api/v1/categories/1')
+      .delete('/api/v1/companies/1')
       .end((err, res) => {
 
         res.should.have.status(200)
@@ -164,5 +170,5 @@ describe('CATEGORIAS', () => {
         done()
 
       })
-  }).timeout(5000)
+  })
 })

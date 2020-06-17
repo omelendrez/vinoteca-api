@@ -93,6 +93,9 @@ module.exports = (router) => {
   router.route('/reset-db')
     .post(controller.reset)
 
+  router.route('/reset-db/:table')
+    .post(controller.reset)
+
   router.route('/stock_variations')
     .post(controller.add)
     .get(controller.getAll)
