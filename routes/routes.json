@@ -1,50 +1,506 @@
 [
   {
     "route": "categories",
-    "model": "category"
+    "model": "category",
+    "url": "/categories",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "categories",
+    "model": "category",
+    "url": "/categories/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "companies",
-    "model": "company"
+    "model": "company",
+    "url": "/companies",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "companies",
+    "model": "company",
+    "url": "/companies/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "inventory",
-    "model": "inventory"
+    "model": "inventory",
+    "url": "/inventory",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "inventory",
+    "model": "inventory",
+    "url": "/inventory/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "orders",
-    "model": "order"
+    "model": "order",
+    "url": "/orders",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "orders",
+    "model": "order",
+    "url": "/orders/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "order_details",
-    "model": "order_details"
+    "model": "order_details",
+    "url": "/order_details",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "order_details",
+    "model": "order_details",
+    "url": "/order_details/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "products",
-    "model": "product"
+    "model": "product",
+    "url": "/products",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "products",
+    "model": "product",
+    "url": "/products/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "stock_variations",
-    "model": "stock_variation"
+    "model": "stock_variation",
+    "url": "/stock_variations",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "stock_variations",
+    "model": "stock_variation",
+    "url": "/stock_variations/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "stock_variation_reasons",
-    "model": "stock_variation_reason"
+    "model": "stock_variation_reason",
+    "url": "/stock_variation_reasons",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "stock_variation_reasons",
+    "model": "stock_variation_reason",
+    "url": "/stock_variation_reasons/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "stock_variations",
+    "model": "stock_variation",
+    "url": "/stock_variations",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "stock_variations",
+    "model": "stock_variation",
+    "url": "/stock_variations/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "stores",
-    "model": "store"
+    "model": "store",
+    "url": "/stores",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "stores",
+    "model": "store",
+    "url": "/stores/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "suppliers",
-    "model": "supplier"
+    "model": "supplier",
+    "url": "/suppliers",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "suppliers",
+    "model": "supplier",
+    "url": "/suppliers/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "users",
-    "model": "user"
+    "model": "user",
+    "url": "/users",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "users",
+    "model": "user",
+    "url": "/users/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
   },
   {
     "route": "login",
-    "model": "user"
+    "model": "user",
+    "url": "/login",
+    "methods": [
+      {
+        "method": "post",
+        "function": "login",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "reset-db",
+    "model": "",
+    "url": "/reset-db",
+    "methods": [
+      {
+        "method": "post",
+        "function": "reset",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "reset-db",
+    "model": "",
+    "url": "/reset-db/:table",
+    "methods": [
+      {
+        "method": "post",
+        "function": "reset",
+        "secure": false
+      }
+    ]
   }
 ]
