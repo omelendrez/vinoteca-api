@@ -12,6 +12,16 @@ app.use(bodyParser.urlencoded({ extended: false })) // extended permite recibir 
 
 const router = express.Router() // Este lo usamos para crear los endpoints
 
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+      res.redirect(`https://${req.header('host')}${req.url}`)
+    } else {
+      next()
+    }
+  })
+}
+
 /**
  * Una serie de variables de http que el server setea en el header // Long story...
  */
