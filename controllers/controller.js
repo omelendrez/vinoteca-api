@@ -9,6 +9,8 @@
 const bcrypt = require('bcrypt')
 const { generateToken } = require('../security')
 const { getModelFromRoute } = require('../helpers')
+const Email = require('../services/email')
+
 // Importamos el modelo con el que este controlador va a interactuar
 
 const Model = require('../models/model')
@@ -81,6 +83,15 @@ module.exports = {
   delete: (req, res) => {
     const modelName = getModelFromRoute(req)
     Model.delete(req.params.id, modelName)
+      .then(results => {
+        return res.status(200).json(results)
+      })
+      .catch(err => res.status(500).json(err))
+  },
+
+  send: (req, res) => {
+    if (!req.body.emailAddress) return res.status(200).json({ message: 'Falta la dirección de email' })
+    Email.sendEmail(req.body.emailAddress)
       .then(results => {
         return res.status(200).json(results)
       })

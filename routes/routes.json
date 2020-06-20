@@ -541,5 +541,17 @@
         "secure": false
       }
     ]
+  },
+  {
+    "route": "emails",
+    "model": "",
+    "url": "/emails",
+    "methods": [
+      {
+        "method": "post",
+        "function": "send",
+        "secure": false
+      }
+    ]
   }
 ]
