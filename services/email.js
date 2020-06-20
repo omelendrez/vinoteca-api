@@ -13,16 +13,17 @@ module.exports = {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASSORD
+        type: "OAuth2",
+        user: process.env.GMAIL_ADDRESS,
+        clientId: process.env.OAUTH_CLIENT,
+        clientSecret: process.env.CLIENT_SECRET,
       }
     })
 
-    return new Promise((resolve, reject) => {
-      transporter.sendMail(mailOptions, (err, info) => {
-        if (err) return reject(err)
-        resolve({ response: info.response })
-      })
+    return new Promise(async (resolve, reject) => {
+      await transporter.sendMail(mailOptions)
+        .then(info => resolve({ response: info }))
+        .catch(err => reject(err))
     })
   }
 }
