@@ -64,8 +64,8 @@ module.exports = {
 
   login: async (req, res) => {
     const modelName = getModelFromRoute(req)
-    const { name, password } = req.body
-    const user = await Model.getByName(name, modelName)
+    const { email, password } = req.body
+    const user = await Model.getByEmail(email, modelName)
     if (!user) return res.status(401).json({ message: 'Usuario o password incorrectos' })
     const ok = await bcrypt.compare(password, user.password)
     if (!ok) return res.status(401).json({ message: 'Usuario o password incorrectos' })

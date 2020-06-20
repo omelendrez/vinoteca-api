@@ -16,14 +16,17 @@ module.exports = {
         type: "OAuth2",
         user: process.env.GMAIL_ADDRESS,
         clientId: process.env.OAUTH_CLIENT,
-        clientSecret: process.env.CLIENT_SECRET,
+        clientSecret: process.env.CLIENT_SECRET
       }
     })
 
     return new Promise(async (resolve, reject) => {
       await transporter.sendMail(mailOptions)
         .then(info => resolve({ response: info }))
-        .catch(err => reject(err))
+        .catch(err => {
+          console.log(err)
+          reject(err)
+        })
     })
   }
 }

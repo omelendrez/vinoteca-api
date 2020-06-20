@@ -106,6 +106,16 @@ module.exports = {
     })
   },
 
+  getByEmail: (email, model) => { // Sólo para user
+    return new Promise((resolve, reject) => {
+      const sql = `SELECT * FROM \`${model}\` WHERE email=?;`
+      pool.executeQuery(sql, [email], (err, results, fields) => {
+        if (err) return reject({ error: err })
+        resolve(convertListToCamelCase(results, false)[0]) // Es un solo record
+      })
+    })
+  },
+
   reset: (model) => {
     return new Promise((resolve, reject) => {
       /**
