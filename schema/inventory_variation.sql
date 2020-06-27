@@ -5,7 +5,7 @@ CREATE TABLE inventory_variation (
   product_id INTEGER NOT NULL,
   quantity INTEGER DEFAULT 0,
   variation_type TINYINT NOT NULL,
-  variation_reason SMALLINT NOT NULL,
+  variation_reason_id INTEGER NOT NULL,
   comments VARCHAR(100) DEFAULT '',
   company_id INTEGER NOT NULL,
   created DATETIME DEFAULT NULL,
