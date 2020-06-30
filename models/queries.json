@@ -1,0 +1,6 @@
+{
+  "order": {
+    "all": "SELECT * FROM  `order`",
+    "one": "SELECT * FROM  `order` WHERE id=?;SELECT * FROM `order_details` WHERE order_id = ?"
+  }
+}

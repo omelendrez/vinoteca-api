@@ -11,6 +11,7 @@ const path = require('path') // Función de node que genera urls
 const pool = require('./pool')
 const encryptPassword = require('../security').encryptPassword // Sólo para user
 const { updateFieldsFromModel, convertListToCamelCase, convertObjectToCamelCase, convertObjectToUnderscoreCase } = require('../helpers')
+const queries = require('./queries.json')
 
 module.exports = {
   save: async (data, model) => { // El controlador ha ejecutado esta función pasado el objeto que le envió el cliente a la respectiva ruta
@@ -45,6 +46,7 @@ module.exports = {
     const [fields] = await updateFieldsFromModel(data) // Otra función helper que genera SQL para ejectuar un UPDATE
     return new Promise(async (resolve, reject) => { // Creamos una nueva Promise
       const sql = `UPDATE \`${model}\` SET ${fields} WHERE id=?` // Preparamos el SQL
+      console.log(sql)
       pool.executeQuery(sql, [id], (err, results, fields) => { // Enviamos el SQL y el id (estamos modificando un solo registro) a mysql
         if (err) return reject(err) // Si hubo errores devolvemos el error y terminamos acá
         const sql = `SELECT * FROM  \`${model}\` WHERE id=?` // Si no hubo errores creamos un query para traer los datos de este registro
@@ -77,13 +79,29 @@ module.exports = {
 
   // El controlador quiere los datos de una empresa en particular
   getById: (id, model) => { // Por eso nos pasa el id
-    return new Promise((resolve, reject) => { // Creamos una nueva Promise
-      const sql = `SELECT * FROM  \`${model}\` WHERE id=?;` // Preparamos el query
-      pool.executeQuery(sql, [id], (err, results, fields) => { // Se lo enviamos a mysql junto con el id
-        if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
-        resolve(convertListToCamelCase(results)[0]) // Si no hubo errores formateamos el registro y se lo devolvemos al controlador
+    let sql
+    if (model === 'order') {
+      sql = queries[model].one
+      return new Promise((resolve, reject) => { // Creamos una nueva Promise
+        pool.executeQuery(sql, [id, id], (err, results, fields) => { // Se lo enviamos a mysql junto con el id
+          if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
+          const order = convertListToCamelCase(results[0])[0]
+          const items = convertListToCamelCase(results[1])
+          const data = { ...order, items }
+
+          resolve(data) // Si no hubo errores formateamos el registro y se lo devolvemos al controlador
+        })
       })
-    })
+    } else {
+      sql = `SELECT * FROM  \`${model}\` WHERE id=?;` // Preparamos el query
+
+      return new Promise((resolve, reject) => { // Creamos una nueva Promise
+        pool.executeQuery(sql, [id, id], (err, results, fields) => { // Se lo enviamos a mysql junto con el id
+          if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
+          resolve(convertListToCamelCase(results)[0])
+        })
+      })
+    }
   },
 
   delete: (id, model) => { // Por eso nos pasa el id

@@ -8,7 +8,7 @@ content-type: application/json
 
 {
   "name": "Omar",
-  "password": "Master1",
+  "password": "Master1*",
   "email": "omar@gmail.com",
   "profileId": 1,
   "companyId": 1
@@ -41,4 +41,3 @@ content-type: application/json
 ### Eliminar usuario pasando el id || Se pasa el id del registro a eliminar en la url
 DELETE http://localhost:3000/api/v1/users/1
 content-type: application/json
-
