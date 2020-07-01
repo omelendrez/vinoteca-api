@@ -81,6 +81,6 @@ module.exports = {
     }
   },
   formatDateFull(dateTime) {
-    return moment(dateTime).format('YYYY-MM-DD HH:mm:SS')
+    return moment(dateTime).format('YYYY-MM-DD hh:mm:ss')
   }
 }
