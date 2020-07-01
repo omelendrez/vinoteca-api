@@ -358,12 +358,12 @@
       {
         "method": "get",
         "function": "getAll",
-        "secure": false
+        "secure": true
       },
       {
         "method": "post",
         "function": "add",
-        "secure": false
+        "secure": true
       }
     ]
   },
@@ -380,7 +380,7 @@
       {
         "method": "put",
         "function": "update",
-        "secure": false
+        "secure": true
       },
       {
         "method": "delete",

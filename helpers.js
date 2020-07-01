@@ -1,3 +1,6 @@
+const moment = require('moment')
+require('moment/locale/es')
+
 String.prototype.toUnderscore = function () {
   return this.replace(/([A-Z])/g, function ($1) { return "_" + $1.toLowerCase() })
 }
@@ -76,5 +79,8 @@ module.exports = {
     } else {
       return ''
     }
+  },
+  formatDateFull(dateTime) {
+    return moment(dateTime).format('YYYY-MM-DD HH:mm:SS')
   }
 }

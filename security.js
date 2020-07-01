@@ -28,7 +28,8 @@ module.exports = {
   },
 
   generateToken(user) {
-    const payload = { id: user.id, name: user.name, profileId: user.profile_id }
+    const payload = { id: user.id, companyId: user.companyId, name: user.name, profileId: user.profileId }
+    console.log(payload)
     const options = { expiresIn: '2d', issuer: process.env.ISSUER }
     const secret = process.env.JWT_SECRET
     const token = jwt.sign(payload, secret, options)

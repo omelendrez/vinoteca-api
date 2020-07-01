@@ -10,13 +10,13 @@ const fs = require('fs') // Función de node que permite acceder al sistema de a
 const path = require('path') // Función de node que genera urls
 const pool = require('./pool')
 const encryptPassword = require('../security').encryptPassword // Sólo para user
-const { updateFieldsFromModel, convertListToCamelCase, convertObjectToCamelCase, convertObjectToUnderscoreCase } = require('../helpers')
+const { updateFieldsFromModel, convertListToCamelCase, convertObjectToCamelCase, convertObjectToUnderscoreCase, formatDateFull } = require('../helpers')
 const queries = require('./queries.json')
 
 module.exports = {
   save: async (data, model) => { // El controlador ha ejecutado esta función pasado el objeto que le envió el cliente a la respectiva ruta
-    data.created = new Date()
-    data.updated = new Date()
+    data.created = formatDateFull(new Date())
+    data.updated = formatDateFull(new Date())
     const payload = convertObjectToUnderscoreCase(data)
     return new Promise(async (resolve, reject) => { // Creamos una Promise, que nos permite actuar de manera diferente si hubo errores o no
       const sql = `INSERT INTO \`${model}\` SET ?` // La lista de fields y values es generada automáticamente
@@ -29,8 +29,8 @@ module.exports = {
 
   saveUser: async (data, model) => {
     data.password = await encryptPassword(data) // Sólo para user
-    data.created = new Date()
-    data.updated = new Date()
+    data.created = formatDateFull(new Date())
+    data.updated = formatDateFull(new Date())
     const payload = convertObjectToUnderscoreCase(data)
     return new Promise(async (resolve, reject) => {
       const sql = `INSERT INTO \`${model}\` SET ?`
@@ -43,10 +43,10 @@ module.exports = {
 
   // El contolador quiere cambiar datos en una empresa
   update: async (data, id, model) => { // El controlador nos pasa los datos que envió el cliente (datos de la empresa y su id)
+    data.updated = formatDateFull(new Date())
     const [fields] = await updateFieldsFromModel(data) // Otra función helper que genera SQL para ejectuar un UPDATE
     return new Promise(async (resolve, reject) => { // Creamos una nueva Promise
       const sql = `UPDATE \`${model}\` SET ${fields} WHERE id=?` // Preparamos el SQL
-      console.log(sql)
       pool.executeQuery(sql, [id], (err, results, fields) => { // Enviamos el SQL y el id (estamos modificando un solo registro) a mysql
         if (err) return reject(err) // Si hubo errores devolvemos el error y terminamos acá
         const sql = `SELECT * FROM  \`${model}\` WHERE id=?` // Si no hubo errores creamos un query para traer los datos de este registro

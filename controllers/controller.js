@@ -19,8 +19,10 @@ module.exports = {
   // En la ruta el cliente ha hecho un POST por lo que está agregando una nueva empresa
   add: (req, res) => {
     const modelName = getModelFromRoute(req)
+    const { id, companyId } = req.decoded
+    const payload = { ...req.body, companyId, createdBy: id }
     if (modelName !== 'user') {
-      Model.save(req.body, modelName) // Le decimos al modelo que ejecute la función "save" y le pasamos lo que el cliente posteó en la ruta
+      Model.save(payload, modelName) // Le decimos al modelo que ejecute la función "save" y le pasamos lo que el cliente posteó en la ruta
         .then(result => {
           Model.getById(result.id, modelName)
             .then(result => res.status(201).json({ errors: {}, data: result }))
@@ -28,7 +30,7 @@ module.exports = {
         }) // Aquí todo salió bien, devolvemos  al cliente lo que nos devolvió el modelo
         .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
     } else {
-      Model.saveUser(req.body, modelName)
+      Model.saveUser(payload, modelName)
         .then(result => {
           Model.getById(result.id, modelName)
             .then(result => res.status(201).json({ errors: {}, data: result }))
@@ -40,8 +42,11 @@ module.exports = {
 
   // En la ruta el cliente ha hecho un PUT por lo que quiere modificar los datos de una empresa en particular
   update: (req, res) => {
+    console.log(req.decoded)
+    const { id, companyId } = req.decoded
+    const payload = { ...req.body, companyId, createdBy: id }
     const modelName = getModelFromRoute(req)
-    Model.update(req.body, req.params.id, modelName) // El controlador le está enviando los datos nuevos y el id de la empresa a modificar
+    Model.update(payload, req.params.id, modelName) // El controlador le está enviando los datos nuevos y el id de la empresa a modificar
       .then(result => res.status(200).json({ errors: {}, data: result }))
       .catch(err => res.status(500).json(err))
   },
