@@ -44,6 +44,9 @@ module.exports = {
   // El contolador quiere cambiar datos en una empresa
   update: async (data, id, model) => { // El controlador nos pasa los datos que envió el cliente (datos de la empresa y su id)
     data.updated = formatDateFull(new Date())
+    if (data.password) {
+      data.password = await encryptPassword(data) // Sólo para user
+    }
     const [fields] = await updateFieldsFromModel(data) // Otra función helper que genera SQL para ejectuar un UPDATE
     return new Promise(async (resolve, reject) => { // Creamos una nueva Promise
       const sql = `UPDATE \`${model}\` SET ${fields} WHERE id=?` // Preparamos el SQL
