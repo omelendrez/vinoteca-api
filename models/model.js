@@ -10,7 +10,7 @@ const fs = require('fs') // Función de node que permite acceder al sistema de a
 const path = require('path') // Función de node que genera urls
 const pool = require('./pool')
 const encryptPassword = require('../security').encryptPassword // Sólo para user
-const { updateFieldsFromModel, convertListToCamelCase, convertObjectToCamelCase, convertObjectToUnderscoreCase, formatDateFull } = require('../helpers')
+const { updateFieldsFromModel, convertListToCamelCase, convertObjectToUnderscoreCase, formatDateFull } = require('../helpers')
 const queries = require('./queries.json')
 
 module.exports = {
