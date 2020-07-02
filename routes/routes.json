@@ -499,7 +499,7 @@
       {
         "method": "post",
         "function": "reset",
-        "secure": true
+        "secure": false
       }
     ]
   },
