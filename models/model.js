@@ -9,7 +9,7 @@
 const fs = require('fs') // Función de node que permite acceder al sistema de achivos (file system)
 const path = require('path') // Función de node que genera urls
 const pool = require('./pool')
-const encryptPassword = require('../security').encryptPassword // Sólo para user
+const { encryptPassword } = require('../security') // Sólo para user
 const { updateFieldsFromModel, convertListToCamelCase, convertObjectToUnderscoreCase, formatDateFull } = require('../helpers')
 const queries = require('./queries.json')
 
@@ -81,7 +81,7 @@ module.exports = {
   },
 
   // El controlador quiere los datos de una empresa en particular
-  getById: (id, model) => { // Por eso nos pasa el id
+  getById: (id, model, withPassword = false) => { // Por eso nos pasa el id
     let sql
     if (model === 'order') {
       sql = queries[model].one
@@ -101,7 +101,7 @@ module.exports = {
       return new Promise((resolve, reject) => { // Creamos una nueva Promise
         pool.executeQuery(sql, [id, id], (err, results, fields) => { // Se lo enviamos a mysql junto con el id
           if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
-          resolve(convertListToCamelCase(results)[0])
+          resolve(convertListToCamelCase(results, !withPassword)[0])
         })
       })
     }
@@ -196,6 +196,18 @@ module.exports = {
           resolve({ message: 'Tablas recreadas', queries })
         })
       }))
+    })
+  },
+  changePassword: async (user, id, model) => {
+    const password = await encryptPassword(user)
+    const payload = { password }
+    const [fields] = await updateFieldsFromModel(payload)
+    return new Promise(async (resolve, reject) => {
+      const sql = `UPDATE \`${model}\` SET ${fields} WHERE id=?`
+      pool.executeQuery(sql, [id], (err, results, fields) => {
+        if (err) return reject(err)
+        resolve({ message: 'Password cambiada satisfactoriamente' })
+      })
     })
   }
 }

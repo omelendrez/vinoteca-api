@@ -553,5 +553,17 @@
         "secure": true
       }
     ]
+  },
+  {
+    "route": "change-password",
+    "model": "user",
+    "url": "/change-password/:id",
+    "methods": [
+      {
+        "method": "put",
+        "function": "changePassword",
+        "secure": true
+      }
+    ]
   }
 ]

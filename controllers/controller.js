@@ -21,7 +21,7 @@ module.exports = {
     const modelName = getModelFromRoute(req)
     const { id, companyId } = req.decoded
     let payload = { ...req.body, createdBy: id }
-    const requiresCompanyId = !['user', 'company'].includes(modelName)
+    const requiresCompanyId = !['user', 'company', 'profile'].includes(modelName)
     if (requiresCompanyId) {
       payload = { ...payload, companyId }
     }
@@ -110,6 +110,18 @@ module.exports = {
       .then(results => {
         return res.status(200).json(results)
       })
+      .catch(err => res.status(500).json(err))
+  },
+
+  changePassword: async (req, res) => {
+    const modelName = getModelFromRoute(req)
+    const { id } = req.params
+    const { oldPassword, password } = req.body
+    const user = await Model.getById(id, modelName, true)
+    const ok = await bcrypt.compare(oldPassword, user.password)
+    if (!ok) return res.status(401).json({ message: 'Password anterior es incorrecta' })
+    Model.changePassword({ password }, id, modelName)
+      .then(results => res.status(200).json(results))
       .catch(err => res.status(500).json(err))
   }
 }
