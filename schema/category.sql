@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS category;
 CREATE TABLE category (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  code CHAR(6) NOT NULL,
+  code CHAR(3) NOT NULL,
   name VARCHAR(30) NOT NULL,
   company_id INTEGER NOT NULL,
   status_id TINYINT DEFAULT 1,

@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS inventory_variation_reason;
 CREATE TABLE inventory_variation_reason (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  code CHAR(3) NOT NULL,
+  code CHAR(2) NOT NULL,
   name VARCHAR(30) NOT NULL,
   company_id INTEGER NOT NULL,
   status_id TINYINT DEFAULT 1,

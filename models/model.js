@@ -209,5 +209,17 @@ module.exports = {
         resolve({ message: 'Password cambiada satisfactoriamente' })
       })
     })
+  },
+  getLastCode: async (model, companyId) => {
+    return new Promise(async (resolve, reject) => {
+      const sql = `PREPARE stmt FROM "SELECT MAX(code) as 'max_code' FROM ${model} WHERE company_id = ?";
+      SET @company_id = ${companyId};
+      EXECUTE stmt USING @company_id;
+      DEALLOCATE PREPARE stmt;`
+      pool.executeQuery(sql, [], (err, results, fields) => {
+        if (err) return reject(err)
+        resolve(convertListToCamelCase(results[2])[0])
+      })
+    })
   }
 }
