@@ -544,13 +544,13 @@
   },
   {
     "route": "emails",
-    "model": "",
+    "model": "user",
     "url": "/emails",
     "methods": [
       {
         "method": "post",
         "function": "send",
-        "secure": true
+        "secure": false
       }
     ]
   },

@@ -1,32 +1,29 @@
-const nodemailer = require("nodemailer")
+const sendGrid = require("@sendgrid/mail")
+const fs = require('fs')
+const path = require('path')
+sendGrid.setApiKey(process.env.SENDGRID_API_KEY)
 
 module.exports = {
-  sendEmail: (emailAddress) => {
-    const mailOptions = {
-      from: process.env.GMAIL_ADDRESS,
-      to: emailAddress,
-      subject: "Hello ✔",
-      text: "Hello world?", // plain text body
-      html: "<b>Hello world?</b>", // html body
-    }
-
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        type: "OAuth2",
-        user: process.env.GMAIL_ADDRESS,
-        clientId: process.env.OAUTH_CLIENT,
-        clientSecret: process.env.CLIENT_SECRET
-      }
-    })
-
-    return new Promise(async (resolve, reject) => {
-      await transporter.sendMail(mailOptions)
-        .then(info => resolve({ response: info }))
-        .catch(err => {
-          console.log(err)
-          reject(err)
+  sendEmail: (emailAddress, password) => {
+    return new Promise((resolve, reject) => {
+      const directory = path.join(__dirname, 'templates', 'forgot-password.html')
+      fs.readFile(directory, (error, data) => {
+        if (error) {
+          return reject({ error })
+        }
+        const mailOptions = {
+          from: process.env.SENDGRID_SENDER_ADDRESS,
+          to: emailAddress,
+          subject: "Restaurar pasword",
+          html: data.toString().replace('{password}', password)
+        }
+        sendGrid.send(mailOptions, (error, result) => {
+          if (error) {
+            return reject({ error })
+          }
+          resolve({ response: result })
         })
+      })
     })
   }
 }
