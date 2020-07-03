@@ -4,7 +4,7 @@ const path = require('path')
 sendGrid.setApiKey(process.env.SENDGRID_API_KEY)
 
 module.exports = {
-  sendEmail: (emailAddress) => {
+  sendEmail: (emailAddress, password) => {
     return new Promise((resolve, reject) => {
       const directory = path.join(__dirname, 'templates', 'forgot-password.html')
       fs.readFile(directory, (error, data) => {
@@ -15,7 +15,7 @@ module.exports = {
           from: process.env.SENDGRID_SENDER_ADDRESS,
           to: emailAddress,
           subject: "Restaurar pasword",
-          html: data.toString()
+          html: data.toString().replace('{password}', password)
         }
         sendGrid.send(mailOptions, (error, result) => {
           if (error) {

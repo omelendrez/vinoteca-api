@@ -544,7 +544,7 @@
   },
   {
     "route": "emails",
-    "model": "",
+    "model": "user",
     "url": "/emails",
     "methods": [
       {

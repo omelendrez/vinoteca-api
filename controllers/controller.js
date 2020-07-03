@@ -7,6 +7,7 @@
  * Puede recibir data o errores del modelo y se los envía al cliente
  */
 const bcrypt = require('bcrypt')
+const randomstring = require('randomstring')
 const { generateToken } = require('../security')
 const { getModelFromRoute } = require('../helpers')
 const Email = require('../services/email')
@@ -104,13 +105,20 @@ module.exports = {
       .catch(err => res.status(500).json(err))
   },
 
-  send: (req, res) => {
-    if (!req.body.emailAddress) return res.status(200).json({ message: 'Falta la dirección de email' })
-    Email.sendEmail(req.body.emailAddress)
-      .then(results => {
-        return res.status(200).json(results)
-      })
-      .catch(err => res.status(500).json(err))
+  send: async (req, res) => {
+    try {
+      const email = req.body.emailAddress
+      if (!email) return res.status(400).json({ message: 'Falta la dirección de email' })
+      const modelName = getModelFromRoute(req)
+      const password = randomstring.generate({ length: 7 }).toUpperCase()
+      const user = await Model.getByEmail(email, modelName)
+      if (!user) return res.status(400).json({ message: 'Email no registrado' })
+      await Model.changePassword({ password }, user.id, modelName)
+      await Email.sendEmail(email, password)
+      res.status(200).json({ message: 'ok' })
+    } catch (error) {
+      res.status(500).json({ error })
+    }
   },
 
   changePassword: async (req, res) => {
