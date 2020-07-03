@@ -550,7 +550,7 @@
       {
         "method": "post",
         "function": "send",
-        "secure": true
+        "secure": false
       }
     ]
   },
