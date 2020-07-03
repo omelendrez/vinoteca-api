@@ -8,7 +8,8 @@ SELECT s.id,
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
   s.created,
-  s.updated
+  s.updated,
+  if (s.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM `supplier` as s
   INNER JOIN `company` as c ON s.company_id = c.id
   INNER JOIN `user` as u1 ON s.created_by = u1.id

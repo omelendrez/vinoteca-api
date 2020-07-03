@@ -6,7 +6,8 @@ SELECT u.id,
   u.created,
   u.updated,
   u1.name as 'created_by_name',
-  u2.name as 'updated_by_name'
+  u2.name as 'updated_by_name',
+  if (u.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM `user` as u
   INNER JOIN `company` as c ON u.company_id = c.id
   INNER JOIN `profile` as p ON u.profile_id = p.id

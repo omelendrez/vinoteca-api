@@ -14,7 +14,8 @@ SELECT p.id,
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
   p.created,
-  p.updated
+  p.updated,
+  if (p.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM `product` as p
   INNER JOIN `category` as ca ON p.category_id = ca.id
   INNER JOIN `company` as c ON p.company_id = c.id
