@@ -131,5 +131,13 @@ module.exports = {
     Model.changePassword({ password }, id, modelName)
       .then(results => res.status(200).json(results))
       .catch(err => res.status(500).json(err))
+  },
+
+  test: async (req, res) => {
+    const modelName = getModelFromRoute(req)
+    const companyId = req.decoded ? req.decoded.companyId : 1
+    Model.getLastCode(modelName, companyId)
+      .then(results => res.status(200).json(results))
+      .catch(err => res.status(500).json(err))
   }
 }

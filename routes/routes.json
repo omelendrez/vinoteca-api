@@ -565,5 +565,17 @@
         "secure": true
       }
     ]
+  },
+  {
+    "route": "test",
+    "model": "product",
+    "url": "/test",
+    "methods": [
+      {
+        "method": "post",
+        "function": "test",
+        "secure": false
+      }
+    ]
   }
 ]
