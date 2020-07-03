@@ -6,7 +6,8 @@ SELECT u.id,
   u.created,
   u.updated,
   u1.name as 'created_by_name',
-  u2.name as 'updated_by_name'
+  u2.name as 'updated_by_name',
+  if (u.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM `user` as u
   INNER JOIN `company` as c ON u.company_id = c.id
   INNER JOIN `profile` as p ON u.profile_id = p.id
@@ -19,7 +20,8 @@ SELECT c.id,
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
   c.created,
-  c.updated
+  c.updated,
+  if (c.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM `category` as c
   INNER JOIN `company` as co ON c.company_id = co.id
   INNER JOIN `user` as u1 ON c.created_by = u1.id
@@ -32,7 +34,8 @@ SELECT c.id,
   c.created,
   c.updated,
   u1.name as 'created_by_name',
-  u2.name as 'updated_by_name'
+  u2.name as 'updated_by_name',
+  if (c.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM `company` as c
   INNER JOIN `user` as u1 ON c.created_by = u1.id
   LEFT OUTER JOIN `user` as u2 ON c.updated_by = u2.id;
@@ -77,7 +80,8 @@ SELECT ir.id,
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
   ir.created,
-  ir.updated
+  ir.updated,
+  if (ir.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM `inventory_variation_reason` as ir
   INNER JOIN `company` as c ON ir.company_id = c.id
   INNER JOIN `user` as u1 ON ir.created_by = u1.id
@@ -98,7 +102,8 @@ SELECT p.id,
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
   p.created,
-  p.updated
+  p.updated,
+  if (p.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM `product` as p
   INNER JOIN `category` as ca ON p.category_id = ca.id
   INNER JOIN `company` as c ON p.company_id = c.id
@@ -124,7 +129,8 @@ SELECT s.id,
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
   s.created,
-  s.updated
+  s.updated,
+  if (s.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM `store` as s
   INNER JOIN `company` as c ON s.company_id = c.id
   INNER JOIN `user` as u1 ON s.created_by = u1.id
@@ -139,7 +145,8 @@ SELECT s.id,
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
   s.created,
-  s.updated
+  s.updated,
+  if (s.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM `supplier` as s
   INNER JOIN `company` as c ON s.company_id = c.id
   INNER JOIN `user` as u1 ON s.created_by = u1.id
