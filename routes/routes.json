@@ -567,6 +567,18 @@
     ]
   },
   {
+    "route": "low-stock-products",
+    "model": "low_stock_products",
+    "url": "/low-stock-products",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": true
+      }
+    ]
+  },
+  {
     "route": "test",
     "model": "inventory_variation_reason",
     "url": "/test",

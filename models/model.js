@@ -199,7 +199,7 @@ module.exports = {
       })
     })
   },
-  getLastCode: async (model, companyId) => {
+  getLastCode: async (model, companyId, fieldName) => {
     return new Promise(async (resolve, reject) => {
       /**
        * Necesitamos obtener el último 'code' existente en este modelo (tabla)
@@ -226,13 +226,13 @@ module.exports = {
       const file = fs.readFileSync(directory, 'UTF-8')
       const lines = file.split(/\r?\n/)
 
-      // Buscamos en el esquema el campo 'code' y obtenemos su tamaño (size)
+      // Buscamos en el esquema el campo fieldName y obtenemos su tamaño (size)
       let size
       lines.forEach((line) => {
-        if (line.indexOf('code') > -1 && line.indexOf('CHAR') > -1) {
+        if (line.indexOf(fieldName) > -1 && line.indexOf('CHAR') > -1) {
           // code CHAR(3) NOT NULL,          0    1     2       3         4       5
           const words = line.split(' ') // [' ', ' ', 'code','CHAR(3)', 'NOT', 'NULL,']
-          if (words[2] === 'code') {
+          if (words[2] === fieldName) {
             const type = words[3] // CHAR(3)
             size = type.replace('CHAR', '').substr(1, 1) // 3
           }
@@ -240,7 +240,7 @@ module.exports = {
       })
 
       // Buscamos el code de mayor valor para este modelo y para la empresa del usuario
-      const sql = `PREPARE stmt FROM "SELECT MAX(code) as 'last_code' FROM ${model} WHERE company_id = ?";
+      const sql = `PREPARE stmt FROM "SELECT MAX(${fieldName}) as 'last_code' FROM ${model} WHERE company_id = ?";
       SET @company_id = ${companyId};
       EXECUTE stmt USING @company_id;
       DEALLOCATE PREPARE stmt;`

@@ -30,9 +30,18 @@ module.exports = {
 
     const requiresCode = ['category', 'product', 'inventory_variation_reason'].includes(modelName) // Estos modelos requieren "code"
     if (requiresCode) {
-      await Model.getLastCode(modelName, companyId)
+      await Model.getLastCode(modelName, companyId, 'code')
         .then(results => {
           payload.code = results.newCode
+        })
+        .catch(err => res.status(500).json(err))
+    }
+
+    const requiresNumber = ['order'].includes(modelName) // Estos modelos requieren "number"
+    if (requiresNumber) {
+      await Model.getLastCode(modelName, companyId, 'number')
+        .then(results => {
+          payload.number = results.newCode
         })
         .catch(err => res.status(500).json(err))
     }
