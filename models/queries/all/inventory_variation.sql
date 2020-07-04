@@ -5,6 +5,7 @@ SELECT ir.id,
   ir.store_id,
   s.name as 'store_name',
   ir.product_id,
+  p.code as 'product_code',
   p.name as 'product_name',
   c.name as 'company_name',
   ir.variation_reason_id,
@@ -19,4 +20,5 @@ FROM `inventory_variation` as ir
   INNER JOIN `company` as c ON ir.company_id = c.id
   INNER JOIN `inventory_variation_reason` as v ON ir.variation_reason_id = v.id
   INNER JOIN `user` as u1 ON ir.created_by = u1.id
-  LEFT OUTER JOIN `user` as u2 ON ir.updated_by = u2.id;
+  LEFT OUTER JOIN `user` as u2 ON ir.updated_by = u2.id
+ORDER BY ir.id DESC;
