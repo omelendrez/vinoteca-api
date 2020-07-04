@@ -1,4 +1,5 @@
-SELECT i.id,
+SELECT
+  i.id,
   i.quantity,
   s.name as 'store_name',
   p.name as 'product_name',
@@ -7,10 +8,12 @@ SELECT i.id,
   u2.name as 'updated_by_name',
   i.created,
   i.updated
-FROM `inventory` as i
+FROM
+  `inventory` as i
   INNER JOIN `store` as s ON i.store_id = s.id
   INNER JOIN `product` as p ON i.product_id = i.id
   INNER JOIN `company` as c ON i.company_id = c.id
   INNER JOIN `user` as u1 ON i.created_by = u1.id
   LEFT OUTER JOIN `user` as u2 ON i.updated_by = u2.id
-WHERE id = ?;
+WHERE
+  i.id = ?;

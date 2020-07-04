@@ -20,13 +20,15 @@ module.exports = {
   // En la ruta el cliente ha hecho un POST por lo que está agregando una nueva empresa
   add: async (req, res) => {
     const modelName = getModelFromRoute(req)
-    const { id, companyId } = req.decoded
+    const { id, companyId } = req.decoded // id es id y companyId vienen del usuario que hizo el post
     let payload = { ...req.body, createdBy: id }
-    const requiresCompanyId = !['user', 'company', 'profile'].includes(modelName)
+
+    const requiresCompanyId = !['user', 'company', 'profile'].includes(modelName) // Estos modelos no requieren "company_id"
     if (requiresCompanyId) {
       payload = { ...payload, companyId }
     }
-    const requiresCode = ['category', 'product', 'inventory_variation_reason'].includes(modelName)
+
+    const requiresCode = ['category', 'product', 'inventory_variation_reason'].includes(modelName) // Estos modelos requieren "code"
     if (requiresCode) {
       await Model.getLastCode(modelName, companyId)
         .then(results => {
@@ -34,23 +36,14 @@ module.exports = {
         })
         .catch(err => res.status(500).json(err))
     }
-    if (modelName !== 'user') {
-      Model.save(payload, modelName) // Le decimos al modelo que ejecute la función "save" y le pasamos lo que el cliente posteó en la ruta
-        .then(result => {
-          Model.getById(result.id, modelName)
-            .then(result => res.status(201).json({ errors: {}, data: result }))
-            .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
-        }) // Aquí todo salió bien, devolvemos  al cliente lo que nos devolvió el modelo
-        .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
-    } else {
-      Model.saveUser(payload, modelName)
-        .then(result => {
-          Model.getById(result.id, modelName)
-            .then(result => res.status(201).json({ errors: {}, data: result }))
-            .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
-        }) // Aquí todo salió bien, devolvemos  al cliente lo que nos devolvió el modelo
-        .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
-    }
+
+    Model.save(payload, modelName) // Le decimos al modelo que ejecute la función "save" y le pasamos lo que el cliente posteó en la ruta
+      .then(result => {
+        Model.getById(result.id, modelName)
+          .then(result => res.status(201).json({ errors: {}, data: result }))
+          .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
+      }) // Aquí todo salió bien, devolvemos  al cliente lo que nos devolvió el modelo
+      .catch(err => res.status(500).json(err)) // Hubo un error, se lo enviamos al cliente
   },
 
   // En la ruta el cliente ha hecho un PUT por lo que quiere modificar los datos de una empresa en particular
@@ -61,7 +54,7 @@ module.exports = {
     }
     const { id, companyId } = req.decoded
     let payload = { ...req.body, updatedBy: id || 1 }
-    const requiresCompanyId = !['user', 'company'].includes(modelName)
+    const requiresCompanyId = !['user', 'company', 'profile'].includes(modelName)
     if (requiresCompanyId) {
       payload = { ...payload, companyId }
     }

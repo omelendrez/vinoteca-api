@@ -1,4 +1,5 @@
-SELECT p.id,
+SELECT
+  p.id,
   p.code,
   p.barcode,
   p.name,
@@ -16,9 +17,11 @@ SELECT p.id,
   p.created,
   p.updated,
   if (p.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
-FROM `product` as p
+FROM
+  `product` as p
   INNER JOIN `category` as ca ON p.category_id = ca.id
   INNER JOIN `company` as c ON p.company_id = c.id
   INNER JOIN `user` as u1 ON p.created_by = u1.id
   LEFT OUTER JOIN `user` as u2 ON p.updated_by = u2.id
-WHERE id = ?;
+WHERE
+  p.id = ?;

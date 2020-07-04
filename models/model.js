@@ -11,10 +11,13 @@ const path = require('path') // Función de node que genera urls
 const pool = require('./pool')
 const { encryptPassword } = require('../security') // Sólo para user
 const { updateFieldsFromModel, convertListToCamelCase, convertObjectToUnderscoreCase, formatDateFull } = require('../helpers')
-const queries = require('./queries.json')
+//const queries = require('./queries.json')
 
 module.exports = {
   save: async (data, model) => { // El controlador ha ejecutado esta función pasado el objeto que le envió el cliente a la respectiva ruta
+    if (model === 'user') {
+      data.password = await encryptPassword(data) // Sólo para user
+    }
     data.created = formatDateFull(new Date())
     data.updated = formatDateFull(new Date())
     const payload = convertObjectToUnderscoreCase(data)
@@ -26,21 +29,21 @@ module.exports = {
       })
     })
   },
-
-  saveUser: async (data, model) => {
-    data.password = await encryptPassword(data) // Sólo para user
-    data.created = formatDateFull(new Date())
-    data.updated = formatDateFull(new Date())
-    const payload = convertObjectToUnderscoreCase(data)
-    return new Promise(async (resolve, reject) => {
-      const sql = `INSERT INTO \`${model}\` SET ?`
-      pool.executeQuery(sql, [payload], (err, results, fields) => {
-        if (err) return reject(err)
-        resolve({ id: results.insertId })
+  /*
+    saveUser: async (data, model) => {
+      data.password = await encryptPassword(data) // Sólo para user
+      data.created = formatDateFull(new Date())
+      data.updated = formatDateFull(new Date())
+      const payload = convertObjectToUnderscoreCase(data)
+      return new Promise(async (resolve, reject) => {
+        const sql = `INSERT INTO \`${model}\` SET ?`
+        pool.executeQuery(sql, [payload], (err, results, fields) => {
+          if (err) return reject(err)
+          resolve({ id: results.insertId })
+        })
       })
-    })
-  },
-
+    },
+  */
   // El contolador quiere cambiar datos en una empresa
   update: async (data, id, model) => { // El controlador nos pasa los datos que envió el cliente (datos de la empresa y su id)
     data.updated = formatDateFull(new Date())
@@ -63,14 +66,12 @@ module.exports = {
 
   getAll: (model) => {
     return new Promise((resolve, reject) => {
-      const fileName = path.join(__dirname, 'queries', 'all', `${model}.sql`) // Asignamos dinámicamente el path del query que necesitamos
+      const fileName = path.join(__dirname, 'queries', 'all', `${model}.sql`)
       const sql = `SELECT COUNT(*) as count FROM  \`${model}\`;`
       pool.executeQuery(sql, null, async (err, results, fields) => {
         if (err) return reject({ error: err })
-        let response = {
-          count: results[0].count
-        }
-        const sql = fs.readFileSync(fileName).toString() // Leemos el query desde el disco
+        const response = { count: results[0].count }
+        const sql = fs.readFileSync(fileName).toString()
         pool.executeQuery(sql, null, async (err, results, fields) => {
           if (err) return reject({ error: err })
           response.rows = convertListToCamelCase(results)
@@ -80,31 +81,15 @@ module.exports = {
     })
   },
 
-  // El controlador quiere los datos de una empresa en particular
-  getById: (id, model, withPassword = false) => { // Por eso nos pasa el id
-    let sql
-    if (model === 'order') {
-      sql = queries[model].one
-      return new Promise((resolve, reject) => { // Creamos una nueva Promise
-        pool.executeQuery(sql, [id, id], (err, results, fields) => { // Se lo enviamos a mysql junto con el id
-          if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
-          const order = convertListToCamelCase(results[0])[0]
-          const items = convertListToCamelCase(results[1])
-          const data = { ...order, items }
-
-          resolve(data) // Si no hubo errores formateamos el registro y se lo devolvemos al controlador
-        })
+  getById: (id, model, withPassword = false) => {
+    return new Promise((resolve, reject) => {
+      const fileName = path.join(__dirname, 'queries', 'one', `${model}.sql`)
+      const sql = fs.readFileSync(fileName).toString()
+      pool.executeQuery(sql, [id], async (err, results, fields) => {
+        if (err) return reject({ error: err })
+        resolve(convertListToCamelCase(results, withPassword))
       })
-    } else {
-      sql = `SELECT * FROM  \`${model}\` WHERE id=?;` // Preparamos el query
-
-      return new Promise((resolve, reject) => { // Creamos una nueva Promise
-        pool.executeQuery(sql, [id, id], (err, results, fields) => { // Se lo enviamos a mysql junto con el id
-          if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
-          resolve(convertListToCamelCase(results, !withPassword)[0])
-        })
-      })
-    }
+    })
   },
 
   delete: (id, model) => { // Por eso nos pasa el id
