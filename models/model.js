@@ -67,8 +67,14 @@ module.exports = {
   getAll: (model) => {
     return new Promise((resolve, reject) => {
       const fileName = path.join(__dirname, 'queries', 'all', `${model}.sql`)
+      let countModel
+      if (model === 'low_stock_product') {
+        countModel = 'product'
+      } else {
+        countModel = model
+      }
       /** Con este query sólo contamos los registros que traerá el siguiente query */
-      const sql = `SELECT COUNT(*) as count FROM  \`${model}\`;`
+      const sql = `SELECT COUNT(*) as count FROM  \`${countModel}\`;`
       pool.executeQuery(sql, null, async (err, results, fields) => {
         if (err) return reject({ error: err })
         const response = { count: results[0].count }
