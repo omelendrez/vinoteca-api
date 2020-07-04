@@ -24,26 +24,12 @@ module.exports = {
     return new Promise(async (resolve, reject) => { // Creamos una Promise, que nos permite actuar de manera diferente si hubo errores o no
       const sql = `INSERT INTO \`${model}\` SET ?` // La lista de fields y values es generada automáticamente
       pool.executeQuery(sql, [payload], (err, results, fields) => { // Mandamo el query a la base de datos
-        if (err) return reject(err) // Si hubo errores devolvemos el error y terminamos acá
+        if (err) return reject({ error: err })
         resolve({ id: results.insertId }) // Si llegamos acá no hubo errores, formateamos la data y la devolvemos al controlador
       })
     })
   },
-  /*
-    saveUser: async (data, model) => {
-      data.password = await encryptPassword(data) // Sólo para user
-      data.created = formatDateFull(new Date())
-      data.updated = formatDateFull(new Date())
-      const payload = convertObjectToUnderscoreCase(data)
-      return new Promise(async (resolve, reject) => {
-        const sql = `INSERT INTO \`${model}\` SET ?`
-        pool.executeQuery(sql, [payload], (err, results, fields) => {
-          if (err) return reject(err)
-          resolve({ id: results.insertId })
-        })
-      })
-    },
-  */
+
   // El contolador quiere cambiar datos en una empresa
   update: async (data, id, model) => { // El controlador nos pasa los datos que envió el cliente (datos de la empresa y su id)
     data.updated = formatDateFull(new Date())
@@ -52,12 +38,14 @@ module.exports = {
     }
     const [fields] = await updateFieldsFromModel(data) // Otra función helper que genera SQL para ejectuar un UPDATE
     return new Promise(async (resolve, reject) => { // Creamos una nueva Promise
-      const sql = `UPDATE \`${model}\` SET ${fields} WHERE id=?` // Preparamos el SQL
+      const fileName = path.join(__dirname, 'queries', 'update', `${model}.sql`)
+      const sql = fs.readFileSync(fileName).toString().replace('{ fields }', fields)
       pool.executeQuery(sql, [id], (err, results, fields) => { // Enviamos el SQL y el id (estamos modificando un solo registro) a mysql
-        if (err) return reject(err) // Si hubo errores devolvemos el error y terminamos acá
-        const sql = `SELECT * FROM  \`${model}\` WHERE id=?` // Si no hubo errores creamos un query para traer los datos de este registro
+        if (err) return reject({ error: err })
+        const fileName = path.join(__dirname, 'queries', 'one', `${model}.sql`)
+        const sql = fs.readFileSync(fileName).toString().replace('{ fields }', fields)
         pool.executeQuery(sql, [id], (err, results, fields) => { // Ejecutamos el query en mysql
-          if (err) return reject(err) // Si hubo errores devolvemos el error y terminamos acá
+          if (err) return reject({ error: err })
           resolve(convertListToCamelCase(results)[0]) // Si no hubo errores formateamos el registro y se la devolvemos al controlador
         })
       })
@@ -186,8 +174,8 @@ module.exports = {
 
           }
         })
-        pool.executeQuery(sql, null, (error, results) => {
-          if (error) return reject(error)
+        pool.executeQuery(sql, null, (err, results) => {
+          if (error) return reject({ error: err })
           resolve({ message: 'Tablas recreadas', queries })
         })
       }))
@@ -200,7 +188,7 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       const sql = `UPDATE \`${model}\` SET ${fields} WHERE id=?`
       pool.executeQuery(sql, [id], (err, results, fields) => {
-        if (err) return reject(err)
+        if (err) return reject({ error: err })
         resolve({ message: 'Password cambiada satisfactoriamente' })
       })
     })
@@ -251,7 +239,7 @@ module.exports = {
       EXECUTE stmt USING @company_id;
       DEALLOCATE PREPARE stmt;`
       pool.executeQuery(sql, [], (err, results, fields) => {
-        if (err) return reject(err)
+        if (err) return reject({ error: err })
         const lastCode = convertListToCamelCase(results[2])[0].lastCode
 
         // Si hay registros en la tabla consideramos valor 0
