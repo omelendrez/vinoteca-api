@@ -257,7 +257,7 @@ module.exports = {
         // Si hay registros en la tabla consideramos valor 0
         // Ahora le sumamos uno y lo formateamos con ceros a la izquierda con pad
         const newCode = (parseInt(lastCode || 0) + 1).pad(size, '0')
-        resolve({ newCode })
+        resolve({ newCode }) // 003
       })
     })
   }

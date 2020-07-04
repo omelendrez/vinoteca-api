@@ -1,7 +1,8 @@
 DROP TABLE IF EXISTS `order`;
+
 CREATE TABLE `order` (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  number CHAR(6) NOT NULL,
+  number CHAR(5) NOT NULL,
   date DATE NOT NULL,
   supplier_id INTEGER NOT NULL,
   amount DECIMAL(10, 2) DEFAULT 0,
