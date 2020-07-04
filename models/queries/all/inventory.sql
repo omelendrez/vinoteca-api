@@ -1,6 +1,8 @@
 SELECT i.id,
   i.quantity,
+  i.store_id,
   s.name as 'store_name',
+  i.product_id,
   p.name as 'product_name',
   c.name as 'company_name',
   u1.name as 'created_by_name',

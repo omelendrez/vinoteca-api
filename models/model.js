@@ -61,20 +61,20 @@ module.exports = {
     })
   },
 
-  // El controlador quiere una lista de todas las empresas
   getAll: (model) => {
-    return new Promise((resolve, reject) => { // Creamos una nueva Promise
-      const sql = `SELECT COUNT(*) as count FROM  \`${model}\`;` // Preparamos el query
-      pool.executeQuery(sql, null, async (err, results, fields) => { // Enviamos el query a mysql
-        if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
+    return new Promise((resolve, reject) => {
+      const fileName = path.join(__dirname, 'queries', 'all', `${model}.sql`) // Asignamos dinámicamente el path del query que necesitamos
+      const sql = `SELECT COUNT(*) as count FROM  \`${model}\`;`
+      pool.executeQuery(sql, null, async (err, results, fields) => {
+        if (err) return reject({ error: err })
         let response = {
           count: results[0].count
         }
-        const sql = `SELECT * FROM  \`${model}\`;` // Preparamos el query
-        pool.executeQuery(sql, null, async (err, results, fields) => { // Enviamos el query a mysql
-          if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
+        const sql = fs.readFileSync(fileName).toString() // Leemos el query desde el disco
+        pool.executeQuery(sql, null, async (err, results, fields) => {
+          if (err) return reject({ error: err })
           response.rows = convertListToCamelCase(results)
-          resolve(response) // Si no hubo errores formateamos la lista completa y se la devolvemos al controlador
+          resolve(response)
         })
       })
     })
