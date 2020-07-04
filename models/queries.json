@@ -2,5 +2,17 @@
   "order": {
     "all": "SELECT * FROM  `order`",
     "one": "SELECT * FROM  `order` WHERE id=?;SELECT * FROM `order_details` WHERE order_id = ?"
+  },
+  "user": {
+    "all": "SELECT u.id, u.name, u.email, c.name as 'company_name', p.name as 'profile_name', u.created, u.updated, u1.name as 'created_by_name', u2.name as 'updated_by_name' FROM `user` as u INNER JOIN `company` as c ON u.company_id = c.id INNER JOIN `profile` as p ON u.profile_id = p.id INNER JOIN `user` u1 ON u.created_by = u1.id LEFT OUTER JOIN `user` u2 ON u.updated_by = u2.id;"
+  },
+  "category": {
+    "all": "SELECT c.id, c.name, c.code, co.name as 'company_name', u1.name as 'created_by_name', u2.name as 'updated_by_name', c.created, c.updated FROM `category` as c INNER JOIN `company` as co ON c.company_id = co.id INNER JOIN `user` u1 ON c.created_by = u1.id LEFT OUTER JOIN `user` u2 ON c.updated_by = u2.id;"
+  },
+  "company": {
+    "all": "SELECT c.id, c.name, c.contact, c.address, c.email, c.created, c.updated, u1.name as 'created_by_name', u2.name as 'updated_by_name' FROM `company` as c INNER JOIN `user` u1 ON c.created_by = u1.id LEFT OUTER JOIN `user` u2 ON c.updated_by = u2.id;"
+  },
+  "inventory": {
+    "all": "SELECT i.id, i.quantity, s.name as 'store_name', p.name as 'product_name', c.name as 'company_name', u1.name as 'created_by_name', u2.name as 'updated_by_name', i.created, i.updated FROM `inventory` as i INNER JOIN `store` as s ON i.store_id = s.id INNER JOIN `product` as p ON i.product_id = i.id INNER JOIN `company` as c ON i.company_id = c.id INNER JOIN `user` u1 ON i.created_by = u1.id LEFT OUTER JOIN `user` u2 ON i.updated_by = u2.id;"
   }
 }
