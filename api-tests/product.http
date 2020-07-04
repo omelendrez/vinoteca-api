@@ -6,20 +6,12 @@ POST http://localhost:3000/api/v1/products
 content-type: application/json
 
 {
-  "code": "P-0001",
-  "barcode": "333",
-  "name": "Matias",
-  "description": "asdas",
-  "quantity": "4",
+  "name": "Cerveza Quilmes",
+  "description": "Quilmes en cata",
   "minimum" : "2",
   "categoryId": "1",
   "companyId": "1",
-  "lastPurchaseDate": "2017-06-15",
-  "lastPurchasePrice": "126",
-  "lastSaleDate": "2019-05-01",
-  "lastSalePrice": "216",
-  "price": "134",
-  "statusId": "1"
+  "price": "134"
 }
 
 ### Actualizar products

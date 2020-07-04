@@ -9,6 +9,12 @@ String.prototype.toCamel = function () {
   return this.replace(/(\_[a-z])/g, function ($1) { return $1.toUpperCase().replace('_', '') })
 }
 
+Number.prototype.pad = function (size) {
+  var s = String(this)
+  while (s.length < (size || 2)) { s = "0" + s }
+  return s
+}
+
 const routeMaps = require('./routes/routes.json')
 
 module.exports = {

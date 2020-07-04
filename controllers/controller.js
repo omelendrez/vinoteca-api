@@ -18,13 +18,21 @@ const Model = require('../models/model')
 
 module.exports = {
   // En la ruta el cliente ha hecho un POST por lo que está agregando una nueva empresa
-  add: (req, res) => {
+  add: async (req, res) => {
     const modelName = getModelFromRoute(req)
     const { id, companyId } = req.decoded
     let payload = { ...req.body, createdBy: id }
     const requiresCompanyId = !['user', 'company', 'profile'].includes(modelName)
     if (requiresCompanyId) {
       payload = { ...payload, companyId }
+    }
+    const requiresCode = ['category', 'product', 'inventory_variation_reason'].includes(modelName)
+    if (requiresCode) {
+      await Model.getLastCode(modelName, companyId)
+        .then(results => {
+          payload.code = results.newCode
+        })
+        .catch(err => res.status(500).json(err))
     }
     if (modelName !== 'user') {
       Model.save(payload, modelName) // Le decimos al modelo que ejecute la función "save" y le pasamos lo que el cliente posteó en la ruta
@@ -137,7 +145,9 @@ module.exports = {
     const modelName = getModelFromRoute(req)
     const companyId = req.decoded ? req.decoded.companyId : 1
     Model.getLastCode(modelName, companyId)
-      .then(results => res.status(200).json(results))
+      .then(results => {
+        res.status(200).json(results)
+      })
       .catch(err => res.status(500).json(err))
   }
 }

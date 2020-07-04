@@ -178,7 +178,7 @@ module.exports = {
             PRIMARY KEY (id)
           );
        */
-      const directory = path.join(__dirname, '..', 'schema')
+      const directory = path.join(__dirname, 'schema')
       fs.readdir(directory, ((err, fileNames) => {
         let sql = ''
         let queries = []
@@ -212,13 +212,28 @@ module.exports = {
   },
   getLastCode: async (model, companyId) => {
     return new Promise(async (resolve, reject) => {
-      const sql = `PREPARE stmt FROM "SELECT MAX(code) as 'max_code' FROM ${model} WHERE company_id = ?";
+      const directory = path.join(__dirname, 'schema', `${model}.sql`)
+      const file = fs.readFileSync(directory, 'UTF-8')
+      const lines = file.split(/\r?\n/)
+      let size
+      lines.forEach((line) => {
+        if (line.indexOf('code') > -1 && line.indexOf('CHAR') > -1) {
+          const words = line.split(' ')
+          if (words[2] === 'code') {
+            const type = words[3]
+            size = type.replace('CHAR', '').substr(1, 1)
+          }
+        }
+      })
+      const sql = `PREPARE stmt FROM "SELECT MAX(code) as 'last_code' FROM ${model} WHERE company_id = ?";
       SET @company_id = ${companyId};
       EXECUTE stmt USING @company_id;
       DEALLOCATE PREPARE stmt;`
       pool.executeQuery(sql, [], (err, results, fields) => {
         if (err) return reject(err)
-        resolve(convertListToCamelCase(results[2])[0])
+        const lastCode = convertListToCamelCase(results[2])[0].lastCode
+        const newCode = (parseInt(lastCode || 0) + 1).pad(size, '0')
+        resolve({ newCode })
       })
     })
   }

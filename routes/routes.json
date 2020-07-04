@@ -568,7 +568,7 @@
   },
   {
     "route": "test",
-    "model": "product",
+    "model": "inventory_variation_reason",
     "url": "/test",
     "methods": [
       {
