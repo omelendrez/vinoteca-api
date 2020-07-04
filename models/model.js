@@ -201,19 +201,45 @@ module.exports = {
   },
   getLastCode: async (model, companyId) => {
     return new Promise(async (resolve, reject) => {
+      /**
+       * Necesitamos obtener el último 'code' existente en este modelo (tabla)
+       * para sumarle 1 (ej.: 002 -> 003)
+       *
+       * Para ello hacemos lo siguiente:
+       *
+       * 1) Nos fijamos en el esquema de este modelo qué tamaño tiene code (size).
+       *    Ya que no en todas la tablas que usan 'code' el campo tiene el mismo tamaño (product, category, variation_reason)
+       *
+       * 2) Una vez obtenido el size buscamos en la tabla el registro con el mayor valor de code
+       *
+       * 3) Lo convertimos en número y le sumamos uno
+       *
+       * 4) Lo formateamos agregando '0' a la izquierda hasta llegar al tamaño
+       *    especificado en el esquema (size)
+       *
+       * 5) Devolvemos el valor
+       *
+       */
+
+      // Abrimos el archivo de esquema de este model
       const directory = path.join(__dirname, 'schema', `${model}.sql`)
       const file = fs.readFileSync(directory, 'UTF-8')
       const lines = file.split(/\r?\n/)
+
+      // Buscamos en el esquema el campo 'code' y obtenemos su tamaño (size)
       let size
       lines.forEach((line) => {
         if (line.indexOf('code') > -1 && line.indexOf('CHAR') > -1) {
-          const words = line.split(' ')
+          // code CHAR(3) NOT NULL,          0    1     2       3         4       5
+          const words = line.split(' ') // [' ', ' ', 'code','CHAR(3)', 'NOT', 'NULL,']
           if (words[2] === 'code') {
-            const type = words[3]
-            size = type.replace('CHAR', '').substr(1, 1)
+            const type = words[3] // CHAR(3)
+            size = type.replace('CHAR', '').substr(1, 1) // 3
           }
         }
       })
+
+      // Buscamos el code de mayor valor para este modelo y para la empresa del usuario
       const sql = `PREPARE stmt FROM "SELECT MAX(code) as 'last_code' FROM ${model} WHERE company_id = ?";
       SET @company_id = ${companyId};
       EXECUTE stmt USING @company_id;
@@ -221,6 +247,9 @@ module.exports = {
       pool.executeQuery(sql, [], (err, results, fields) => {
         if (err) return reject(err)
         const lastCode = convertListToCamelCase(results[2])[0].lastCode
+
+        // Si hay registros en la tabla consideramos valor 0
+        // Ahora le sumamos uno y lo formateamos con ceros a la izquierda con pad
         const newCode = (parseInt(lastCode || 0) + 1).pad(size, '0')
         resolve({ newCode })
       })
