@@ -92,11 +92,12 @@ module.exports = {
     })
   },
 
-  delete: (id, model) => { // Por eso nos pasa el id
-    return new Promise((resolve, reject) => { // Creamos una nueva Promise
-      const sql = `DELETE FROM  \`${model}\` WHERE id=?;` // Preparamos el query
-      pool.executeQuery(sql, [id], (err, results, fields) => { // Se lo enviamos a mysql junto con el id
-        if (err) return reject({ error: err }) // Si hubo errores devolvemos el error y terminamos acá
+  delete: (id, model) => {
+    return new Promise((resolve, reject) => {
+      const fileName = path.join(__dirname, 'queries', 'delete', `${model}.sql`)
+      const sql = fs.readFileSync(fileName).toString()
+      pool.executeQuery(sql, [id], (err, results, fields) => {
+        if (err) return reject({ error: err })
         resolve(results)
       })
     })
