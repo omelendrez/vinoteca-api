@@ -1,3 +1,7 @@
+SIGNAL SQLSTATE '45000'
+SET
+  MESSAGE_TEXT = 'No se pueden eliminar órdenes';
+
 SET
   autocommit = OFF;
 

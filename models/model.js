@@ -43,7 +43,7 @@ module.exports = {
       pool.executeQuery(sql, [id], (err, results, fields) => { // Enviamos el SQL y el id (estamos modificando un solo registro) a mysql
         if (err) return reject({ error: err })
         const fileName = path.join(__dirname, 'queries', 'one', `${model}.sql`)
-        const sql = fs.readFileSync(fileName).toString().replace('{ fields }', fields)
+        const sql = fs.readFileSync(fileName).toString()
         pool.executeQuery(sql, [id], (err, results, fields) => { // Ejecutamos el query en mysql
           if (err) return reject({ error: err })
           resolve(convertListToCamelCase(results)[0]) // Si no hubo errores formateamos el registro y se la devolvemos al controlador
@@ -84,7 +84,12 @@ module.exports = {
       /** Aquí traemos el registro con todos los campos que especifica el archivo queries/one/[model].sql  */
       pool.executeQuery(sql, [id], async (err, results, fields) => {
         if (err) return reject({ error: err })
-        resolve(convertListToCamelCase(results, withPassword))
+        let response = results
+        if (model === 'order') {
+          response = { ...results[1][0] }
+          response.order_details = results[2]
+        }
+        resolve(convertListToCamelCase(response, withPassword))
       })
     })
   },

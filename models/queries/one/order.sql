@@ -1,3 +1,6 @@
+SET
+  @id := ?;
+
 SELECT
   o.id,
   o.number,
@@ -9,8 +12,9 @@ SELECT
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
   o.created,
-  o.updated,
-  if (o.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
+  o.updated
+  /*,
+   if (o.status_id = 1, 'Activo', 'Inactivo') as 'status_name'*/
 FROM
   `order` as o
   INNER JOIN `company` as co ON o.company_id = co.id
@@ -18,7 +22,7 @@ FROM
   INNER JOIN `user` as u1 ON o.created_by = u1.id
   LEFT OUTER JOIN `user` as u2 ON o.updated_by = u2.id
 WHERE
-  o.id = ?;
+  o.id = @id;
 
 SELECT
   od.id,
@@ -42,4 +46,4 @@ FROM
   INNER JOIN `user` as u1 ON od.created_by = u1.id
   LEFT OUTER JOIN `user` as u2 ON od.updated_by = u2.id
 WHERE
-  od.order_id = ?;
+  od.order_id = @id;

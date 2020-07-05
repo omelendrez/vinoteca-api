@@ -124,12 +124,12 @@
       {
         "method": "get",
         "function": "getAll",
-        "secure": true
+        "secure": false
       },
       {
         "method": "post",
         "function": "add",
-        "secure": true
+        "secure": false
       }
     ]
   },
@@ -141,7 +141,7 @@
       {
         "method": "get",
         "function": "getById",
-        "secure": true
+        "secure": false
       },
       {
         "method": "put",
@@ -163,7 +163,7 @@
       {
         "method": "get",
         "function": "getAll",
-        "secure": true
+        "secure": false
       },
       {
         "method": "post",
