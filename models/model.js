@@ -239,10 +239,11 @@ module.exports = {
       })
 
       // Buscamos el code de mayor valor para este modelo y para la empresa del usuario
-      const sql = `PREPARE stmt FROM "SELECT MAX(${fieldName}) as 'last_code' FROM ${model} WHERE company_id = ?";
+      const sql = `PREPARE stmt FROM "SELECT MAX(${fieldName}) as 'last_code' FROM \`${model}\` WHERE company_id = ?";
       SET @company_id = ${companyId};
       EXECUTE stmt USING @company_id;
       DEALLOCATE PREPARE stmt;`
+
       pool.executeQuery(sql, [], (err, results, fields) => {
         if (err) return reject({ error: err })
         const lastCode = convertListToCamelCase(results[2])[0].lastCode
