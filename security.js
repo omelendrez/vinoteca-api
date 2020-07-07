@@ -16,7 +16,13 @@ module.exports = {
         req.decoded = result
         next()
       } catch (err) {
-        throw new Error(err)
+        result = {
+          error: `Authentication error. Token required.`,
+          message: 'La sesión ha expirado',
+          status: 401,
+          code: 'token'
+        }
+        res.status(401).send(result)
       }
     } else {
       result = {
