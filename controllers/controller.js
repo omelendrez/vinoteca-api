@@ -58,11 +58,11 @@ module.exports = {
   // En la ruta el cliente ha hecho un PUT por lo que quiere modificar los datos de una empresa en particular
   update: (req, res) => {
     const modelName = getModelFromRoute(req)
-    if (!req.decoded) {
+    /*if (!req.decoded) {
       req.decoded = { id: 1, companyId: 1 }
-    }
+    }*/
     const { id, companyId } = req.decoded
-    let payload = { ...req.body, updatedBy: id || 1 }
+    let payload = { ...req.body, updatedBy: id/* || 1*/ }
     const requiresCompanyId = !['user', 'company', 'profile'].includes(modelName)
     if (requiresCompanyId) {
       payload = { ...payload, companyId }
