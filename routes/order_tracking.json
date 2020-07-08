@@ -1,0 +1,26 @@
+[
+  {
+    "route": "order_tracking",
+    "model": "order_tracking",
+    "url": "/order_tracking",
+    "methods": [
+      {
+        "method": "post",
+        "function": "add",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "order_tracking",
+    "model": "order_tracking",
+    "url": "/order_tracking/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      }
+    ]
+  }
+]
