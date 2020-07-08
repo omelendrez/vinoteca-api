@@ -1,7 +1,5 @@
 [
   {
-    "route": "low-stock-products",
-    "model": "low_stock_product",
     "url": "/low-stock-products",
     "methods": [
       {

@@ -1,7 +1,5 @@
 [
   {
-    "route": "suppliers",
-    "model": "supplier",
     "url": "/suppliers",
     "methods": [
       {
@@ -17,8 +15,6 @@
     ]
   },
   {
-    "route": "suppliers",
-    "model": "supplier",
     "url": "/suppliers/:id",
     "methods": [
       {

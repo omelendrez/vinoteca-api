@@ -1,7 +1,5 @@
 [
   {
-    "route": "products",
-    "model": "product",
     "url": "/products",
     "methods": [
       {
@@ -17,8 +15,6 @@
     ]
   },
   {
-    "route": "products",
-    "model": "product",
     "url": "/products/:id",
     "methods": [
       {

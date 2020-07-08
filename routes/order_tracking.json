@@ -1,7 +1,5 @@
 [
   {
-    "route": "order_tracking",
-    "model": "order_tracking",
     "url": "/order_tracking",
     "methods": [
       {
@@ -12,8 +10,6 @@
     ]
   },
   {
-    "route": "order_tracking",
-    "model": "order_tracking",
     "url": "/order_tracking/:id",
     "methods": [
       {

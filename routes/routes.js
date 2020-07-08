@@ -33,7 +33,7 @@ const controller = require('../controllers/controller')
 const { validateToken } = require('../security')
 const fs = require('fs')
 const path = require('path')
-const files = require('./routes.json')
+const files = require('./index.json')
 
 const generateRoutes = (router, files) => {
   return files.map(file => {

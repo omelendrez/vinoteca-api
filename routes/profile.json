@@ -1,7 +1,5 @@
 [
   {
-    "route": "profiles",
-    "model": "profile",
     "url": "/profiles",
     "methods": [
       {
@@ -17,8 +15,6 @@
     ]
   },
   {
-    "route": "profiles",
-    "model": "profile",
     "url": "/profiles/:id",
     "methods": [
       {

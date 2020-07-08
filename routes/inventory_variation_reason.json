@@ -1,7 +1,5 @@
 [
   {
-    "route": "inventory_variation_reasons",
-    "model": "inventory_variation_reason",
     "url": "/inventory_variation_reasons",
     "methods": [
       {
@@ -17,8 +15,6 @@
     ]
   },
   {
-    "route": "inventory_variation_reasons",
-    "model": "inventory_variation_reason",
     "url": "/inventory_variation_reasons/:id",
     "methods": [
       {

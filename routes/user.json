@@ -1,7 +1,5 @@
 [
   {
-    "route": "users",
-    "model": "user",
     "url": "/users",
     "methods": [
       {
@@ -17,8 +15,6 @@
     ]
   },
   {
-    "route": "users",
-    "model": "user",
     "url": "/users/:id",
     "methods": [
       {
@@ -39,8 +35,6 @@
     ]
   },
   {
-    "route": "login",
-    "model": "user",
     "url": "/login",
     "methods": [
       {
@@ -51,8 +45,6 @@
     ]
   },
   {
-    "route": "emails",
-    "model": "user",
     "url": "/emails",
     "methods": [
       {
@@ -63,8 +55,6 @@
     ]
   },
   {
-    "route": "change-password",
-    "model": "user",
     "url": "/change-password/:id",
     "methods": [
       {

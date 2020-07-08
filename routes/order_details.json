@@ -1,7 +1,5 @@
 [
   {
-    "route": "order_details",
-    "model": "order_details",
     "url": "/order_details",
     "methods": [
       {
@@ -17,8 +15,6 @@
     ]
   },
   {
-    "route": "order_details",
-    "model": "order_details",
     "url": "/order_details/:id",
     "methods": [
       {

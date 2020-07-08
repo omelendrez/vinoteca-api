@@ -20,6 +20,10 @@
     "model": "order_details"
   },
   {
+    "route": "order_tracking",
+    "model": "order_tracking"
+  },
+  {
     "route": "products",
     "model": "product"
   },

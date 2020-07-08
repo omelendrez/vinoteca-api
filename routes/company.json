@@ -1,7 +1,5 @@
 [
   {
-    "route": "companies",
-    "model": "company",
     "url": "/companies",
     "methods": [
       {
@@ -17,8 +15,6 @@
     ]
   },
   {
-    "route": "companies",
-    "model": "company",
     "url": "/companies/:id",
     "methods": [
       {

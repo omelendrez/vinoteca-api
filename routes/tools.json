@@ -1,7 +1,5 @@
 [
   {
-    "route": "reset-db",
-    "model": "",
     "url": "/reset-db",
     "methods": [
       {
@@ -12,8 +10,6 @@
     ]
   },
   {
-    "route": "reset-db",
-    "model": "",
     "url": "/reset-db/:table",
     "methods": [
       {
@@ -24,8 +20,6 @@
     ]
   },
   {
-    "route": "test",
-    "model": "inventory_variation_reason",
     "url": "/test",
     "methods": [
       {

@@ -1,7 +1,5 @@
 [
   {
-    "route": "inventory",
-    "model": "inventory",
     "url": "/inventory",
     "methods": [
       {
@@ -17,8 +15,6 @@
     ]
   },
   {
-    "route": "inventory",
-    "model": "inventory",
     "url": "/inventory/:id",
     "methods": [
       {

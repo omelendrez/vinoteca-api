@@ -15,7 +15,7 @@ Number.prototype.pad = function (size) {
   return s
 }
 
-const routeMaps = require('./routes/routes.json')
+const routeMaps = require('./routes/index.json')
 
 module.exports = {
   async updateFieldsFromModel(model) {

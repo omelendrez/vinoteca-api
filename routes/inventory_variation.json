@@ -1,7 +1,5 @@
 [
   {
-    "route": "inventory_variations",
-    "model": "inventory_variation",
     "url": "/inventory_variations",
     "methods": [
       {
@@ -17,8 +15,6 @@
     ]
   },
   {
-    "route": "inventory_variations",
-    "model": "inventory_variation",
     "url": "/inventory_variations/:id",
     "methods": [
       {
