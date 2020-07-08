@@ -10,7 +10,7 @@ const fs = require('fs') // Función de node que permite acceder al sistema de a
 const path = require('path') // Función de node que genera urls
 const pool = require('./pool')
 const { encryptPassword } = require('../security') // Sólo para user
-const { updateFieldsFromModel, convertListToCamelCase, convertObjectToUnderscoreCase, formatDateFull } = require('../helpers')
+const { updateFieldsFromModel, convertListToCamelCase, convertObjectToCamelCase, convertObjectToUnderscoreCase, formatDateFull } = require('../helpers')
 //const queries = require('./queries.json')
 
 module.exports = {
@@ -87,7 +87,8 @@ module.exports = {
         let response = results
         if (model === 'order') {
           response = { ...results[1][0] }
-          response.order_details = results[2]
+          response.order_details = convertListToCamelCase(results[2])
+          response = convertObjectToCamelCase(response)
         }
         resolve(convertListToCamelCase(response, withPassword))
       })
