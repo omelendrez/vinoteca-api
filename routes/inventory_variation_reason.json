@@ -1,0 +1,41 @@
+[
+  {
+    "route": "inventory_variation_reasons",
+    "model": "inventory_variation_reason",
+    "url": "/inventory_variation_reasons",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": true
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "inventory_variation_reasons",
+    "model": "inventory_variation_reason",
+    "url": "/inventory_variation_reasons/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": true
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": true
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": true
+      }
+    ]
+  }
+]

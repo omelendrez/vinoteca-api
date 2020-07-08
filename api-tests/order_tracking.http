@@ -1,0 +1,16 @@
+### Lista categories
+GET http://localhost:3000/api/v1/order_tracking
+
+### Agregar category
+POST http://localhost:3000/api/v1/order_tracking
+content-type: application/json
+
+{
+  "name": "Vinos",
+  "code": "123456",
+  "companyId": "1"
+}
+
+### Obtener categoria pasando el id || Se pasa el id del registro a modificar en la url
+GET http://localhost:3000/api/v1/order_tracking/1
+content-type: application/json

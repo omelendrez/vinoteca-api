@@ -29,23 +29,28 @@
  *        ej.: GET http://localhost:3000/categories/1     Elimina la empresa con id = 1
  */
 
-const controller = require('../controllers/controller') // Este es el controlador que va a correr la acciones que se ejecuten en esta ruta (/categories)
+const controller = require('../controllers/controller')
 const { validateToken } = require('../security')
-const routes = require('./routes.json')
-//.get(validateToken, controller.getAll) // Ruta protegida con token
-//.get(controller.getAll)
-const generateRoutes = (router, routes) => {
-  routes.map(route => {
-    const path = router.route(route.url)
-    route.methods.map(method => {
-      if (method.secure) {
-        return path[method.method](validateToken, controller[method.function])
-      }
-      return path[method.method](controller[method.function])
+const fs = require('fs')
+const path = require('path')
+const files = require('./routes.json')
+
+const generateRoutes = (router, files) => {
+  return files.map(file => {
+    const fileName = path.join(__dirname, `${file.model}.json`)
+    const routes = JSON.parse(fs.readFileSync(fileName, 'UTF-8'))
+    routes.map(route => {
+      const path = router.route(route.url)
+      return route.methods.map(method => {
+        if (method.secure) {
+          return path[method.method](validateToken, controller[method.function])
+        }
+        return path[method.method](controller[method.function])
+      })
     })
   })
 }
 
 module.exports = (router) => {
-  generateRoutes(router, routes)
+  generateRoutes(router, files)
 }

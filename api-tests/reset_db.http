@@ -5,7 +5,7 @@ content-type: application/json
 
 
 ### Resetear sólo una tabla en la base de datos
-POST http://localhost:3000/api/v1/reset-db/inventory_variation
+POST http://localhost:3000/api/v1/reset-db/order_tracking
 content-type: application/json
 
 

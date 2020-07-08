@@ -1,0 +1,41 @@
+[
+  {
+    "route": "products",
+    "model": "product",
+    "url": "/products",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": true
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "products",
+    "model": "product",
+    "url": "/products/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": true
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": true
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": true
+      }
+    ]
+  }
+]

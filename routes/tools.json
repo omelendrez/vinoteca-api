@@ -1,0 +1,38 @@
+[
+  {
+    "route": "reset-db",
+    "model": "",
+    "url": "/reset-db",
+    "methods": [
+      {
+        "method": "post",
+        "function": "reset",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "reset-db",
+    "model": "",
+    "url": "/reset-db/:table",
+    "methods": [
+      {
+        "method": "post",
+        "function": "reset",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "test",
+    "model": "inventory_variation_reason",
+    "url": "/test",
+    "methods": [
+      {
+        "method": "post",
+        "function": "test",
+        "secure": false
+      }
+    ]
+  }
+]

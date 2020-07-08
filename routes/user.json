@@ -1,0 +1,77 @@
+[
+  {
+    "route": "users",
+    "model": "user",
+    "url": "/users",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": true
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "users",
+    "model": "user",
+    "url": "/users/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": true
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": true
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "login",
+    "model": "user",
+    "url": "/login",
+    "methods": [
+      {
+        "method": "post",
+        "function": "login",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "emails",
+    "model": "user",
+    "url": "/emails",
+    "methods": [
+      {
+        "method": "post",
+        "function": "send",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "route": "change-password",
+    "model": "user",
+    "url": "/change-password/:id",
+    "methods": [
+      {
+        "method": "put",
+        "function": "changePassword",
+        "secure": true
+      }
+    ]
+  }
+]

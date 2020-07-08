@@ -1,0 +1,41 @@
+[
+  {
+    "route": "inventory_variations",
+    "model": "inventory_variation",
+    "url": "/inventory_variations",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": true
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "inventory_variations",
+    "model": "inventory_variation",
+    "url": "/inventory_variations/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": true
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": true
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": true
+      }
+    ]
+  }
+]

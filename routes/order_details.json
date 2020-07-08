@@ -1,0 +1,41 @@
+[
+  {
+    "route": "order_details",
+    "model": "order_details",
+    "url": "/order_details",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "order_details",
+    "model": "order_details",
+    "url": "/order_details/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": true
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": true
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": true
+      }
+    ]
+  }
+]

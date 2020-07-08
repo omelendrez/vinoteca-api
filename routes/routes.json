@@ -1,593 +1,74 @@
 [
   {
     "route": "categories",
-    "model": "category",
-    "url": "/categories",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "categories",
-    "model": "category",
-    "url": "/categories/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "category"
   },
   {
     "route": "companies",
-    "model": "company",
-    "url": "/companies",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "companies",
-    "model": "company",
-    "url": "/companies/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "company"
   },
   {
     "route": "inventory",
-    "model": "inventory",
-    "url": "/inventory",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "inventory",
-    "model": "inventory",
-    "url": "/inventory/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "inventory"
   },
   {
     "route": "orders",
-    "model": "order",
-    "url": "/orders",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": false
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "orders",
-    "model": "order",
-    "url": "/orders/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": false
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "order"
   },
   {
     "route": "order_details",
-    "model": "order_details",
-    "url": "/order_details",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": false
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "order_details",
-    "model": "order_details",
-    "url": "/order_details/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "order_details"
   },
   {
     "route": "products",
-    "model": "product",
-    "url": "/products",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "products",
-    "model": "product",
-    "url": "/products/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "product"
   },
   {
     "route": "inventory_variations",
-    "model": "inventory_variation",
-    "url": "/inventory_variations",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "inventory_variations",
-    "model": "inventory_variation",
-    "url": "/inventory_variations/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "inventory_variation"
   },
   {
     "route": "inventory_variation_reasons",
-    "model": "inventory_variation_reason",
-    "url": "/inventory_variation_reasons",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "inventory_variation_reasons",
-    "model": "inventory_variation_reason",
-    "url": "/inventory_variation_reasons/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "inventory_variations",
-    "model": "inventory_variation",
-    "url": "/inventory_variations",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "inventory_variations",
-    "model": "inventory_variation",
-    "url": "/inventory_variations/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "inventory_variation_reason"
   },
   {
     "route": "stores",
-    "model": "store",
-    "url": "/stores",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "stores",
-    "model": "store",
-    "url": "/stores/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "store"
   },
   {
     "route": "suppliers",
-    "model": "supplier",
-    "url": "/suppliers",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "suppliers",
-    "model": "supplier",
-    "url": "/suppliers/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "supplier"
   },
   {
     "route": "users",
-    "model": "user",
-    "url": "/users",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "users",
-    "model": "user",
-    "url": "/users/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "user"
   },
   {
     "route": "login",
-    "model": "user",
-    "url": "/login",
-    "methods": [
-      {
-        "method": "post",
-        "function": "login",
-        "secure": false
-      }
-    ]
+    "model": "user"
   },
   {
     "route": "reset-db",
-    "model": "",
-    "url": "/reset-db",
-    "methods": [
-      {
-        "method": "post",
-        "function": "reset",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "reset-db",
-    "model": "",
-    "url": "/reset-db/:table",
-    "methods": [
-      {
-        "method": "post",
-        "function": "reset",
-        "secure": false
-      }
-    ]
+    "model": "tools"
   },
   {
     "route": "profiles",
-    "model": "profile",
-    "url": "/profiles",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      },
-      {
-        "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "route": "profiles",
-    "model": "profile",
-    "url": "/profiles/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
-        "secure": true
-      }
-    ]
+    "model": "profile"
   },
   {
     "route": "emails",
-    "model": "user",
-    "url": "/emails",
-    "methods": [
-      {
-        "method": "post",
-        "function": "send",
-        "secure": false
-      }
-    ]
+    "model": "user"
   },
   {
     "route": "change-password",
-    "model": "user",
-    "url": "/change-password/:id",
-    "methods": [
-      {
-        "method": "put",
-        "function": "changePassword",
-        "secure": true
-      }
-    ]
+    "model": "user"
   },
   {
     "route": "low-stock-products",
-    "model": "low_stock_product",
-    "url": "/low-stock-products",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getAll",
-        "secure": true
-      }
-    ]
+    "model": "low_stock_product"
   },
   {
     "route": "test",
-    "model": "inventory_variation_reason",
-    "url": "/test",
-    "methods": [
-      {
-        "method": "post",
-        "function": "test",
-        "secure": false
-      }
-    ]
+    "model": "inventory_variation_reason"
   }
 ]

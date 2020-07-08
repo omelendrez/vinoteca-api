@@ -1,0 +1,41 @@
+[
+  {
+    "route": "categories",
+    "model": "category",
+    "url": "/categories",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": true
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "categories",
+    "model": "category",
+    "url": "/categories/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": true
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": true
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": true
+      }
+    ]
+  }
+]

@@ -181,7 +181,7 @@ module.exports = {
           }
         })
         pool.executeQuery(sql, null, (err, results) => {
-          if (error) return reject({ error: err })
+          if (err) return reject({ error: err })
           resolve({ message: 'Tablas recreadas', queries })
         })
       }))

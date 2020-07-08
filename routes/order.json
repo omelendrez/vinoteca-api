@@ -1,0 +1,58 @@
+[
+  {
+    "route": "orders",
+    "model": "order",
+    "url": "/orders",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "orders",
+    "model": "order",
+    "url": "/orders/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": true
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": true
+      }
+    ]
+  },
+  {
+    "route": "order_details",
+    "model": "order_details",
+    "url": "/order_details",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": true
+      }
+    ]
+  }
+]
