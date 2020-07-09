@@ -19,7 +19,9 @@ module.exports = {
       data.password = await encryptPassword(data) // Sólo para user
     }
     data.created = formatDateFull(new Date())
-    data.updated = formatDateFull(new Date())
+    if (model !== 'order_tracking') {
+      data.updated = formatDateFull(new Date())
+    }
     const payload = convertObjectToUnderscoreCase(data)
     return new Promise(async (resolve, reject) => { // Creamos una Promise, que nos permite actuar de manera diferente si hubo errores o no
       const sql = `INSERT INTO \`${model}\` SET ?` // La lista de fields y values es generada automáticamente
@@ -32,7 +34,6 @@ module.exports = {
 
   // El contolador quiere cambiar datos en una empresa
   update: async (data, id, model) => { // El controlador nos pasa los datos que envió el cliente (datos de la empresa y su id)
-    data.updated = formatDateFull(new Date())
     if (data.password) {
       data.password = await encryptPassword(data) // Sólo para user
     }
@@ -88,6 +89,7 @@ module.exports = {
         if (model === 'order') {
           response = { ...results[1][0] }
           response.order_details = convertListToCamelCase(results[2])
+          response.order_tracking = convertListToCamelCase(results[3])
           response = convertObjectToCamelCase(response)
         }
         resolve(convertListToCamelCase(response, withPassword))

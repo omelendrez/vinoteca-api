@@ -3,32 +3,26 @@ GET http://localhost:3000/api/v1/orders
 
 ### Agregar order
 POST http://localhost:3000/api/v1/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY29tcGFueUlkIjoxLCJuYW1lIjoiT21hciIsInByb2ZpbGVJZCI6MSwiaWF0IjoxNTk0MzIwMTg4LCJleHAiOjE1OTQ0OTI5ODgsImlzcyI6Imh0dHA6Ly92aW5vdGVjYS1hcGkuaGVyb2t1YXBwLmNvbS8ifQ.BIrP8HuD6cRbdyMpDNgKcrqcxLbp2zDcMAR6tNuOn0o
 content-type: application/json
 
 {
-  "number": "123231",
   "date": "2019-06-13",
-  "supplierId": "1",
-  "amount": "342.12",
-  "companyId": "1"
+  "supplierId": "1"
 }
 
 ### Actualizar order || Se pasa el id del registro a modificar en la url
 PUT http://localhost:3000/api/v1/orders/1
-content-type: application/json
 
 {
-  "number": "8888",
   "date": "2015-06-13",
-  "supplierId": "111111",
-  "amount": "0.12",
-  "companyId": "4345"
+  "supplierId": "2"
 }
 
 ### Obtener order pasando el id || Se pasa el id del registro a modificar en la url
-GET http://localhost:3000/api/v1/orders/1
-content-type: application/json
+GET http://localhost:3000/api/v1/orders/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY29tcGFueUlkIjoxLCJuYW1lIjoiT21hciIsInByb2ZpbGVJZCI6MSwiaWF0IjoxNTk0MzIwMTg4LCJleHAiOjE1OTQ0OTI5ODgsImlzcyI6Imh0dHA6Ly92aW5vdGVjYS1hcGkuaGVyb2t1YXBwLmNvbS8ifQ.BIrP8HuD6cRbdyMpDNgKcrqcxLbp2zDcMAR6tNuOn0o
+
 
 ### Eliminar order pasando el id || Se pasa el id del registro a eliminar en la url
 DELETE http://localhost:3000/api/v1/orders/1
-content-type: application/json

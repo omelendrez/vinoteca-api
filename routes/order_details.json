@@ -3,11 +3,6 @@
     "url": "/order_details",
     "methods": [
       {
-        "method": "get",
-        "function": "getAll",
-        "secure": false
-      },
-      {
         "method": "post",
         "function": "add",
         "secure": true

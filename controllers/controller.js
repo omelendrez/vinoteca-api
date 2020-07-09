@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt')
 const randomstring = require('randomstring')
 const { generateToken } = require('../security')
 const { getModelFromRoute } = require('../helpers')
+const { modelsWithCode, modelsWithNumber, modelsWithoutCompanyId, modelsWithoutUpdatedBy } = require('../helpers')
 const Email = require('../services/email')
 
 // Importamos el modelo con el que este controlador va a interactuar
@@ -23,12 +24,12 @@ module.exports = {
     const { id, companyId } = req.decoded // id es id y companyId vienen del usuario que hizo el post
     let payload = { ...req.body, createdBy: id }
 
-    const requiresCompanyId = !['user', 'company', 'profile'].includes(modelName) // Estos modelos no requieren "company_id"
+    const requiresCompanyId = !modelsWithoutCompanyId.includes(modelName) // Estos modelos no requieren "company_id"
     if (requiresCompanyId) {
       payload = { ...payload, companyId }
     }
 
-    const requiresCode = ['category', 'product', 'inventory_variation_reason'].includes(modelName) // Estos modelos requieren "code"
+    const requiresCode = modelsWithCode.includes(modelName) // Estos modelos requieren "code"
     if (requiresCode) {
       await Model.getLastCode(modelName, companyId, 'code')
         .then(results => {
@@ -37,7 +38,7 @@ module.exports = {
         .catch(err => res.status(500).json(err))
     }
 
-    const requiresNumber = ['order'].includes(modelName) // Estos modelos requieren "number"
+    const requiresNumber = modelsWithNumber.includes(modelName) // Estos modelos requieren "number"
     if (requiresNumber) {
       await Model.getLastCode(modelName, companyId, 'number')
         .then(results => {
@@ -62,8 +63,12 @@ module.exports = {
       req.decoded = { id: 1, companyId: 1 }
     }*/
     const { id, companyId } = req.decoded
-    let payload = { ...req.body, updatedBy: id/* || 1*/ }
-    const requiresCompanyId = !['user', 'company', 'profile'].includes(modelName)
+    const requiresUpdatedBy = !modelsWithoutUpdatedBy.includes(modelName) // Estos modelos requieren "code"
+    let payload = req.body
+    if (requiresUpdatedBy) {
+      payload = { ...req.body, updatedBy: id/* || 1*/ }
+    }
+    const requiresCompanyId = !modelsWithoutCompanyId.includes(modelName)
     if (requiresCompanyId) {
       payload = { ...payload, companyId }
     }

@@ -30,8 +30,8 @@ POST http://localhost:3000/api/v1/login
 content-type: application/json
 
 {
-  "name": "OmarMel",
-  "password": "Master1"
+  "email": "omar.melendrez@gmail.com",
+  "password": "Master1*"
 }
 
 ### Obtener usuario pasando el id  || Se pasa el id del registro a modificar en la url

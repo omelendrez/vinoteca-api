@@ -1,16 +1,15 @@
-### Lista categories
-GET http://localhost:3000/api/v1/order_tracking
-
-### Agregar category
+### Agregar order_tracking
 POST http://localhost:3000/api/v1/order_tracking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY29tcGFueUlkIjoxLCJuYW1lIjoiT21hciIsInByb2ZpbGVJZCI6MSwiaWF0IjoxNTk0MzIwMTg4LCJleHAiOjE1OTQ0OTI5ODgsImlzcyI6Imh0dHA6Ly92aW5vdGVjYS1hcGkuaGVyb2t1YXBwLmNvbS8ifQ.BIrP8HuD6cRbdyMpDNgKcrqcxLbp2zDcMAR6tNuOn0o
 content-type: application/json
 
 {
-  "name": "Vinos",
-  "code": "123456",
-  "companyId": "1"
+  "orderId": "1",
+  "date": "2020-07-11",
+  "statusId": 2,
+  "createdBy": 1
 }
 
-### Obtener categoria pasando el id || Se pasa el id del registro a modificar en la url
+### Devolver una order_tracking pasando el id
 GET http://localhost:3000/api/v1/order_tracking/1
 content-type: application/json

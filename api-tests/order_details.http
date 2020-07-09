@@ -1,17 +1,13 @@
-### Lista detalles de orden
-GET http://localhost:3000/api/v1/order_details
-
-
 ### Agregar detalles de orden
 POST http://localhost:3000/api/v1/order_details
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY29tcGFueUlkIjoxLCJuYW1lIjoiT21hciIsInByb2ZpbGVJZCI6MSwiaWF0IjoxNTk0MzIwMTg4LCJleHAiOjE1OTQ0OTI5ODgsImlzcyI6Imh0dHA6Ly92aW5vdGVjYS1hcGkuaGVyb2t1YXBwLmNvbS8ifQ.BIrP8HuD6cRbdyMpDNgKcrqcxLbp2zDcMAR6tNuOn0o
 content-type: application/json
 
 {
-  "orderId": "1",
+  "orderId": "2",
   "storeId": "2",
   "productId": "3",
-  "qtyRequested": 8,
-  "qtyReceived": 3
+  "qtyRequested": 25
 }
 
 ### Actualizar detalles de orden || Se pasa el id del registro a modificar en la url
@@ -25,10 +21,6 @@ content-type: application/json
   "qtyRequested": 10,
   "qtyReceived": 10
 }
-
-### Obtener detalles de orden pasando el id || Se pasa el id del registro a modificar en la url
-GET http://localhost:3000/api/v1/order_details/1
-content-type: application/json
 
 ### Eliminar detalles de orden pasando el id || Se pasa el id del registro a eliminar en la url
 DELETE http://localhost:3000/api/v1/order_details/1
