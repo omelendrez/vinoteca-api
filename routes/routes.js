@@ -29,11 +29,11 @@
  *        ej.: GET http://localhost:3000/categories/1     Elimina la empresa con id = 1
  */
 
-const controller = require('../controllers/controller')
-const { validateToken } = require('../security')
 const fs = require('fs')
 const path = require('path')
 const files = require('./index.json')
+const controller = require('../controllers/controller')
+const { validateToken } = require('../security')
 
 const generateRoutes = (router, files) => {
   return files.map(file => {
