@@ -1,3 +1,6 @@
-UPDATE `inventory`
-SET { fields }
-WHERE id = ?;
+UPDATE
+  `inventory`
+SET
+  { fields }
+WHERE
+  id = ?;

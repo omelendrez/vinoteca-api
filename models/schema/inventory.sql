@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS inventory;
+
 CREATE TABLE inventory (
   id INTEGER NOT NULL AUTO_INCREMENT,
   store_id INTEGER NOT NULL,

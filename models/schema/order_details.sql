@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS order_details;
+
 CREATE TABLE order_details (
   id INTEGER NOT NULL AUTO_INCREMENT,
   order_id INTEGER NOT NULL,

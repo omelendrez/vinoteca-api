@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS order_tracking;
+
 CREATE TABLE order_tracking (
   id INTEGER NOT NULL AUTO_INCREMENT,
   order_id INTEGER NOT NULL,

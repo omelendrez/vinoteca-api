@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS `profile`;
+
 CREATE TABLE `profile` (
   id INTEGER NOT NULL AUTO_INCREMENT,
   code CHAR(3) NOT NULL,

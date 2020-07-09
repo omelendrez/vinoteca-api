@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS inventory_variation_reason;
+
 CREATE TABLE inventory_variation_reason (
   id INTEGER NOT NULL AUTO_INCREMENT,
   code CHAR(2) NOT NULL,

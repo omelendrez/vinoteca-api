@@ -1,3 +1,6 @@
-UPDATE `company`
-SET { fields }
-WHERE id = ?;
+UPDATE
+  `company`
+SET
+  { fields }
+WHERE
+  id = ?;
