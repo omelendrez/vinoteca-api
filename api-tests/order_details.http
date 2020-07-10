@@ -4,10 +4,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY29tcGFue
 content-type: application/json
 
 {
-  "orderId": "2",
-  "storeId": "2",
-  "productId": "3",
-  "qtyRequested": 25
+  "orderId": "1",
+  "storeId": "1",
+  "productId": "4",
+  "qtyRequested": 60
 }
 
 ### Actualizar detalles de orden || Se pasa el id del registro a modificar en la url
