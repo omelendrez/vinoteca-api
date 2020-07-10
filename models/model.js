@@ -90,9 +90,9 @@ module.exports = {
           response = { ...results[1][0] }
           response.order_details = convertListToCamelCase(results[2])
           response.order_tracking = convertListToCamelCase(results[3])
-          response = convertObjectToCamelCase(response)
+          response = [response]
         }
-        resolve(convertListToCamelCase(response, withPassword))
+        resolve(convertListToCamelCase(response, withPassword)[0])
       })
     })
   },

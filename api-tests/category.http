@@ -23,6 +23,7 @@ content-type: application/json
 
 ### Obtener categoria pasando el id || Se pasa el id del registro a modificar en la url
 GET http://localhost:3000/api/v1/categories/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY29tcGFueUlkIjoxLCJuYW1lIjoiT21hciIsInByb2ZpbGVJZCI6MSwiaWF0IjoxNTk0MzIwMTg4LCJleHAiOjE1OTQ0OTI5ODgsImlzcyI6Imh0dHA6Ly92aW5vdGVjYS1hcGkuaGVyb2t1YXBwLmNvbS8ifQ.BIrP8HuD6cRbdyMpDNgKcrqcxLbp2zDcMAR6tNuOn0o
 content-type: application/json
 
 ### Eliminar categoria pasando el id || Se pasa el id del registro a eliminar en la url
