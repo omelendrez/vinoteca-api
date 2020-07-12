@@ -73,7 +73,11 @@ module.exports = {
       payload = { ...payload, companyId }
     }
     Model.update(payload, req.params.id, modelName) // El controlador le está enviando los datos nuevos y el id de la empresa a modificar
-      .then(result => res.status(200).json({ errors: {}, data: result }))
+      .then(() => {
+        Model.getById(req.params.id, modelName) // Le decimos al modelo que ejecuta la función getById y le pasamos el id que estaba en la url
+          .then(result => res.json(result))
+          .catch(err => res.status(500).json(err))
+      })
       .catch(err => res.status(500).json(err))
   },
 
