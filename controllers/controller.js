@@ -21,7 +21,12 @@ module.exports = {
   // En la ruta el cliente ha hecho un POST por lo que está agregando una nueva empresa
   add: async (req, res) => {
     const modelName = getModelFromRoute(req)
-    const { id, companyId } = req.decoded // id es id y companyId vienen del usuario que hizo el post
+    let id = 1
+    let companyId = 1
+    if (req.decoded) {
+      id = req.decoded.id // id es id y companyId vienen del usuario que hizo el post
+      companyId = req.decoded.companyId // id es id y companyId vienen del usuario que hizo el post
+    }
     let payload = { ...req.body, createdBy: id }
 
     const requiresCompanyId = !modelsWithoutCompanyId.includes(modelName) // Estos modelos no requieren "company_id"
@@ -59,10 +64,12 @@ module.exports = {
   // En la ruta el cliente ha hecho un PUT por lo que quiere modificar los datos de una empresa en particular
   update: (req, res) => {
     const modelName = getModelFromRoute(req)
-    /*if (!req.decoded) {
-      req.decoded = { id: 1, companyId: 1 }
-    }*/
-    const { id, companyId } = req.decoded
+    let id = 1
+    let companyId = 1
+    if (req.decoded) {
+      id = req.decoded.id // id es id y companyId vienen del usuario que hizo el post
+      companyId = req.decoded.companyId // id es id y companyId vienen del usuario que hizo el post
+    }
     const requiresUpdatedBy = !modelsWithoutUpdatedBy.includes(modelName) // Estos modelos requieren "code"
     let payload = req.body
     if (requiresUpdatedBy) {
@@ -133,7 +140,8 @@ module.exports = {
       const user = await Model.getByEmail(email, modelName)
       if (!user) return res.status(400).json({ message: 'Email no registrado' })
       await Model.changePassword({ password }, user.id, modelName)
-      await Email.sendEmail(email, password)
+      const action = 'forgot-password'
+      await Email.sendEmail(email, password, action)
       res.status(200).json({ message: 'ok' })
     } catch (error) {
       res.status(500).json({ error })
@@ -143,8 +151,9 @@ module.exports = {
   changePassword: async (req, res) => {
     const modelName = getModelFromRoute(req)
     const { id } = req.params
-    const { oldPassword, password } = req.body
-    const user = await Model.getById(id, modelName, true)
+    const { oldPassword, password, email } = req.body
+    const user = await Model.getByEmail(email, modelName, true)
+    console.log(user)
     const ok = await bcrypt.compare(oldPassword, user.password)
     if (!ok) return res.status(401).json({ message: 'Password anterior es incorrecta' })
     Model.changePassword({ password }, id, modelName)

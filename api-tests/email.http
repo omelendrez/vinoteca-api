@@ -3,5 +3,6 @@ POST http://localhost:3000/api/v1/emails
 content-type: application/json
 
 {
+  "action": "forgot-password",
   "emailAddress": "omar.melendrez@gmail.com"
 }
