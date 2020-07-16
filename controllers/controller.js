@@ -175,6 +175,8 @@ module.exports = {
     Model.getById(req.params.id, modelName)
       .then(async data => {
         await Email.sendEmail(data.emailAddress, null, 'notify-supplier', data)
+        res.status(200).json(data)
       })
+      .catch(err => res.status(500).json(err))
   }
 }
