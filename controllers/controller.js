@@ -153,7 +153,6 @@ module.exports = {
     const { id } = req.params
     const { oldPassword, password, email } = req.body
     const user = await Model.getByEmail(email, modelName, true)
-    console.log(user)
     const ok = await bcrypt.compare(oldPassword, user.password)
     if (!ok) return res.status(401).json({ message: 'Password anterior es incorrecta' })
     Model.changePassword({ password }, id, modelName)
@@ -169,5 +168,13 @@ module.exports = {
         res.status(200).json(results)
       })
       .catch(err => res.status(500).json(err))
+  },
+
+  sendOrder: async (req, res) => {
+    const modelName = getModelFromRoute(req)
+    Model.getById(req.params.id, modelName)
+      .then(async data => {
+        await Email.sendEmail(data.emailAddress, null, 'notify-supplier', data)
+      })
   }
 }

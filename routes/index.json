@@ -16,6 +16,10 @@
     "model": "order"
   },
   {
+    "route": "send-order",
+    "model": "order"
+  },
+  {
     "route": "order_details",
     "model": "order_details"
   },

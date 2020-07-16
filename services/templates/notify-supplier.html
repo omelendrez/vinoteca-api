@@ -4,18 +4,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recuperación de password</title>
+  <title>Orden de compra</title>
+  <style>
+    body {
+      padding: 1rem;
+      font-family: Arial, Helvetica, sans-serif;
+      letter-spacing: 0.5px;
+      line-height: 1.2rem;
+      margin: 15px;
+    }
+
+    table {
+      width: auto;
+      table-layout: fixed;
+      border-collapse: collapse;
+      border: 1px solid #ccc;
+    }
+
+    @media screen and (min-width: 500px) {
+      table {
+        width: 30vw;
+      }
+    }
+
+    .results {
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+      padding: 10px;
+    }
+
+    .store-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .store-address {
+      margin-bottom: 10px;
+    }
+
+    .qty {
+      text-align: right;
+    }
+  </style>
+
 </head>
 
-<body
-  style="padding: 1rem;font-family: Arial, Helvetica, sans-serif;letter-spacing: 0.5px;line-height: 1.2rem;margin: 1.rem 0">
+<body>
   <img src="https://la-cava.herokuapp.com/images/icons/icon-128x128.png" title="La Cava" />
   <h2>Orden de compra</h2>
   <p>Hola,</p>
   <p>Adjunto detalle de orden de compra de La Cava:</p>
-  <div
-    style="padding: 1rem;font-weight: bold;width: fit-content;font-family: 'Courier New', Courier, monospace;font-size: 2rem;background-color: #efefef">
-    {items}</div>
+
+  {results}
+
   <p>Gracias</p>
   <div style="margin-top: 2rem;line-height: 0.3rem;">
 

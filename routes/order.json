@@ -33,5 +33,15 @@
         "secure": true
       }
     ]
+  },
+  {
+    "url": "/send-order/:id",
+    "methods": [
+      {
+        "method": "post",
+        "function": "sendOrder",
+        "secure": false
+      }
+    ]
   }
 ]

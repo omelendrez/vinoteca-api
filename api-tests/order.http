@@ -26,3 +26,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY29tcGFue
 
 ### Eliminar order pasando el id || Se pasa el id del registro a eliminar en la url
 DELETE http://localhost:3000/api/v1/orders/1
+
+
+### Enviar orden de compra al proveedor
+POST http://localhost:3000/api/v1/send-order/1
+content-type: application/json
