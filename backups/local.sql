@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vinoteca_db
 -- ------------------------------------------------------
--- Server version	8.0.15
+-- Server version	8.0.21
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */
 ;
 
@@ -12,8 +12,8 @@
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */
 ;
 
-SET
-  NAMES utf8mb4;
+/*!50503 SET NAMES utf8mb4 */
+;
 
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */
 ;
@@ -41,22 +41,22 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `code` char(3) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `company_id` int(11) NOT NULL,
-  `status_id` tinyint(4) DEFAULT '1',
+  `company_id` int NOT NULL,
+  `status_id` tinyint DEFAULT '1',
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`, `code`)
-) ENGINE = InnoDB AUTO_INCREMENT = 8 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -75,15 +75,15 @@ VALUES
   (
     1,
     '001',
-    'Whiskies',
+    'Bebidas gaseosas',
     1,
     1,
     '2020-07-04 01:38:06',
     1,
-    '2020-07-04 01:38:06',
-    0
+    '2020-07-09 16:54:21',
+    1
   ),
-  (
+(
     4,
     '002',
     'Cervezas',
@@ -108,21 +108,21 @@ DROP TABLE IF EXISTS `company`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `company` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `contact` varchar(60) NOT NULL,
   `address` varchar(30) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `email` varchar(60) NOT NULL,
-  `status_id` tinyint(4) DEFAULT '1',
+  `status_id` tinyint DEFAULT '1',
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -167,19 +167,19 @@ DROP TABLE IF EXISTS `inventory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `inventory` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `store_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT '0',
-  `company_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `store_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `quantity` int DEFAULT '0',
+  `company_id` int NOT NULL,
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`, `store_id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
@@ -209,7 +209,7 @@ VALUES
     '2020-07-02 00:00:00',
     0
   ),
-  (
+(
     2,
     2,
     1,
@@ -220,7 +220,7 @@ VALUES
     '2020-07-02 00:00:00',
     0
   ),
-  (
+(
     3,
     4,
     1,
@@ -245,22 +245,22 @@ DROP TABLE IF EXISTS `inventory_variation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `inventory_variation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `store_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT '0',
-  `variation_type` tinyint(4) NOT NULL,
-  `variation_reason_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `store_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `quantity` int DEFAULT '0',
+  `variation_type` tinyint NOT NULL,
+  `variation_reason_id` int NOT NULL,
   `comments` varchar(100) DEFAULT '',
-  `company_id` int(11) NOT NULL,
+  `company_id` int NOT NULL,
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`, `store_id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
@@ -293,7 +293,7 @@ VALUES
     '2020-07-04 06:15:58',
     0
   ),
-  (
+(
     2,
     1,
     2,
@@ -321,19 +321,19 @@ DROP TABLE IF EXISTS `inventory_variation_reason`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `inventory_variation_reason` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `code` char(2) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `company_id` int(11) NOT NULL,
-  `status_id` tinyint(4) DEFAULT '1',
+  `company_id` int NOT NULL,
+  `status_id` tinyint DEFAULT '1',
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`, `code`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
@@ -360,10 +360,10 @@ VALUES
     1,
     '2020-07-04 03:46:30',
     1,
-    '2020-07-04 03:46:30',
-    0
+    '2020-07-12 21:08:38',
+    1
   ),
-  (
+(
     5,
     '02',
     'Regalos',
@@ -374,16 +374,16 @@ VALUES
     '2020-07-04 07:19:12',
     0
   ),
-  (
+(
     6,
     '03',
-    'Venta',
+    'Ventas',
     1,
     1,
     '2020-07-04 07:19:25',
     1,
-    '2020-07-04 07:19:25',
-    0
+    '2020-07-04 08:17:03',
+    1
   );
 
 /*!40000 ALTER TABLE `inventory_variation_reason` ENABLE KEYS */
@@ -399,24 +399,24 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `order` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `number` char(5) NOT NULL,
   `date` date NOT NULL,
-  `supplier_id` int(11) NOT NULL,
+  `supplier_id` int NOT NULL,
   `amount` decimal(10, 2) DEFAULT '0.00',
-  `company_id` int(11) NOT NULL,
-  `status_id` tinyint(4) DEFAULT '1',
+  `company_id` int NOT NULL,
+  `status_id` tinyint DEFAULT '1',
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`, `number`)
-) ENGINE = InnoDB AUTO_INCREMENT = 5 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -433,17 +433,17 @@ INSERT INTO
   `order`
 VALUES
   (
-    4,
+    1,
     '00001',
-    '2020-07-01',
+    '2020-07-07',
     1,
-    25600.00,
+    0.00,
     1,
+    2,
+    '2020-07-07 07:25:58',
     1,
-    '2020-07-01 00:00:00',
-    1,
-    '2020-07-01 00:00:00',
-    0
+    '2020-07-16 20:04:18',
+    1
   );
 
 /*!40000 ALTER TABLE `order` ENABLE KEYS */
@@ -459,25 +459,25 @@ DROP TABLE IF EXISTS `order_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `order_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `qty_requested` smallint(6) DEFAULT '0',
-  `qty_received` smallint(6) DEFAULT '0',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int NOT NULL,
+  `store_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `qty_requested` smallint DEFAULT '0',
+  `qty_received` smallint DEFAULT '0',
   `price` decimal(10, 2) DEFAULT '0.00',
-  `status_id` tinyint(4) DEFAULT '1',
+  `status_id` tinyint DEFAULT '1',
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 53 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -494,77 +494,140 @@ INSERT INTO
   `order_details`
 VALUES
   (
-    9,
-    4,
-    1,
-    1,
-    150,
-    60,
-    55.00,
-    1,
-    '2020-07-01 00:00:00',
-    1,
-    '2020-07-01 00:00:00',
-    0
-  ),
-  (
-    10,
-    4,
+    36,
     1,
     2,
-    300,
-    250,
-    60.00,
+    2,
+    200,
+    0,
+    0.00,
     1,
-    '2020-07-01 00:00:00',
+    '2020-07-12 11:54:21',
     1,
-    '2020-07-01 00:00:00',
-    0
+    '2020-07-16 19:22:21',
+    1
   ),
-  (
-    11,
+(
+    48,
+    1,
     4,
     1,
+    100,
+    0,
+    0.00,
+    1,
+    '2020-07-16 07:23:04',
+    1,
+    '2020-07-16 07:23:04',
+    0
+  ),
+(
+    49,
+    1,
+    2,
+    6,
+    500,
+    0,
+    0.00,
+    1,
+    '2020-07-16 07:23:19',
+    1,
+    '2020-07-16 07:23:19',
+    0
+  ),
+(
+    50,
+    1,
+    2,
     3,
-    150,
-    150,
-    50.00,
+    800,
+    0,
+    0.00,
     1,
-    '2020-07-01 00:00:00',
+    '2020-07-16 07:24:21',
     1,
-    '2020-07-01 00:00:00',
+    '2020-07-16 07:24:21',
     0
   ),
-  (
-    12,
-    4,
+(
+    51,
     1,
-    4,
-    200,
-    200,
-    45.00,
-    1,
-    '2020-07-01 00:00:00',
-    1,
-    '2020-07-01 00:00:00',
-    0
-  ),
-  (
-    13,
-    4,
-    1,
+    2,
     5,
-    20,
-    20,
-    43.50,
+    100,
+    0,
+    0.00,
     1,
-    '2020-07-01 00:00:00',
+    '2020-07-16 07:24:36',
     1,
-    '2020-07-01 00:00:00',
+    '2020-07-16 07:24:36',
+    0
+  ),
+(
+    52,
+    1,
+    4,
+    4,
+    1400,
+    0,
+    0.00,
+    1,
+    '2020-07-16 07:25:20',
+    1,
+    '2020-07-16 07:25:20',
     0
   );
 
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */
+;
+
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_tracking`
+--
+DROP TABLE IF EXISTS `order_tracking`;
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */
+;
+
+/*!50503 SET character_set_client = utf8mb4 */
+;
+
+CREATE TABLE `order_tracking` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int NOT NULL,
+  `date` date NOT NULL,
+  `status_id` tinyint NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `created_by` int DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 8 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+
+/*!40101 SET character_set_client = @saved_cs_client */
+;
+
+--
+-- Dumping data for table `order_tracking`
+--
+LOCK TABLES `order_tracking` WRITE;
+
+/*!40000 ALTER TABLE `order_tracking` DISABLE KEYS */
+;
+
+INSERT INTO
+  `order_tracking`
+VALUES
+  (1, 1, '2020-07-09', 1, '2020-07-09 03:53:10', 1),
+(2, 1, '2020-07-09', 1, '2020-07-09 03:55:10', 1),
+(3, 1, '2020-07-09', 1, '2020-07-09 03:56:05', 1),
+(4, 1, '2020-07-09', 1, '2020-07-09 03:57:55', 1),
+(5, 1, '2020-07-09', 1, '2020-07-09 04:00:54', 1),
+(6, 1, '2020-07-11', 2, '2020-07-09 04:08:21', 1),
+(7, 1, '2020-07-11', 2, '2020-07-09 04:22:28', 1);
+
+/*!40000 ALTER TABLE `order_tracking` ENABLE KEYS */
 ;
 
 UNLOCK TABLES;
@@ -577,34 +640,34 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `code` char(4) NOT NULL,
   `barcode` char(13) NOT NULL,
   `name` varchar(60) NOT NULL,
   `description` varchar(100) DEFAULT '',
-  `quantity` smallint(6) DEFAULT '0',
-  `minimum` smallint(6) DEFAULT '0',
-  `category_id` int(11) NOT NULL,
+  `quantity` smallint DEFAULT '0',
+  `minimum` smallint DEFAULT '0',
+  `category_id` int NOT NULL,
   `last_purchase_date` date DEFAULT NULL,
   `last_purchase_price` decimal(10, 2) DEFAULT '0.00',
   `last_sale_date` date DEFAULT NULL,
   `last_sale_price` decimal(10, 2) DEFAULT '0.00',
   `price` decimal(10, 2) DEFAULT '0.00',
-  `company_id` int(11) NOT NULL,
-  `status_id` tinyint(4) DEFAULT '1',
+  `company_id` int NOT NULL,
+  `status_id` tinyint DEFAULT '1',
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`, `code`),
   KEY `company_id_2` (`company_id`, `barcode`),
   KEY `company_id_3` (`company_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 6 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -627,7 +690,7 @@ VALUES
     'Red Label',
     'Botella 750cc',
     0,
-    5,
+    0,
     1,
     NULL,
     0.00,
@@ -638,10 +701,10 @@ VALUES
     1,
     '2020-07-04 01:41:59',
     1,
-    '2020-07-04 01:41:59',
-    0
+    '2020-07-16 22:11:53',
+    1
   ),
-  (
+(
     2,
     '0002',
     '',
@@ -662,7 +725,7 @@ VALUES
     '2020-07-04 01:47:02',
     0
   ),
-  (
+(
     3,
     '0003',
     '',
@@ -683,11 +746,11 @@ VALUES
     '2020-07-04 07:20:01',
     0
   ),
-  (
+(
     4,
     '0004',
     '',
-    'Quilmes ',
+    'Quilmes',
     'Lata 650cc',
     0,
     60,
@@ -701,10 +764,10 @@ VALUES
     1,
     '2020-07-04 07:20:21',
     1,
-    '2020-07-04 07:20:21',
-    0
+    '2020-07-12 11:14:28',
+    1
   ),
-  (
+(
     5,
     '0005',
     '',
@@ -724,6 +787,27 @@ VALUES
     1,
     '2020-07-04 07:20:39',
     0
+  ),
+(
+    6,
+    '0006',
+    '',
+    'Stella Artois',
+    'Botella de 750cc',
+    0,
+    50,
+    4,
+    NULL,
+    0.00,
+    NULL,
+    0.00,
+    120.00,
+    1,
+    1,
+    '2020-07-10 11:58:35',
+    1,
+    '2020-07-10 23:58:58',
+    1
   );
 
 /*!40000 ALTER TABLE `product` ENABLE KEYS */
@@ -739,18 +823,18 @@ DROP TABLE IF EXISTS `profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `profile` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `code` char(3) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `status_id` tinyint(4) DEFAULT '1',
+  `status_id` tinyint DEFAULT '1',
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -778,7 +862,7 @@ VALUES
     '2020-07-02 00:00:00',
     0
   ),
-  (
+(
     2,
     'SUP',
     'Supervisores',
@@ -788,7 +872,7 @@ VALUES
     '2020-07-02 00:00:00',
     0
   ),
-  (
+(
     3,
     'USR',
     'Usuarios',
@@ -812,22 +896,22 @@ DROP TABLE IF EXISTS `store`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `store` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `contact` varchar(30) NOT NULL,
   `address` varchar(30) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `email` varchar(60) NOT NULL,
-  `company_id` int(11) NOT NULL,
-  `status_id` tinyint(4) DEFAULT '1',
+  `company_id` int NOT NULL,
+  `status_id` tinyint DEFAULT '1',
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
@@ -851,16 +935,16 @@ VALUES
     'Depósito Alem',
     'Virginia Perez',
     'Alem y Rodriguez',
-    '291546545655',
+    '2915465456',
     'deposito.alem@gmail.com',
     1,
     1,
     '2020-06-30 21:57:12',
     1,
-    '2020-06-30 21:57:24',
-    0
+    '2020-07-09 16:54:31',
+    1
   ),
-  (
+(
     2,
     'Depósito Principal',
     'Gervasio',
@@ -874,7 +958,7 @@ VALUES
     '2020-07-04 03:39:32',
     1
   ),
-  (
+(
     4,
     'Depósito Noroeste',
     'Pepe',
@@ -902,22 +986,22 @@ DROP TABLE IF EXISTS `supplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */
 ;
 
-SET
-  character_set_client = utf8mb4;
+/*!50503 SET character_set_client = utf8mb4 */
+;
 
 CREATE TABLE `supplier` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `contact` varchar(60) NOT NULL,
   `address` varchar(30) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `email` varchar(60) NOT NULL,
-  `company_id` int(11) NOT NULL,
-  `status_id` tinyint(4) DEFAULT '1',
+  `company_id` int NOT NULL,
+  `status_id` tinyint DEFAULT '1',
   `created` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT '0',
+  `created_by` int DEFAULT '0',
   `updated` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT '0',
+  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
@@ -942,15 +1026,15 @@ VALUES
     'Jorge Martinez Fachi',
     'Yapeyú 2525',
     '2915464656',
-    '',
+    'omar.melendrez@gmail.com',
     1,
     1,
     '2020-06-30 21:56:24',
     1,
-    '2020-06-30 21:56:30',
-    0
+    '2020-07-16 19:20:43',
+    1
   ),
-  (
+(
     2,
     'Coca Cola',
     'Jesús',
@@ -997,4 +1081,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */
 ;
 
--- Dump completed on 2020-07-04 20:00:06
+-- Dump completed on 2020-07-17 18:50:52
