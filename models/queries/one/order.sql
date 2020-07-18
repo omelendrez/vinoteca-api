@@ -16,7 +16,7 @@ SELECT
   o.updated,
   o.status_id,
   CASE
-    WHEN o.status_id = 1 THEN 'Creada'
+    WHEN o.status_id = 1 THEN 'Nueva'
     WHEN o.status_id = 2 THEN 'Enviada'
     WHEN o.status_id = 3 THEN 'Recibida'
     WHEN o.status_id = 4 THEN 'Cancelada'
