@@ -45,11 +45,11 @@
     ]
   },
   {
-    "url": "/emails",
+    "url": "/forgot-password",
     "methods": [
       {
         "method": "post",
-        "function": "send",
+        "function": "forgotPassword",
         "secure": false
       }
     ]

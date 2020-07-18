@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt')
 const randomstring = require('randomstring')
 const { generateToken } = require('../security')
 const { getModelFromRoute } = require('../helpers')
-const { modelsWithCode, modelsWithNumber, modelsWithoutCompanyId, modelsWithoutUpdatedBy } = require('../helpers')
+const { modelsWithCode, modelsWithNumber, modelsWithoutCompanyId, modelsWithoutUpdatedBy, formatDate } = require('../helpers')
 const Email = require('../services/email')
 
 // Importamos el modelo con el que este controlador va a interactuar
@@ -70,7 +70,7 @@ module.exports = {
       id = req.decoded.id // id es id y companyId vienen del usuario que hizo el post
       companyId = req.decoded.companyId // id es id y companyId vienen del usuario que hizo el post
     }
-    const requiresUpdatedBy = !modelsWithoutUpdatedBy.includes(modelName) // Estos modelos requieren "code"
+    const requiresUpdatedBy = !modelsWithoutUpdatedBy.includes(modelName) // Estos modelos requieren "UpdatedBy"
     let payload = req.body
     if (requiresUpdatedBy) {
       payload = { ...req.body, updatedBy: id/* || 1*/ }
@@ -131,7 +131,7 @@ module.exports = {
       .catch(err => res.status(500).json(err))
   },
 
-  send: async (req, res) => {
+  forgotPassword: async (req, res) => {
     try {
       const email = req.body.emailAddress
       if (!email) return res.status(400).json({ message: 'Falta la dirección de email' })
@@ -170,12 +170,66 @@ module.exports = {
       .catch(err => res.status(500).json(err))
   },
 
-  sendOrder: async (req, res) => {
+  sendOrder: (req, res) => {
     const modelName = getModelFromRoute(req)
-    Model.getById(req.params.id, modelName)
-      .then(async data => {
-        await Email.sendEmail(data.emailAddress, null, 'notify-supplier', data)
-        res.status(200).json(data)
+    const id = req.params.id
+    let payload = req.body
+    let userId = 1
+
+    if (req.decoded) {
+      userId = req.decoded.id // id es id y companyId vienen del usuario que hizo el post
+    }
+
+    Model.getById(id, modelName) // Buscar order
+      .then(async (order) => {
+        await Email.sendEmail(order.emailAddress, null, 'notify-supplier', order) // Enviar email
+        payload.updatedBy = userId
+        Model.update(payload, id, modelName) // Cambiar status de order
+          .then(() => {
+            delete payload.id
+            delete payload.updatedBy
+            payload.createdBy = userId
+            payload.date = formatDate(new Date())
+            payload.orderId = id
+            Model.save(payload, 'order_tracking') // Agregar registro de cambio de status de la orden a order_tracking
+              .then(() => {
+                Model.getById(id, modelName) // Buscar order
+                  .then(result => res.json(result))
+                  .catch(err => res.status(500).json(err))
+              })
+              .catch(err => res.status(500).json(err))
+          })
+          .catch(err => res.status(500).json(err))
+      })
+      .catch(err => res.status(500).json(err))
+
+  },
+
+  cancelOrder: (req, res) => {
+    const modelName = getModelFromRoute(req)
+    const id = req.params.id
+    let payload = req.body
+    let userId = 1
+
+    if (req.decoded) {
+      userId = req.decoded.id // id es id y companyId vienen del usuario que hizo el post
+    }
+
+    payload.updatedBy = userId
+    Model.update(payload, id, modelName) // Cambiar status de order
+      .then(() => {
+        delete payload.id
+        delete payload.updatedBy
+        payload.createdBy = userId
+        payload.date = formatDate(new Date())
+        payload.orderId = id
+        Model.save(payload, 'order_tracking') // Agregar registro de cambio de status de la orden a order_tracking
+          .then(() => {
+            Model.getById(id, modelName) // Buscar order
+              .then(result => res.json(result))
+              .catch(err => res.status(500).json(err))
+          })
+          .catch(err => res.status(500).json(err))
       })
       .catch(err => res.status(500).json(err))
   }

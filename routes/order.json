@@ -40,7 +40,17 @@
       {
         "method": "post",
         "function": "sendOrder",
-        "secure": false
+        "secure": true
+      }
+    ]
+  },
+  {
+    "url": "/cancel-order/:id",
+    "methods": [
+      {
+        "method": "post",
+        "function": "cancelOrder",
+        "secure": true
       }
     ]
   }

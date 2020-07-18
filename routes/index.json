@@ -20,6 +20,10 @@
     "model": "order"
   },
   {
+    "route": "cancel-order",
+    "model": "order"
+  },
+  {
     "route": "order_details",
     "model": "order_details"
   },
