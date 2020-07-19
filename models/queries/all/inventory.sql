@@ -14,7 +14,7 @@ SELECT
 FROM
   `inventory` as i
   INNER JOIN `store` as s ON i.store_id = s.id
-  INNER JOIN `product` as p ON i.product_id = i.id
+  INNER JOIN `product` as p ON i.product_id = p.id
   INNER JOIN `company` as c ON i.company_id = c.id
   INNER JOIN `user` as u1 ON i.created_by = u1.id
   LEFT OUTER JOIN `user` as u2 ON i.updated_by = u2.id;
