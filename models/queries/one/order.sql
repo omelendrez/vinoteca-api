@@ -15,6 +15,14 @@ SELECT
   su.email as 'email_address',
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
+  (
+    SELECT
+      SUM(od.qty_received * price)
+    FROM
+      `order_details` AS od
+    WHERE
+      order_id = o.id
+  ) AS 'total_order',
   o.created,
   o.updated,
   o.status_id,

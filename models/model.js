@@ -43,12 +43,7 @@ module.exports = {
       const sql = fs.readFileSync(fileName).toString().replace('{ fields }', fields)
       pool.executeQuery(sql, [id], (err, results, fields) => { // Enviamos el SQL y el id (estamos modificando un solo registro) a mysql
         if (err) return reject({ error: err })
-        const fileName = path.join(__dirname, 'queries', 'one', `${model}.sql`)
-        const sql = fs.readFileSync(fileName).toString()
-        pool.executeQuery(sql, [id], (err, results, fields) => { // Ejecutamos el query en mysql
-          if (err) return reject({ error: err })
-          resolve(convertListToCamelCase(results)[0]) // Si no hubo errores formateamos el registro y se la devolvemos al controlador
-        })
+        resolve() // Si no hubo errores formateamos el registro y se la devolvemos al controlador
       })
     })
   },
