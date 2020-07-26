@@ -73,6 +73,7 @@ module.exports = {
     if (requiresUpdatedBy) {
       payload = { ...req.body, updatedBy: id/* || 1*/ }
     }
+
     Model.update(payload, req.params.id, modelName) // El controlador le está enviando los datos nuevos y el id de la empresa a modificar
       .then(() => {
         Model.getById(req.params.id, modelName) // Le decimos al modelo que ejecuta la función getById y le pasamos el id que estaba en la url
@@ -229,29 +230,16 @@ module.exports = {
   },
 
   receiveOrder: (req, res) => {
-    const modelName = getModelFromRoute(req)
-    const id = req.params.id
-    let payload = req.body
+    const orderId = req.params.id
+    const storeId = req.body.storeId
     let userId = 1
-
     if (req.decoded) {
       userId = req.decoded.id // id es id y companyId vienen del usuario que hizo el post
     }
-
-    payload.updatedBy = userId
-    Model.update(payload, id, modelName) // Cambiar status de order
+    Model.receiveOrder([orderId, storeId, userId]) // Cambiar status de order
       .then(() => {
-        delete payload.id
-        delete payload.updatedBy
-        payload.createdBy = userId
-        payload.date = formatDate(new Date())
-        payload.orderId = id
-        Model.save(payload, 'order_tracking') // Agregar registro de cambio de status de la orden a order_tracking
-          .then(() => {
-            Model.getById(id, modelName) // Buscar order
-              .then(result => res.json(result))
-              .catch(err => res.status(500).json(err))
-          })
+        Model.getById(orderId, 'order') // Buscar order
+          .then(result => res.json(result))
           .catch(err => res.status(500).json(err))
       })
       .catch(err => res.status(500).json(err))

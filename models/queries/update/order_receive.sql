@@ -6,15 +6,24 @@ START TRANSACTION;
 /* Assing received values to variables */
 SET
   @order_id = ?,
-  @date_received = ?,
   @store_id = ?,
   @user_id = ?;
 
 /* Load other needed values to variables*/
 SET
+  @date_received = NOW(),
   @status_id = 3,
   @updated = NOW(),
-  @order_number = (
+  @company_id = (
+    SELECT
+      company_id
+    from
+      `order`
+    WHERE
+      id = @order_id
+    LIMIT
+      1
+  ), @order_number = (
     SELECT
       number
     from
@@ -53,12 +62,12 @@ FROM
   `order_details`
 WHERE
   order_id = @order_id
-  AND id NOT IN (
+  AND NOT EXISTS (
     SELECT
-      od.id
+      *
     FROM
-      `inventory` i
-      INNER JOIN `order_details` od ON i.product_id = od.product_id
+      `inventory` AS i
+      INNER JOIN `order_details` AS od ON i.product_id = od.product_id
       AND i.store_id = @store_id
     WHERE
       od.order_id = @order_id
@@ -67,18 +76,16 @@ WHERE
 /* Increase product stock */
 UPDATE
   `inventory` AS i
-  INNER JOIN `order_details` ON invertory.product_id = od.product_id
+  INNER JOIN `order_details` AS od ON i.product_id = od.product_id
 SET
-  quantity = quantity + od.qty_received,
-  i.updated = @updated,
-  i.updated_by = @user_id
+  quantity = quantity + od.qty_received
 WHERE
   od.order_id = @order_id;
 
 /* Incresase products stock */
 UPDATE
   `product` AS p
-  INNER JOIN `order_details` ON product.id = od.product_id
+  INNER JOIN `order_details` AS od ON p.id = od.product_id
 SET
   quantity = quantity + od.qty_received,
   last_purchase_order = @order_number,
