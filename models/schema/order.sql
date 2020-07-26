@@ -6,6 +6,7 @@ CREATE TABLE `order` (
   date DATE NOT NULL,
   supplier_id INTEGER NOT NULL,
   amount DECIMAL(10, 2) DEFAULT 0,
+  store_id INTEGER NOT NULL,
   company_id INTEGER NOT NULL,
   status_id TINYINT DEFAULT 1,
   created DATETIME DEFAULT NULL,

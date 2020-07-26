@@ -56,7 +56,7 @@ CREATE TABLE `category` (
   `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`, `code`)
-) ENGINE = InnoDB AUTO_INCREMENT = 9 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -75,24 +75,35 @@ VALUES
   (
     1,
     '001',
-    'Bebidas gaseosas',
-    1,
-    1,
-    '2020-07-04 01:38:06',
-    1,
-    '2020-07-09 16:54:21',
-    1
-  ),
-(
-    4,
-    '002',
     'Cervezas',
     1,
     1,
-    '2020-07-04 02:43:05',
+    '2020-07-26 09:27:07',
     1,
-    '2020-07-04 07:17:38',
+    '2020-07-26 09:52:03',
     1
+  ),
+(
+    2,
+    '002',
+    'Vinos',
+    1,
+    1,
+    '2020-07-26 09:27:14',
+    1,
+    '2020-07-26 09:27:14',
+    0
+  ),
+(
+    3,
+    '003',
+    'Whisky',
+    1,
+    1,
+    '2020-07-26 09:27:24',
+    1,
+    '2020-07-26 09:27:24',
+    0
   );
 
 /*!40000 ALTER TABLE `category` ENABLE KEYS */
@@ -178,11 +189,9 @@ CREATE TABLE `inventory` (
   `company_id` int NOT NULL,
   `created` datetime DEFAULT NULL,
   `created_by` int DEFAULT '0',
-  `updated` datetime DEFAULT NULL,
-  `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`, `store_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 4 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -194,43 +203,6 @@ LOCK TABLES `inventory` WRITE;
 
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */
 ;
-
-INSERT INTO
-  `inventory`
-VALUES
-  (
-    1,
-    1,
-    1,
-    23,
-    1,
-    '2020-07-02 00:00:00',
-    1,
-    '2020-07-02 00:00:00',
-    0
-  ),
-(
-    2,
-    2,
-    1,
-    60,
-    1,
-    '2020-07-02 00:00:00',
-    1,
-    '2020-07-02 00:00:00',
-    0
-  ),
-(
-    3,
-    4,
-    1,
-    500,
-    1,
-    '2020-07-02 00:00:00',
-    1,
-    '2020-07-02 00:00:00',
-    0
-  );
 
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */
 ;
@@ -263,7 +235,7 @@ CREATE TABLE `inventory_variation` (
   `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`, `store_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 3 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -275,38 +247,6 @@ LOCK TABLES `inventory_variation` WRITE;
 
 /*!40000 ALTER TABLE `inventory_variation` DISABLE KEYS */
 ;
-
-INSERT INTO
-  `inventory_variation`
-VALUES
-  (
-    1,
-    1,
-    1,
-    5,
-    1,
-    3,
-    '',
-    1,
-    '2020-07-04 06:15:58',
-    1,
-    '2020-07-04 06:15:58',
-    0
-  ),
-(
-    2,
-    1,
-    2,
-    10,
-    -1,
-    3,
-    '',
-    1,
-    '2020-07-04 06:16:15',
-    1,
-    '2020-07-04 06:16:15',
-    0
-  );
 
 /*!40000 ALTER TABLE `inventory_variation` ENABLE KEYS */
 ;
@@ -408,6 +348,7 @@ CREATE TABLE `order` (
   `date` date NOT NULL,
   `supplier_id` int NOT NULL,
   `amount` decimal(10, 2) DEFAULT '0.00',
+  `store_id` int NOT NULL,
   `company_id` int NOT NULL,
   `status_id` tinyint DEFAULT '1',
   `created` datetime DEFAULT NULL,
@@ -416,7 +357,7 @@ CREATE TABLE `order` (
   `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`, `number`)
-) ENGINE = InnoDB AUTO_INCREMENT = 3 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -435,14 +376,15 @@ VALUES
   (
     1,
     '00001',
-    '2020-07-07',
+    '2020-07-26',
     1,
     0.00,
+    2,
     1,
     2,
-    '2020-07-07 07:25:58',
+    '2020-07-26 09:30:52',
     1,
-    '2020-07-16 20:04:18',
+    '2020-07-26 09:53:25',
     1
   );
 
@@ -465,7 +407,6 @@ DROP TABLE IF EXISTS `order_details`;
 CREATE TABLE `order_details` (
   `id` int NOT NULL AUTO_INCREMENT,
   `order_id` int NOT NULL,
-  `store_id` int NOT NULL,
   `product_id` int NOT NULL,
   `qty_requested` smallint DEFAULT '0',
   `qty_received` smallint DEFAULT '0',
@@ -477,7 +418,7 @@ CREATE TABLE `order_details` (
   `updated_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 53 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -494,87 +435,55 @@ INSERT INTO
   `order_details`
 VALUES
   (
-    36,
     1,
-    2,
-    2,
+    1,
+    1,
     200,
-    0,
-    0.00,
+    200,
+    100.00,
     1,
-    '2020-07-12 11:54:21',
+    '2020-07-26 09:31:08',
     1,
-    '2020-07-16 19:22:21',
+    '2020-07-26 09:51:40',
     1
   ),
 (
-    48,
-    1,
-    4,
-    1,
-    100,
-    0,
-    0.00,
-    1,
-    '2020-07-16 07:23:04',
-    1,
-    '2020-07-16 07:23:04',
-    0
-  ),
-(
-    49,
+    2,
     1,
     2,
-    6,
-    500,
-    0,
-    0.00,
+    80,
+    80,
+    200.00,
     1,
-    '2020-07-16 07:23:19',
+    '2020-07-26 09:31:17',
     1,
-    '2020-07-16 07:23:19',
-    0
+    '2020-07-26 09:52:53',
+    1
   ),
 (
-    50,
-    1,
-    2,
     3,
-    800,
-    0,
-    0.00,
     1,
-    '2020-07-16 07:24:21',
+    3,
+    40,
+    40,
+    350.00,
     1,
-    '2020-07-16 07:24:21',
-    0
+    '2020-07-26 09:31:24',
+    1,
+    '2020-07-26 09:53:14',
+    1
   ),
 (
-    51,
-    1,
-    2,
-    5,
-    100,
-    0,
-    0.00,
-    1,
-    '2020-07-16 07:24:36',
-    1,
-    '2020-07-16 07:24:36',
-    0
-  ),
-(
-    52,
+    4,
     1,
     4,
-    4,
-    1400,
-    0,
-    0.00,
+    200,
+    190,
+    120.00,
     1,
-    '2020-07-16 07:25:20',
+    '2020-07-26 09:31:31',
     1,
-    '2020-07-16 07:25:20',
+    '2020-07-26 09:31:31',
     0
   );
 
@@ -603,7 +512,7 @@ CREATE TABLE `order_tracking` (
   `created_by` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 8 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -619,13 +528,7 @@ LOCK TABLES `order_tracking` WRITE;
 INSERT INTO
   `order_tracking`
 VALUES
-  (1, 1, '2020-07-09', 1, '2020-07-09 03:53:10', 1),
-(2, 1, '2020-07-09', 1, '2020-07-09 03:55:10', 1),
-(3, 1, '2020-07-09', 1, '2020-07-09 03:56:05', 1),
-(4, 1, '2020-07-09', 1, '2020-07-09 03:57:55', 1),
-(5, 1, '2020-07-09', 1, '2020-07-09 04:00:54', 1),
-(6, 1, '2020-07-11', 2, '2020-07-09 04:08:21', 1),
-(7, 1, '2020-07-11', 2, '2020-07-09 04:22:28', 1);
+  (1, 1, '2020-07-26', 2, '2020-07-26 09:53:25', 1);
 
 /*!40000 ALTER TABLE `order_tracking` ENABLE KEYS */
 ;
@@ -652,6 +555,7 @@ CREATE TABLE `product` (
   `quantity` smallint DEFAULT '0',
   `minimum` smallint DEFAULT '0',
   `category_id` int NOT NULL,
+  `last_purchase_order` char(5) DEFAULT '',
   `last_purchase_date` date DEFAULT NULL,
   `last_purchase_price` decimal(10, 2) DEFAULT '0.00',
   `last_sale_date` date DEFAULT NULL,
@@ -667,7 +571,7 @@ CREATE TABLE `product` (
   KEY `company_id` (`company_id`, `code`),
   KEY `company_id_2` (`company_id`, `barcode`),
   KEY `company_id_3` (`company_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 7 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 /*!40101 SET character_set_client = @saved_cs_client */
 ;
@@ -687,127 +591,89 @@ VALUES
     1,
     '0001',
     '',
-    'Red Label',
-    'Botella 750cc',
+    'Quilmes ',
+    'Lata 650cc',
     0,
     0,
     1,
+    '',
     NULL,
     0.00,
     NULL,
     0.00,
-    800.00,
+    0.00,
     1,
     1,
-    '2020-07-04 01:41:59',
+    '2020-07-26 09:27:54',
     1,
-    '2020-07-16 22:11:53',
+    '2020-07-26 09:35:04',
     1
   ),
 (
     2,
     '0002',
     '',
-    'Green Label',
-    'Botella de 750cc',
+    'Santa Elena Cabernet Sauvignon ',
+    '750cc',
     0,
-    5,
-    1,
+    0,
+    2,
+    '',
     NULL,
     0.00,
     NULL,
     0.00,
-    1600.00,
+    0.00,
     1,
     1,
-    '2020-07-04 01:47:02',
+    '2020-07-26 09:28:45',
     1,
-    '2020-07-04 01:47:02',
+    '2020-07-26 09:28:45',
     0
   ),
 (
     3,
     '0003',
     '',
-    'Andes rubia',
-    'Cerveza lata 650cc',
+    'Red Label',
+    '750cc',
     0,
-    50,
-    4,
+    0,
+    3,
+    '',
     NULL,
     0.00,
     NULL,
     0.00,
-    80.00,
+    0.00,
     1,
     1,
-    '2020-07-04 07:20:01',
+    '2020-07-26 09:28:57',
     1,
-    '2020-07-04 07:20:01',
+    '2020-07-26 09:28:57',
     0
   ),
 (
     4,
     '0004',
     '',
-    'Quilmes',
-    'Lata 650cc',
-    0,
-    60,
-    4,
-    NULL,
-    0.00,
-    NULL,
-    0.00,
-    65.00,
-    1,
-    1,
-    '2020-07-04 07:20:21',
-    1,
-    '2020-07-12 11:14:28',
-    1
-  ),
-(
-    5,
-    '0005',
-    '',
     'Imperial',
-    'Lata 650cc',
+    'Lata 550c',
     0,
-    80,
-    4,
-    NULL,
-    0.00,
-    NULL,
-    0.00,
-    95.00,
+    0,
     1,
-    1,
-    '2020-07-04 07:20:39',
-    1,
-    '2020-07-04 07:20:39',
-    0
-  ),
-(
-    6,
-    '0006',
     '',
-    'Stella Artois',
-    'Botella de 750cc',
-    0,
-    50,
-    4,
     NULL,
     0.00,
     NULL,
     0.00,
-    120.00,
+    0.00,
     1,
     1,
-    '2020-07-10 11:58:35',
+    '2020-07-26 09:29:15',
     1,
-    '2020-07-10 23:58:58',
-    1
+    '2020-07-26 09:29:15',
+    0
   );
 
 /*!40000 ALTER TABLE `product` ENABLE KEYS */
@@ -1081,4 +947,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */
 ;
 
--- Dump completed on 2020-07-17 18:50:52
+-- Dump completed on 2020-07-26  9:55:53

@@ -31,7 +31,6 @@ module.exports = {
           data.orderDetails.map(item => {
             const row = []
             row.push('<tr>')
-            row.push('<td>' + item.storeName + ' ' + item.storeAddress + '</td>')
             row.push('<td>' + item.productName + ' ' + item.description + '</td>')
             row.push('<td class="qty">' + item.qtyRequested + '</td>')
             row.push('</tr>')
@@ -39,11 +38,14 @@ module.exports = {
           })
 
           let fileName = path.join(__dirname, 'templates', `${action}-table.html`)
+
           const emailTable = fs.readFileSync(fileName).toString()
             .replace('{items}', rows.join(''))
 
           fileName = path.join(__dirname, 'templates', `${action}.html`)
           const emailBody = fs.readFileSync(fileName).toString().replace('{results}', emailTable)
+            .replace('{store-name}', data.storeName)
+            .replace('{store-address}', data.storeAddress)
 
           const mailOptions = {
             from: process.env.SENDGRID_SENDER_ADDRESS,

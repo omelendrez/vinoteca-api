@@ -3,6 +3,7 @@ SELECT
   p.code,
   p.barcode,
   p.name,
+  p.description,
   p.minimum,
   p.quantity,
   p.last_purchase_date,

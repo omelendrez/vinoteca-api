@@ -65,19 +65,13 @@ module.exports = {
   update: (req, res) => {
     const modelName = getModelFromRoute(req)
     let id = 1
-    let companyId = 1
     if (req.decoded) {
       id = req.decoded.id // id es id y companyId vienen del usuario que hizo el post
-      companyId = req.decoded.companyId // id es id y companyId vienen del usuario que hizo el post
     }
     const requiresUpdatedBy = !modelsWithoutUpdatedBy.includes(modelName) // Estos modelos requieren "UpdatedBy"
     let payload = req.body
     if (requiresUpdatedBy) {
       payload = { ...req.body, updatedBy: id/* || 1*/ }
-    }
-    const requiresCompanyId = !modelsWithoutCompanyId.includes(modelName)
-    if (requiresCompanyId) {
-      payload = { ...payload, companyId }
     }
     Model.update(payload, req.params.id, modelName) // El controlador le está enviando los datos nuevos y el id de la empresa a modificar
       .then(() => {
@@ -206,6 +200,35 @@ module.exports = {
   },
 
   cancelOrder: (req, res) => {
+    const modelName = getModelFromRoute(req)
+    const id = req.params.id
+    let payload = req.body
+    let userId = 1
+
+    if (req.decoded) {
+      userId = req.decoded.id // id es id y companyId vienen del usuario que hizo el post
+    }
+
+    payload.updatedBy = userId
+    Model.update(payload, id, modelName) // Cambiar status de order
+      .then(() => {
+        delete payload.id
+        delete payload.updatedBy
+        payload.createdBy = userId
+        payload.date = formatDate(new Date())
+        payload.orderId = id
+        Model.save(payload, 'order_tracking') // Agregar registro de cambio de status de la orden a order_tracking
+          .then(() => {
+            Model.getById(id, modelName) // Buscar order
+              .then(result => res.json(result))
+              .catch(err => res.status(500).json(err))
+          })
+          .catch(err => res.status(500).json(err))
+      })
+      .catch(err => res.status(500).json(err))
+  },
+
+  receiveOrder: (req, res) => {
     const modelName = getModelFromRoute(req)
     const id = req.params.id
     let payload = req.body

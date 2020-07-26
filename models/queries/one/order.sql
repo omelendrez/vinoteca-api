@@ -9,6 +9,9 @@ SELECT
   co.name as 'company_name',
   o.supplier_id,
   su.name as 'supplier_name',
+  o.store_id,
+  st.name as 'store_name',
+  st.address as 'store_address',
   su.email as 'email_address',
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
@@ -27,6 +30,7 @@ FROM
   `order` as o
   INNER JOIN `company` as co ON o.company_id = co.id
   INNER JOIN `supplier` as su ON o.supplier_id = su.id
+  INNER JOIN `store` as st ON o.store_id = st.id
   INNER JOIN `user` as u1 ON o.created_by = u1.id
   LEFT OUTER JOIN `user` as u2 ON o.updated_by = u2.id
 WHERE
@@ -34,9 +38,6 @@ WHERE
 
 SELECT
   od.id,
-  od.store_id,
-  st.name as 'store_name',
-  st.address as 'store_address',
   od.product_id,
   pr.name as 'product_name',
   pr.description as 'description',
@@ -51,7 +52,6 @@ SELECT
   if (od.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM
   `order_details` as od
-  INNER JOIN `store` as st ON od.store_id = st.id
   INNER JOIN `product` as pr ON od.product_id = pr.id
   INNER JOIN `user` as u1 ON od.created_by = u1.id
   LEFT OUTER JOIN `user` as u2 ON od.updated_by = u2.id

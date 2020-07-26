@@ -28,19 +28,16 @@
     }
 
     .results {
-      border-top: 1px solid #ccc;
       padding-top: 20px;
-      padding: 10px;
     }
 
-    .store-name {
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
+    .store-name,
     .store-address {
-      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .product {
+      text-align: left;
     }
 
     .qty {
@@ -55,6 +52,8 @@
   <h2>Orden de compra</h2>
   <p>Hola,</p>
   <p>Adjunto detalle de orden de compra de La Cava:</p>
+  <p class="store-name">{store-name}</p>
+  <p class="store-address">{store-address}</p>
 
   {results}
 

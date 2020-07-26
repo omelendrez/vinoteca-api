@@ -53,5 +53,15 @@
         "secure": true
       }
     ]
+  },
+  {
+    "url": "/receive-order/:id",
+    "methods": [
+      {
+        "method": "post",
+        "function": "receiveOrder",
+        "secure": true
+      }
+    ]
   }
 ]

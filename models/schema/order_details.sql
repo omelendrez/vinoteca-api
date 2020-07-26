@@ -3,7 +3,6 @@ DROP TABLE IF EXISTS order_details;
 CREATE TABLE order_details (
   id INTEGER NOT NULL AUTO_INCREMENT,
   order_id INTEGER NOT NULL,
-  store_id INTEGER NOT NULL,
   product_id INTEGER NOT NULL,
   qty_requested SMALLINT DEFAULT 0,
   qty_received SMALLINT DEFAULT 0,

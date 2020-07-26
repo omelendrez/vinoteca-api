@@ -9,6 +9,7 @@ CREATE TABLE product (
   quantity SMALLINT DEFAULT 0,
   minimum SMALLINT DEFAULT 0,
   category_id INTEGER NOT NULL,
+  last_purchase_order CHAR(5) DEFAULT '',
   last_purchase_date DATE,
   last_purchase_price DECIMAL(10, 2) DEFAULT 0,
   last_sale_date DATE,
