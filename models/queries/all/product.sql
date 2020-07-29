@@ -19,6 +19,7 @@ SELECT
   u2.name as 'updated_by_name',
   p.created,
   p.updated,
+  p.status_id,
   if (p.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM
   `product` as p

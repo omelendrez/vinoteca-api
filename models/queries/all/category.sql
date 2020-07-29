@@ -7,6 +7,7 @@ SELECT
   u2.name as 'updated_by_name',
   c.created,
   c.updated,
+  c.status_id,
   if (c.status_id = 1, 'Activo', 'Inactivo') as 'status_name'
 FROM
   `category` as c
