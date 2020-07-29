@@ -48,7 +48,7 @@ SELECT
   od.id,
   od.product_id,
   pr.name as 'product_name',
-  pr.description as 'description',
+  pr.description as 'product_description',
   od.qty_requested,
   od.qty_received,
   od.price,
