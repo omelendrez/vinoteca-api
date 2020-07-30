@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS product;
 CREATE TABLE product (
   id INTEGER NOT NULL AUTO_INCREMENT,
   code CHAR(4) NOT NULL,
-  barcode CHAR(13) NOT NULL,
+  barcode CHAR(13) DEFAULT '',
   name VARCHAR(60) NOT NULL,
   description VARCHAR(100) DEFAULT '',
   quantity SMALLINT DEFAULT 0,
