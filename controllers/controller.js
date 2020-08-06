@@ -243,5 +243,21 @@ module.exports = {
           .catch(err => res.status(500).json(err))
       })
       .catch(err => res.status(500).json(err))
+  },
+
+  addInventoryVariation: (req, res) => {
+    const { comments, productId, quantity, storeId, variationReasonId, variationType } = req.body
+
+    let userId = 1
+    let companyId = 1
+    if (req.decoded) {
+      id = req.decoded.id // id es id y companyId vienen del usuario que hizo el post
+      companyId = req.decoded.companyId // id es id y companyId vienen del usuario que hizo el post
+    }
+
+    Model.addInventoryVariation([storeId, productId, quantity, variationType, variationReasonId, comments, companyId, userId])
+      .then(data => res.json(data))
+      .catch(err => res.status(500).json(err))
+
   }
 }

@@ -262,5 +262,15 @@ module.exports = {
         resolve() // Si no hubo errores formateamos el registro y se la devolvemos al controlador
       })
     })
+  },
+  addInventoryVariation: async (values) => {
+    return new Promise(async (resolve, reject) => {
+      const fileName = path.join(__dirname, 'queries', 'insert', 'inventory_variation.sql')
+      const sql = fs.readFileSync(fileName).toString()
+      pool.executeQuery(sql, values, (err, results, fields) => {
+        if (err) return reject({ error: err })
+        resolve(results)
+      })
+    })
   }
 }

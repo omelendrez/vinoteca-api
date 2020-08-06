@@ -9,27 +9,7 @@
       },
       {
         "method": "post",
-        "function": "add",
-        "secure": true
-      }
-    ]
-  },
-  {
-    "url": "/inventory_variations/:id",
-    "methods": [
-      {
-        "method": "get",
-        "function": "getById",
-        "secure": true
-      },
-      {
-        "method": "put",
-        "function": "update",
-        "secure": true
-      },
-      {
-        "method": "delete",
-        "function": "delete",
+        "function": "addInventoryVariation",
         "secure": true
       }
     ]
