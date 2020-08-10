@@ -4,6 +4,7 @@ SELECT
   c.contact,
   c.address,
   c.email,
+  c.phone,
   c.created,
   c.updated,
   u1.name as 'created_by_name',

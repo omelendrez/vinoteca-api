@@ -41,6 +41,7 @@ module.exports = {
     return new Promise(async (resolve, reject) => { // Creamos una nueva Promise
       const fileName = path.join(__dirname, 'queries', 'update', `${model}.sql`)
       const sql = fs.readFileSync(fileName).toString().replace('{ fields }', fields)
+      console.log(fields)
       pool.executeQuery(sql, [id], (err, results, fields) => { // Enviamos el SQL y el id (estamos modificando un solo registro) a mysql
         if (err) return reject({ error: err })
         resolve() // Si no hubo errores formateamos el registro y se la devolvemos al controlador
