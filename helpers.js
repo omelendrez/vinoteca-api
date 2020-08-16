@@ -82,7 +82,7 @@ module.exports = {
 
   getModelFromRoute(req) {
     const originalUrl = req.originalUrl.split('/')
-    const routeName = originalUrl[3]
+    const routeName = originalUrl[3].split('?')[0]
     const result = routeMaps.find(item => item.route === routeName)
     if (result) {
       return result.model
