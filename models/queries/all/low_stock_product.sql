@@ -27,4 +27,9 @@ FROM
   INNER JOIN `user` as u1 ON p.created_by = u1.id
   LEFT OUTER JOIN `user` as u2 ON p.updated_by = u2.id
 WHERE
-  p.quantity <= p.minimum;
+  p.quantity <= p.minimum
+  AND (
+    '@search' = ''
+    OR p.barcode = '@search'
+    OR p.name like '%@search%'
+  );
