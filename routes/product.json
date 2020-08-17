@@ -5,7 +5,7 @@
       {
         "method": "get",
         "function": "getAll",
-        "secure": true
+        "secure": false
       },
       {
         "method": "post",

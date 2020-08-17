@@ -26,4 +26,8 @@ FROM
   INNER JOIN `category` as ca ON p.category_id = ca.id
   INNER JOIN `company` as c ON p.company_id = c.id
   INNER JOIN `user` as u1 ON p.created_by = u1.id
-  LEFT OUTER JOIN `user` as u2 ON p.updated_by = u2.id;
+  LEFT OUTER JOIN `user` as u2 ON p.updated_by = u2.id
+WHERE
+  '@search' = ''
+  OR p.barcode = '@search'
+  OR p.name = '@search';

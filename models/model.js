@@ -49,7 +49,7 @@ module.exports = {
     })
   },
 
-  getAll: (model) => {
+  getAll: (model, search) => {
     return new Promise((resolve, reject) => {
       const fileName = path.join(__dirname, 'queries', 'all', `${model}.sql`)
       let countModel
@@ -58,18 +58,12 @@ module.exports = {
       } else {
         countModel = model
       }
-      /** Con este query sólo contamos los registros que traerá el siguiente query */
-      const sql = `SELECT COUNT(*) as count FROM  \`${countModel}\`;`
+      const sql = fs.readFileSync(fileName).toString().replace(/@search/gi, search)
+      /** Aquí traemos los registros con todos los campos que especifica el archivo queries/all/[model].sql  */
       pool.executeQuery(sql, null, async (err, results, fields) => {
         if (err) return reject({ error: err })
-        const response = { count: results[0].count }
-        const sql = fs.readFileSync(fileName).toString()
-        /** Aquí traemos los registros con todos los campos que especifica el archivo queries/all/[model].sql  */
-        pool.executeQuery(sql, null, async (err, results, fields) => {
-          if (err) return reject({ error: err })
-          response.rows = convertListToCamelCase(results)
-          resolve(response)
-        })
+        const response = { count: results.length, rows: convertListToCamelCase(results) }
+        resolve(response)
       })
     })
   },

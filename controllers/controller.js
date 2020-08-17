@@ -86,7 +86,8 @@ module.exports = {
   // En la ruta el cliente ha hecho un GET por lo que quiere una lista de todas las empresas
   getAll: (req, res) => {
     const modelName = getModelFromRoute(req)
-    Model.getAll(modelName) // El controlador le dice al model que ejecute la función getAll
+    const search = req.query.search || ''
+    Model.getAll(modelName, search) // El controlador le dice al model que ejecute la función getAll
       .then(results => res.json(results))
       .catch(err => res.status(500).json(err))
   },
