@@ -5,7 +5,7 @@
       {
         "method": "get",
         "function": "getAll",
-        "secure": false
+        "secure": true
       },
       {
         "method": "post",
@@ -20,7 +20,7 @@
       {
         "method": "get",
         "function": "getById",
-        "secure": false
+        "secure": true
       },
       {
         "method": "put",
