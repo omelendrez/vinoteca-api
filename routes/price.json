@@ -1,0 +1,37 @@
+[
+  {
+    "url": "/prices",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAll",
+        "secure": false
+      },
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "url": "/prices/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
+  }
+]

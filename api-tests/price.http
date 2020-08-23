@@ -1,0 +1,29 @@
+### Lista precios
+GET http://localhost:3000/api/v1/prices
+
+### Agregar precio
+POST http://localhost:3000/api/v1/prices
+content-type: application/json
+
+{
+  "productId": 5,
+  "supplierId": 1,
+  "price": 7100
+}
+
+### Actualizar precio || Se pasa el id del registro a modificar en la url
+PUT http://localhost:3000/api/v1/prices/1
+content-type: application/json
+
+{
+  "supplierId": 2,
+  "price": 64.5
+}
+
+### Obtener precio pasando el id || Se pasa el id del registro a modificar en la url
+GET http://localhost:3000/api/v1/prices/1
+content-type: application/json
+
+### Eliminar precio pasando el id || Se pasa el id del registro a eliminar en la url
+DELETE http://localhost:3000/api/v1/prices/1
+content-type: application/json

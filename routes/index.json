@@ -82,5 +82,9 @@
   {
     "route": "test",
     "model": "inventory_variation_reason"
+  },
+  {
+    "route": "prices",
+    "model": "price"
   }
 ]

@@ -18,7 +18,7 @@ Number.prototype.pad = function (size) {
 const routeMaps = require('./routes/index.json')
 
 module.exports = {
-  modelsWithoutCompanyId: ['user', 'company', 'profile', 'order_details', 'order_tracking'],
+  modelsWithoutCompanyId: ['user', 'company', 'profile', 'order_details', 'order_tracking', 'price'],
   modelsWithCode: ['category', 'product', 'inventory_variation_reason'],
   modelsWithNumber: ['order'],
   modelsWithoutUpdatedBy: ['order_tracking', 'inventory'],
