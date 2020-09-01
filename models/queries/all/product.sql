@@ -30,4 +30,6 @@ FROM
 WHERE
   '@search' = ''
   OR p.barcode = '@search'
-  OR p.name like '%@search%';
+  OR p.name like '%@search%'
+ORDER BY
+  p.name;
