@@ -24,5 +24,6 @@ CREATE TABLE product (
   PRIMARY KEY (id),
   INDEX(company_id, code),
   INDEX(company_id, barcode),
+  INDEX(company_id, name) UNIQUE,
   INDEX(company_id)
 );
