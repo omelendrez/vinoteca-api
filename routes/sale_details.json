@@ -1,0 +1,32 @@
+[
+  {
+    "url": "/sale_details",
+    "methods": [
+      {
+        "method": "post",
+        "function": "add",
+        "secure": false
+      }
+    ]
+  },
+  {
+    "url": "/sale_details/:id",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getById",
+        "secure": false
+      },
+      {
+        "method": "put",
+        "function": "update",
+        "secure": false
+      },
+      {
+        "method": "delete",
+        "function": "delete",
+        "secure": false
+      }
+    ]
+  }
+]

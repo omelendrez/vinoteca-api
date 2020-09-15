@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS sale_details;
+
+CREATE TABLE sale_details (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  sale_id INTEGER NOT NULL,
+  product_id INTEGER NOT NULL,
+  quantity SMALLINT DEFAULT 0,
+  price DECIMAL(10, 2) DEFAULT 0,
+  status_id TINYINT DEFAULT 1,
+  created DATETIME DEFAULT NULL,
+  created_by INTEGER DEFAULT 0,
+  updated DATETIME DEFAULT NULL,
+  updated_by INTEGER DEFAULT 0,
+  PRIMARY KEY (id),
+  INDEX(sale_id)
+);

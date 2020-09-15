@@ -18,9 +18,9 @@ Number.prototype.pad = function (size) {
 const routeMaps = require('./routes/index.json')
 
 module.exports = {
-  modelsWithoutCompanyId: ['user', 'company', 'profile', 'order_details', 'order_tracking', 'price'],
+  modelsWithoutCompanyId: ['user', 'company', 'profile', 'order_details', 'order_tracking', 'price', 'sale_details'],
   modelsWithCode: ['category', 'product', 'inventory_variation_reason'],
-  modelsWithNumber: ['order'],
+  modelsWithNumber: ['order', 'sale'],
   modelsWithoutUpdatedBy: ['order_tracking', 'inventory'],
   async updateFieldsFromModel(model) {
     // Crea lista de campos y valores separados por coma para ser usados con SQL UPDATE table...

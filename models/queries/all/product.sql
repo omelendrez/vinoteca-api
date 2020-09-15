@@ -17,6 +17,21 @@ SELECT
   c.name as 'company_name',
   u1.name as 'created_by_name',
   u2.name as 'updated_by_name',
+  (
+    select
+      name
+    from
+      `supplier`
+    where
+      id = (
+        select
+          supplier_id
+        from
+          `order`
+        where
+          number = p.last_purchase_order
+      )
+  ) as 'supplier_name',
   p.created,
   p.updated,
   p.status_id,
