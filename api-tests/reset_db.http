@@ -5,19 +5,19 @@ content-type: application/json
 
 
 ### Resetear sólo una tabla en la base de datos
-POST http://localhost:3000/api/v1/reset-db/price
+POST http://localhost:3000/api/v1/reset-db/sale
 content-type: application/json
 
 
 
 // FIXME: CUIDADO ESTE REQUEST RESETEA LA BASE DE DATOS EN QA
 ### Resetear la base de datos
-POST https://vinoteca-api-qa.herokuapp.com/api/v1/reset-db
+POST https://vinoteca-api-qa.herokuapp.com/api/v1/reset-db/
 content-type: application/json
 
 
 ### Resetear sólo una tabla en la base de datos
-POST https://vinoteca-api-qa.herokuapp.com/api/v1/reset-db/inventory_variation
+POST https://vinoteca-api-qa.herokuapp.com/api/v1/reset-db/sale_details
 content-type: application/json
 
 
@@ -28,5 +28,5 @@ POST https://vinoteca-api.herokuapp.com/api/v1/reset-db
 content-type: application/json
 
 ### Resetear sólo una tabla en la base de datos
-POST https://vinoteca-api.herokuapp.com/api/v1/reset-db/inventory_variation
+POST https://vinoteca-api.herokuapp.com/api/v1/reset-db/sale_details
 content-type: application/json
