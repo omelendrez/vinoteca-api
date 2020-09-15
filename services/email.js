@@ -31,7 +31,7 @@ module.exports = {
           data.orderDetails.map(item => {
             const row = []
             row.push('<tr>')
-            row.push('<td>' + item.productName + ' ' + item.description + '</td>')
+            row.push('<td>' + item.productName + '</td>')
             row.push('<td class="qty">' + item.qtyRequested + '</td>')
             row.push('</tr>')
             rows.push(row.join(''))
