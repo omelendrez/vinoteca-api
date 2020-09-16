@@ -5,8 +5,7 @@ content-type: application/json
 {
   "saleId": "2",
   "productId": "1",
-  "quantity": 3,
-  "price": 90
+  "quantity": 3
 }
 
 ### Actualizar detalles de orden || Se pasa el id del registro a modificar en la url

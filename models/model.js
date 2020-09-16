@@ -82,6 +82,11 @@ module.exports = {
           response.order_tracking = convertListToCamelCase(results[3])
           response = [response]
         }
+        if (model === 'sale') {
+          response = { ...results[1][0] }
+          response.sale_details = convertListToCamelCase(results[2])
+          response = [response]
+        }
         resolve(convertListToCamelCase(response, withPassword)[0])
       })
     })
