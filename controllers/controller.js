@@ -273,5 +273,21 @@ module.exports = {
       })
       .catch(err => res.status(500).json(err))
 
+  },
+
+  confirmSale: (req, res) => {
+    const saleId = req.params.id
+    let userId = 1
+    if (req.decoded) {
+      userId = req.decoded.id // id es id y companyId vienen del usuario que hizo el post
+    }
+    Model.confirmSale([saleId, userId]) // Cambiar status de order
+      .then(() => {
+        Model.getById(saleId, 'sale') // Buscar order
+          .then(result => res.json(result))
+          .catch(err => res.status(500).json(err))
+      })
+      .catch(err => res.status(500).json(err))
   }
+
 }

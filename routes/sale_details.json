@@ -1,6 +1,6 @@
 [
   {
-    "url": "/sale_details",
+    "url": "/sale-details",
     "methods": [
       {
         "method": "post",
@@ -10,7 +10,7 @@
     ]
   },
   {
-    "url": "/sale_details_update",
+    "url": "/sale-details-update",
     "methods": [
       {
         "method": "post",
@@ -20,7 +20,7 @@
     ]
   },
   {
-    "url": "/sale_details/:id",
+    "url": "/sale-details/:id",
     "methods": [
       {
         "method": "get",

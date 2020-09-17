@@ -282,5 +282,16 @@ module.exports = {
         resolve(results)
       })
     })
+  },
+  confirmSale: async (values) => {
+    return new Promise(async (resolve, reject) => { // Creamos una nueva Promise
+      const fileName = path.join(__dirname, 'queries', 'update', 'sale_confirm.sql')
+      const sql = fs.readFileSync(fileName).toString()
+      pool.executeQuery(sql, values, (err, results, fields) => { // Enviamos el SQL y el id (estamos modificando un solo registro) a mysql
+        if (err) return reject({ error: err })
+        resolve() // Si no hubo errores formateamos el registro y se la devolvemos al controlador
+      })
+    })
   }
+
 }

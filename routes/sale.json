@@ -33,5 +33,15 @@
         "secure": false
       }
     ]
+  },
+  {
+    "url": "/confirm-sale/:id",
+    "methods": [
+      {
+        "method": "put",
+        "function": "confirmSale",
+        "secure": false
+      }
+    ]
   }
 ]

@@ -92,7 +92,11 @@
     "model": "sale"
   },
   {
-    "route": "sale_details",
+    "route": "sale-details",
     "model": "sale_details"
+  },
+  {
+    "route": "confirm-sale",
+    "model": "sale"
   }
 ]
