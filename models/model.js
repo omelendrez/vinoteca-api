@@ -277,7 +277,6 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       const fileName = path.join(__dirname, 'queries', 'update', 'update_sale.sql')
       const sql = fs.readFileSync(fileName).toString()
-      console.log(sql)
       pool.executeQuery(sql, values, (err, results, fields) => {
         if (err) return reject({ error: err })
         resolve(results)
