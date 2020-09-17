@@ -10,6 +10,16 @@
     ]
   },
   {
+    "url": "/sale_details_update",
+    "methods": [
+      {
+        "method": "post",
+        "function": "updateSale",
+        "secure": false
+      }
+    ]
+  },
+  {
     "url": "/sale_details/:id",
     "methods": [
       {

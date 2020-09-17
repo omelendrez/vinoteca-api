@@ -260,5 +260,18 @@ module.exports = {
       .then(data => res.json(data))
       .catch(err => res.status(500).json(err))
 
+  },
+
+  updateSale: (req, res) => {
+    const { saleId } = req.body
+
+    Model.updateSale([saleId])
+      .then(() => {
+        Model.getById(saleId, 'sale') // Buscar order
+          .then(result => res.json(result))
+          .catch(err => res.status(500).json(err))
+      })
+      .catch(err => res.status(500).json(err))
+
   }
 }
