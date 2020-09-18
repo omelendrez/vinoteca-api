@@ -292,6 +292,17 @@ module.exports = {
         resolve() // Si no hubo errores formateamos el registro y se la devolvemos al controlador
       })
     })
-  }
+  },
+
+  getAvailability: (params, model) => { // Sólo para user
+    const { storeId, productId } = params
+    return new Promise((resolve, reject) => {
+      const sql = `SELECT * FROM \`${model}\` WHERE store_id=? AND product_id=?;`
+      pool.executeQuery(sql, [storeId, productId], (err, results, fields) => {
+        if (err) return reject({ error: err })
+        resolve(convertListToCamelCase(results, false)[0]) // Es un solo record
+      })
+    })
+  },
 
 }

@@ -288,6 +288,13 @@ module.exports = {
           .catch(err => res.status(500).json(err))
       })
       .catch(err => res.status(500).json(err))
+  },
+
+  getAvailability: (req, res) => {
+    const modelName = getModelFromRoute(req)
+    Model.getAvailability(req.params, modelName) // Le decimos al modelo que ejecuta la función getById y le pasamos el id que estaba en la url
+      .then(result => res.json(result))
+      .catch(err => res.status(500).json(err))
   }
 
 }

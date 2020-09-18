@@ -33,5 +33,15 @@
         "secure": true
       }
     ]
+  },
+  {
+    "url": "/inventory/:storeId/:productId",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getAvailability",
+        "secure": true
+      }
+    ]
   }
 ]
