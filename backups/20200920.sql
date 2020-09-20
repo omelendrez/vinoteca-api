@@ -81,6 +81,35 @@ INSERT INTO `company` VALUES (1,'SoftDev','Omar Melendrez','Alberdi 2678','291 5
 UNLOCK TABLES;
 
 --
+-- Table structure for table `graph_data`
+--
+
+DROP TABLE IF EXISTS `graph_data`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `graph_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `period` char(6) NOT NULL,
+  `period_name` char(7) NOT NULL,
+  `purchases` decimal(12,2) DEFAULT '0.00',
+  `sales` decimal(12,2) DEFAULT '0.00',
+  `company_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `company_id` (`company_id`,`period`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `graph_data`
+--
+
+LOCK TABLES `graph_data` WRITE;
+/*!40000 ALTER TABLE `graph_data` DISABLE KEYS */;
+INSERT INTO `graph_data` VALUES (11,'202009','09/2020',20667.45,0.00,11);
+/*!40000 ALTER TABLE `graph_data` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `inventory`
 --
 
@@ -562,4 +591,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20  0:05:46
+-- Dump completed on 2020-09-20 18:52:19
