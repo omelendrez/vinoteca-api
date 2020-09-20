@@ -98,5 +98,9 @@
   {
     "route": "confirm-sale",
     "model": "sale"
+  },
+  {
+    "route": "graph-data",
+    "model": "report"
   }
 ]

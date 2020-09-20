@@ -305,4 +305,16 @@ module.exports = {
     })
   },
 
+  getGraphData: (params) => {
+    return new Promise((resolve, reject) => {
+      const fileName = path.join(__dirname, 'queries', 'reports', 'graph_data.sql')
+      const sql = fs.readFileSync(fileName).toString()
+      pool.executeQuery(sql, params, (err, results, fields) => {
+        if (err) return reject({ error: err })
+        const response = { count: results[10].length, rows: convertListToCamelCase(results[10], false) }
+        resolve(response)
+      })
+    })
+  }
+
 }

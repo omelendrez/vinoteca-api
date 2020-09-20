@@ -295,6 +295,16 @@ module.exports = {
     Model.getAvailability(req.params, modelName) // Le decimos al modelo que ejecuta la función getById y le pasamos el id que estaba en la url
       .then(result => res.json(result))
       .catch(err => res.status(500).json(err))
+  },
+
+  getGraphData: (req, res) => {
+    let companyId = 1
+    if (req.decoded) {
+      companyId = req.decoded.companyId
+    }
+    Model.getGraphData([companyId]) // Le decimos al modelo que ejecuta la función getById y le pasamos el id que estaba en la url
+      .then(result => res.json(result))
+      .catch(err => res.status(500).json(err))
   }
 
 }

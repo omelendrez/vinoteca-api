@@ -1,0 +1,12 @@
+[
+  {
+    "url": "/graph-data",
+    "methods": [
+      {
+        "method": "post",
+        "function": "getGraphData",
+        "secure": "true"
+      }
+    ]
+  }
+]

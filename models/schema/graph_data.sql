@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS graph_data;
+
+CREATE TABLE graph_data (
+  period CHAR(6) NOT NULL,
+  period_name CHAR(7) NOT NULL,
+  purchases DECIMAL(12, 2) DEFAULT(0),
+  sales DECIMAL(12, 2) DEFAULT(0),
+  company_id INTEGER NOT NULL,
+  INDEX(company_id, period)
+);
