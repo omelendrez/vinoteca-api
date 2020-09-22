@@ -52,12 +52,6 @@ module.exports = {
   getAll: (model, search) => {
     return new Promise((resolve, reject) => {
       const fileName = path.join(__dirname, 'queries', 'all', `${model}.sql`)
-      let countModel
-      if (model === 'low_stock_product') {
-        countModel = 'product'
-      } else {
-        countModel = model
-      }
       const sql = fs.readFileSync(fileName).toString().replace(/@search/gi, search)
       /** Aquí traemos los registros con todos los campos que especifica el archivo queries/all/[model].sql  */
       pool.executeQuery(sql, null, async (err, results, fields) => {
@@ -312,6 +306,18 @@ module.exports = {
       pool.executeQuery(sql, params, (err, results, fields) => {
         if (err) return reject({ error: err })
         const response = { count: results[10].length, rows: convertListToCamelCase(results[10], false) }
+        resolve(response)
+      })
+    })
+  },
+
+  getBelowMinimum: (params) => {
+    return new Promise((resolve, reject) => {
+      const fileName = path.join(__dirname, 'queries', 'all', 'stock_below_mimimum.sql')
+      const sql = fs.readFileSync(fileName).toString()
+      pool.executeQuery(sql, null, (err, results, fields) => {
+        if (err) return reject({ error: err })
+        const response = { count: results.length, rows: convertListToCamelCase(results) }
         resolve(response)
       })
     })

@@ -15,6 +15,16 @@
     ]
   },
   {
+    "url": "/inventory/below-minimum",
+    "methods": [
+      {
+        "method": "get",
+        "function": "getBelowMinimum",
+        "secure": true
+      }
+    ]
+  },
+  {
     "url": "/inventory/:id",
     "methods": [
       {
