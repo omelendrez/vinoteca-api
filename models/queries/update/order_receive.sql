@@ -62,9 +62,9 @@ FROM
   `order_details`
 WHERE
   order_id = @order_id
-  AND NOT EXISTS (
+  AND product_id NOT IN (
     SELECT
-      *
+      i.product_id
     FROM
       `inventory` AS i
       INNER JOIN `order_details` AS od ON i.product_id = od.product_id
