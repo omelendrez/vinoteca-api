@@ -60,6 +60,8 @@ SELECT
   @company_id,
   @now,
   @user_id
+FROM
+  `inventory`
 WHERE
   NOT EXISTS (
     SELECT
