@@ -47,6 +47,4 @@ WHERE
   OR p.barcode = '@search'
   OR p.name like '%@search%'
 ORDER BY
-  p.name
-LIMIT
-  20;
+  p.name;
